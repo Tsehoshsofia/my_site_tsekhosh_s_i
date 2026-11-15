@@ -7,75 +7,44 @@
     <style>
         /* 1. БАЗОВЫЕ НАСТРОЙКИ */
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+            margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: "Times New Roman", Times, serif;
             overflow: hidden; 
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             scroll-behavior: smooth;
         }
 
         /* 2. ФОН */
         .background-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-image: url("print.jpeg"); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-size: cover; background-position: center; background-repeat: no-repeat;
             z-index: -1;
         }
 
         /* 3. КОНТЕЙНЕР */
         .quest-container {
-            position: fixed;
-            bottom: 5vh;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 750px;
-            max-width: calc(100% - 40px);
-            max-height: 85vh; 
-            overflow-y: auto; 
-            display: flex;
-            flex-direction: column;
-            gap: 25px; 
-            padding-bottom: 20px;
-            padding-right: 5px;
+            position: fixed; bottom: 5vh; left: 50%; transform: translateX(-50%);
+            width: 750px; max-width: calc(100% - 40px); max-height: 85vh; 
+            overflow-y: auto; display: flex; flex-direction: column; gap: 25px; 
+            padding-bottom: 20px; padding-right: 5px;
         }
 
         /* 4. ПЛАШКА */
         .theory-card {
             background-color: rgba(255, 255, 255, 0.92); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            padding: 30px 35px;
-            box-sizing: border-box;
-            font-size: 20px;
-            line-height: 1.5;
-            color: #000000;
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 30px 35px; box-sizing: border-box;
+            font-size: 20px; line-height: 1.5; color: #000000;
         }
 
         /* 5. ЗАГОЛОВКИ */
         h2 {
-            font-size: 28px;
-            font-weight: bold;
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #000000;
-            border-bottom: 3px solid #4169E1;
-            padding-bottom: 10px;
-            display: flex;
-            align-items: center; 
-            gap: 12px; 
+            font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 20px;
+            color: #000000; border-bottom: 3px solid #4169E1; padding-bottom: 10px;
+            display: flex; align-items: center; gap: 12px; 
         }
 
         /* 6. ТЕКСТ */
@@ -84,125 +53,90 @@
 
         /* 7. КОД */
         code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.12);
-            padding: 4px 8px;
-            border-radius: 6px;
-            color: #c7254e;
-            display: inline-block;
-            margin: 5px 0;
-            font-weight: bold;
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
+            background-color: rgba(65, 105, 225, 0.12); padding: 4px 8px;
+            border-radius: 6px; color: #c7254e; display: inline-block;
+            margin: 5px 0; font-weight: bold;
         }
 
         .code-block {
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.08);
-            padding: 15px;
-            border-radius: 8px;
-            color: #c7254e;
-            margin: 15px 0;
-            white-space: pre-wrap;
-            line-height: 1.4;
-            display: block;
-            width: 100%;
-            box-sizing: border-box;
-            border-left: 4px solid #4169E1;
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
+            background-color: rgba(65, 105, 225, 0.08); padding: 15px;
+            border-radius: 8px; color: #c7254e; margin: 15px 0;
+            white-space: pre-wrap; line-height: 1.4; display: block;
+            width: 100%; box-sizing: border-box; border-left: 4px solid #4169E1;
         }
 
-        /* 8. ИНТЕРАКТИВНЫЙ БЛОК */
+        /* 8. КОНСОЛЬ */
+        .console-output {
+            background-color: rgba(0,0,0,0.05); border-left: 4px solid #4169E1; 
+            padding: 15px; font-family: 'Consolas', monospace; font-size: 16px; 
+            border-radius: 0 8px 8px 0; margin-top: 15px; color: #333;
+        }
+        .console-title {
+            display: block; font-weight: bold; font-family: 'Times New Roman', Times, serif;
+            font-size: 14px; margin-bottom: 5px; color: #4169E1;
+        }
+
+        /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
         .interactive-box {
-            background-color: #F4F9FF;
-            border: 2px dashed #4169E1;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-            text-align: center;
+            background-color: #F4F9FF; border: 2px dashed #4169E1;
+            border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
         }
 
-        .interactive-box input {
-            font-family: 'Consolas', monospace;
-            font-size: 16px;
-            padding: 8px;
-            margin: 5px 2px;
-            border: 2px solid #ccc;
-            border-radius: 6px;
-            outline: none;
-            box-sizing: border-box;
+        .interactive-box input, .interactive-box select {
+            font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
+            margin: 5px 2px; border: 2px solid #ccc; border-radius: 6px;
+            outline: none; box-sizing: border-box;
         }
 
-        .interactive-box input:focus { border-color: #4169E1; }
+        .interactive-box input:focus, .interactive-box select:focus { border-color: #4169E1; }
 
         .interactive-box button {
-            font-family: "Times New Roman", Times, serif;
-            font-size: 16px;
-            font-weight: bold;
-            background-color: #4169E1;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 9px 15px;
-            margin: 5px 2px;
-            cursor: pointer;
-            transition: background 0.2s;
+            font-family: "Times New Roman", Times, serif; font-size: 16px;
+            font-weight: bold; background-color: #4169E1; color: white;
+            border: none; border-radius: 6px; padding: 9px 15px;
+            margin: 5px 2px; cursor: pointer; transition: background 0.2s;
         }
 
         .interactive-box button:hover { background-color: #2b4eb5; }
 
         .result-box {
-            margin-top: 10px;
-            font-family: 'Consolas', monospace;
-            font-size: 16px;
-            text-align: left;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            display: none; 
-            color: #333;
+            margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
+            text-align: left; background-color: #fff; padding: 10px;
+            border-radius: 8px; border: 1px solid #ccc; display: none; color: #333;
         }
 
-        /* 9. КНОПКА ПЕРЕХОДА */
+        /* 10. КНОПКА ПЕРЕХОДА */
         .btn {
-            display: block;
-            width: 100%;
-            max-width: 500px;
-            margin: 20px auto 0 auto;
-            padding: 14px 20px;
-            background-color: #F4F9FF; 
-            border: 2px solid #4169E1;
-            border-radius: 10px;
-            color: #4169E1; 
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-            box-sizing: border-box;
+            display: block; width: 100%; max-width: 500px;
+            margin: 20px auto 0 auto; padding: 14px 20px;
+            background-color: #F4F9FF; border: 2px solid #4169E1;
+            border-radius: 10px; color: #4169E1; font-size: 18px;
+            font-weight: bold; text-align: center; text-decoration: none;
+            transition: all 0.2s ease-in-out; cursor: pointer; box-sizing: border-box;
         }
 
-        .btn:hover {
-            background-color: #4169E1;
-            color: #FFFFFF;
-            transform: translateY(-2px);
-        }
+        .btn:hover { background-color: #4169E1; color: #FFFFFF; transform: translateY(-2px); }
 
-        /* 10. ТИТУЛЬНЫЙ СЛАЙД */
+        /* 11. ТИТУЛЬНЫЙ СЛАЙД */
         .start-screen {
-            text-align: center;
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 400px;
+            text-align: center; padding: 60px 40px;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; min-height: 400px;
         }
         .start-screen h1 { font-size: 42px; margin: 0 0 10px 0; font-weight: bold; }
         .start-screen .subtitle { font-size: 24px; color: #4169E1; margin-bottom: 30px; font-weight: bold; }
         .start-screen .description { font-size: 20px; color: #333; margin-bottom: 40px; text-align: center; max-width: 600px; }
         .start-screen .author { font-size: 18px; color: #555; margin-bottom: 40px; font-style: italic; }
+
+        /* 12. ЗАДАЧИ НА ИСПРАВЛЕНИЕ */
+        .blank-input {
+            font-family: 'Consolas', monospace; font-size: 18px;
+            font-weight: bold; color: #4169E1; background-color: #fff;
+            border: 2px solid #ccc; border-radius: 4px; padding: 2px 5px;
+            width: 120px; text-align: center;
+        }
 
         /* Скроллбар */
         .quest-container::-webkit-scrollbar { width: 8px; }
@@ -242,7 +176,6 @@
             <h2>📝 Создание списка</h2>
             <p>Списки создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные.</p>
             <div class="code-block">garage = ['Lada Granta', 'Niva Travel']</div>
-            
             <div class="interactive-box">
                 <input type="text" id="createInput" placeholder="Введите элементы через запятую" style="width: 60%;">
                 <button onclick="runCreate()">Запустить</button>
@@ -256,7 +189,6 @@
             <p>Индексы начинаются с <code>0</code>. Отрицательные индексы идут с конца: <code>-1</code> — последний.</p>
             <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']
 print(car_models[0])</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'KIA', 'Vesta', 'УАЗ']</code></p>
                 <input type="number" id="indexInput" placeholder="Индекс (напр. 0 или -1)" style="width: 30%;">
@@ -271,7 +203,6 @@ print(car_models[0])</div>
             <p>Срез: <code>[начало:конец:шаг]</code>. Конечный индекс не включается.</p>
             <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
 print(cars[1:3])</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'Niva', 'Vesta', 'УАЗ']</code></p>
                 <input type="number" id="sliceStart" placeholder="Начало" style="width: 20%;">
@@ -287,7 +218,6 @@ print(cars[1:3])</div>
             <p>Метод <code>append(x)</code> добавляет элемент <b>строго в конец списка</b>.</p>
             <div class="code-block">garage = ['Lada', 'Niva']
 garage.append('Aurus')</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'Niva']</code></p>
                 <input type="text" id="appendInput" placeholder="Что добавить?" style="width: 50%;">
@@ -302,7 +232,6 @@ garage.append('Aurus')</div>
             <p>Метод <code>insert(index, value)</code> вставляет элемент на конкретную позицию.</p>
             <div class="code-block">garage = ['Lada', 'Niva', 'Aurus']
 garage.insert(1, 'УАЗ')</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'Niva', 'Aurus']</code></p>
                 <input type="number" id="insertIndex" placeholder="Индекс" style="width: 20%;">
@@ -318,7 +247,6 @@ garage.insert(1, 'УАЗ')</div>
             <p>Метод <code>remove(x)</code> удаляет первый элемент по значению.</p>
             <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
 cart.remove('Хлеб')</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
                 <input type="text" id="removeInput" placeholder="Что удалить?" style="width: 50%;">
@@ -333,7 +261,6 @@ cart.remove('Хлеб')</div>
             <p>Удаляют по индексу. <code>del</code> просто удаляет, а <code>pop()</code> удаляет и возвращает значение.</p>
             <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
 del cart[1] # или cart.pop(1)</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
                 <input type="number" id="popIndex" placeholder="Индекс" style="width: 20%;">
@@ -349,7 +276,6 @@ del cart[1] # или cart.pop(1)</div>
             <p>Метод <code>clear()</code> полностью очищает список.</p>
             <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
 cart.clear()</div>
-
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
                 <button onclick="runClear()">Очистить список</button>
@@ -357,7 +283,7 @@ cart.clear()</div>
             </div>
         </div>
 
-        <!-- ЗАДАЧА 1: ЧЕК (С ИНТЕРАКТИВОМ) -->
+        <!-- 9. ЗАДАЧА 1: ЧЕК (ИНТЕРАКТИВ) -->
         <div class="theory-card">
             <h2>⌨️ Задача 1: Добавление товаров в конец</h2>
             <p>Давайте напишем мини-программу, которая просит ввести товар и цену. Пользователь может добавлять товары сколько угодно раз.</p>
@@ -369,10 +295,8 @@ price_list = []
 while True:
     product = input('Введите название товара: ')
     price = float(input('Введите стоимость товара: '))
-    
     shopping_list.append(product)
     price_list.append(price)
-    
     answer = input('Добавить еще товар? (да/нет): ').lower()
     if answer != 'да':
         break
@@ -401,7 +325,198 @@ print("---------------")</div>
             </div>
         </div>
 
-        <!-- Финальная карточка -->
+        <!-- 10. ЗАДАЧА 2: ВСТАВКА ПО ИНДЕКСУ -->
+        <div class="theory-card">
+            <h2>📍 Задача 2: Вставка товара по индексу</h2>
+            <p>А что, если нам нужно вставить срочный товар не в конец, а на <b>определенное место</b>?</p>
+            <p>Пользователи привыкли считать с единицы. Чтобы программа поняла, что «место 1» — это нулевой индекс в Python, мы вычтем 1 из введенного числа (<code>index - 1</code>). А чтобы программа не сломалась от слишком большого числа, применим <code>min()</code>.</p>
+            
+            <div class="code-block">shopping_list = ['Хлеб', 'Молоко']
+price_list = [65, 99]
+
+print("Текущий список:")
+for i in range(len(shopping_list)):
+    print(f"{i + 1}. {shopping_list[i]}")
+
+urgent_product = input('\nВведите срочный товар: ')
+urgent_price = float(input('Введите его стоимость: '))
+user_place = int(input(f'На какое место поставить (от 1 до {len(shopping_list) + 1})? '))
+
+index = min(user_place - 1, len(shopping_list))
+
+shopping_list.insert(index, urgent_product)
+price_list.insert(index, urgent_price)
+
+print("\n--- ОБНОВЛЕННЫЙ СПИСОК ---")
+for i in range(len(shopping_list)):
+    print(f"{shopping_list[i]} — {price_list[i]:g} руб.")</div>
+            
+            <div class="console-output">
+                <span class="console-title">Пример работы программы:</span>
+                Текущий список:<br>
+                1. Хлеб<br>
+                2. Молоко<br>
+                <br>
+                Введите срочный товар: <b>Сметана</b><br>
+                Введите его стоимость: <b>85</b><br>
+                На какое место поставить (от 1 до 3)? <b>1</b><br>
+                <br>
+                --- ОБНОВЛЕННЫЙ СПИСОК ---<br>
+                Сметана — 85 руб.<br>
+                Хлеб — 65 руб.<br>
+                Молоко — 99 руб.
+            </div>
+        </div>
+
+        <!-- 11. ЗАДАЧА 3: УДАЛЕНИЕ ПО НАЗВАНИЮ (REMOVE) -->
+        <div class="theory-card">
+            <h2>🗑️ Задача 3: Удаление товара по названию</h2>
+            <p>Представим, что пользователь передумал покупать конкретный товар. Мы спрашиваем его название и удаляем первый найденный элемент через <code>remove()</code>.</p>
+            <p><i>Важно: перед удалением нужно проверить, есть ли товар в списке (через <code>in</code>), чтобы программа не выдала ошибку.</i></p>
+            
+            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
+
+print("Текущая корзина:", cart)
+product_to_remove = input('Какой товар удалить? ')
+
+if product_to_remove in cart:
+    cart.remove(product_to_remove)
+    print(f"\nТовар '{product_to_remove}' удален.")
+    print("Новая корзина:", cart)
+else:
+    print("\nТакого товара нет в корзине.")</div>
+            
+            <div class="console-output">
+                <span class="console-title">Пример работы программы:</span>
+                Текущая корзина: ['Молоко', 'Хлеб', 'Сметана', 'Сыр']<br>
+                Какой товар удалить? <b>Сметана</b><br>
+                <br>
+                Товар 'Сметана' удален.<br>
+                Новая корзина: ['Молоко', 'Хлеб', 'Сыр']
+            </div>
+        </div>
+
+        <!-- 12. ЗАДАЧА 4: УДАЛЕНИЕ ПО ИНДЕКСУ (DEL И POP) -->
+        <div class="theory-card">
+            <h2>🗑️ Задача 4: Удаление по номеру (индексу)</h2>
+            <p>Иногда проще удалить товар не по названию, а по его номеру в списке. Пользователь вводит номер (с 1), а мы переводим его в индекс (вычитая 1) и удаляем через <code>del</code> или <code>pop</code>.</p>
+            <p><i>Разница: <code>del</code> просто удаляет, а <code>pop()</code> удаляет и возвращает значение (его можно сохранить в переменную).</i></p>
+            
+            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
+
+print("Ваша корзина:")
+for i in range(len(cart)):
+    print(f"{i + 1}. {cart[i]}")
+
+user_num = int(input('\nКакой по счету товар удалить? '))
+
+if 1 <= user_num <= len(cart):
+    index_to_remove = user_num - 1
+    del cart[index_to_remove] 
+    # или: removed_item = cart.pop(index_to_remove)
+    print("\nТовар удален.")
+    print("Новая корзина:", cart)
+else:
+    print("\nОшибка: такого номера нет.")</div>
+            
+            <div class="console-output">
+                <span class="console-title">Пример работы программы:</span>
+                Ваша корзина:<br>
+                1. Молоко<br>
+                2. Хлеб<br>
+                3. Сметана<br>
+                4. Сыр<br>
+                <br>
+                Какой по счету товар удалить? <b>2</b><br>
+                <br>
+                Товар удален.<br>
+                Новая корзина: ['Молоко', 'Сметана', 'Сыр']
+            </div>
+        </div>
+
+        <!-- 13. ПРАКТИКА: ВЫБОР ИЗ КАТАЛОГА -->
+        <div class="theory-card">
+            <h2>🛍️ Практика: Выбор товара из готового каталога</h2>
+            <p>Теперь представим, что у нас есть готовый каталог товаров и цен. Пользователь выбирает нужные ему товары по названию, а программа формирует чек.</p>
+            
+            <div class="code-block">catalog_products = ['Хлеб', 'Молоко', 'Сметана', 'Сыр']
+catalog_prices = [65, 99, 85, 150]
+
+cart_products = []
+cart_prices = []
+
+while True:
+    print("\nДоступные товары:", catalog_products)
+    choice = input('Что купить? (или "стоп" для завершения): ')
+    
+    if choice.lower() == 'стоп':
+        break
+        
+    if choice in catalog_products:
+        idx = catalog_products.index(choice)
+        cart_products.append(catalog_products[idx])
+        cart_prices.append(catalog_prices[idx])
+        print(f"Добавлено: {choice} за {catalog_prices[idx]} руб.")
+    else:
+        print("Такого товара нет.")
+
+print("\n--- ОФОРМЛЕНИЕ ПОКУПКИ ---")
+if len(cart_products) > 0:
+    for i in range(len(cart_products)):
+        print(f"{cart_products[i]} — {cart_prices[i]:g} руб.")
+    total = sum(cart_prices)
+    print(f"Итого: {total:g} руб.")
+else:
+    print("Корзина пуста.")</div>
+            
+            <div class="console-output">
+                <span class="console-title">Пример работы программы:</span>
+                Доступные товары: ['Хлеб', 'Молоко', 'Сметана', 'Сыр']<br>
+                Что купить? (или "стоп" для завершения): <b>Молоко</b><br>
+                Добавлено: Молоко за 99 руб.<br>
+                <br>
+                Доступные товары: ['Хлеб', 'Молоко', 'Сметана', 'Сыр']<br>
+                Что купить? (или "стоп" для завершения): <b>Сметана</b><br>
+                Добавлено: Сметана за 85 руб.<br>
+                <br>
+                Доступные товары: ['Хлеб', 'Молоко', 'Сметана', 'Сыр']<br>
+                Что купить? (или "стоп" для завершения): <b>стоп</b><br>
+                <br>
+                --- ОФОРМЛЕНИЕ ПОКУПКИ ---<br>
+                Молоко — 99 руб.<br>
+                Сметана — 85 руб.<br>
+                Итого: 184 руб.
+            </div>
+        </div>
+
+        <!-- 14. ПРАКТИКА: СРЕЗ КАТАЛОГА -->
+        <div class="theory-card">
+            <h2>✂️ Практика: Показать только часть каталога</h2>
+            <p>Иногда нужно вывести не весь список, а только его часть (например, первые три товара). В этом нам помогут срезы.</p>
+            
+            <div class="code-block">catalog_products = ['Хлеб', 'Молоко', 'Сметана', 'Сыр', 'Масло']
+catalog_prices = [65, 99, 85, 150, 120]
+
+# Выводим первые 3 товара (срезы с 0 по 2 индекс)
+print("Топ-3 товара:")
+for i in range(3):
+    print(f"{catalog_products[i]} — {catalog_prices[i]:g} руб.")
+
+# Или используем срез списка напрямую
+print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
+            
+            <div class="console-output">
+                <span class="console-title">Пример работы программы:</span>
+                Топ-3 товара:<br>
+                Хлеб — 65 руб.<br>
+                Молоко — 99 руб.<br>
+                Сметана — 85 руб.<br>
+                <br>
+                Срез цен (первые 3): [65, 99, 85]
+            </div>
+        </div>
+
+        <!-- 15. ФИНАЛЬНАЯ КАРТОЧКА -->
         <div class="theory-card" style="text-align: center;">
             <h2 style="justify-content: center; border-bottom: none; font-size: 24px;">🎉 Теория пройдена!</h2>
             <p style="font-weight: bold; font-size: 22px; margin-bottom: 20px;">Время проверить знания на практике.</p>
@@ -410,16 +525,14 @@ print("---------------")</div>
 
     </div>
 
-    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОКРУТКИ -->
+    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА -->
     <script>
-        // Прокрутка
         function scrollToCard() {
             const container = document.getElementById('main-container');
             const firstCard = document.getElementById('card-1');
             container.scrollTo({ top: firstCard.offsetTop - 20, behavior: 'smooth' });
         }
 
-        // Утилита для вывода
         function showResult(id, text) {
             const el = document.getElementById(id);
             el.style.display = 'block';
@@ -430,7 +543,6 @@ print("---------------")</div>
         function runCreate() {
             const input = document.getElementById('createInput').value;
             if (!input.trim()) return;
-            // Разбиваем по запятой и убираем пробелы
             const arr = input.split(',').map(s => s.trim());
             showResult('resCreate', `>>> ['${arr.join("', '")}']`);
         }
@@ -443,7 +555,6 @@ print("---------------")</div>
             if (index >= list.length || index < -list.length) {
                 showResult('resIndex', `<span style="color:red;">IndexError: list index out of range</span>`);
             } else {
-                // Работа с отрицательными индексами
                 const realIndex = index < 0 ? list.length + index : index;
                 showResult('resIndex', `>>> ${list[realIndex]}`);
             }
@@ -455,8 +566,6 @@ print("---------------")</div>
             const start = parseInt(document.getElementById('sliceStart').value) || 0;
             const end = parseInt(document.getElementById('sliceEnd').value);
             if (isNaN(end)) return;
-            
-            // Имитация среза
             const sliced = list.slice(start, end);
             showResult('resSlice', `>>> [${sliced.map(s => `'${s}'`).join(', ')}]`);
         }
@@ -476,7 +585,7 @@ print("---------------")</div>
             const index = parseInt(document.getElementById('insertIndex').value);
             const val = document.getElementById('insertValue').value;
             if (isNaN(index) || !val.trim()) return;
-            list.splice(index, 0, val); // JS аналог insert
+            list.splice(index, 0, val);
             showResult('resInsert', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
         }
 
@@ -517,7 +626,7 @@ print("---------------")</div>
                 return;
             }
             const realIndex = index < 0 ? list.length + index : index;
-            const popped = list.splice(realIndex, 1)[0]; // Получаем удаленный элемент
+            const popped = list.splice(realIndex, 1)[0];
             showResult('resPop', `Удалено: '${popped}'<br>(pop) >>> [${list.map(s => `'${s}'`).join(', ')}]`);
         }
 
@@ -540,7 +649,6 @@ print("---------------")</div>
                 alert("Пожалуйста, введите корректное название и цену.");
                 return;
             }
-
             cartProducts.push(name);
             cartPrices.push(price);
             nameInput.value = '';
@@ -561,22 +669,18 @@ print("---------------")</div>
 
             resultBox.style.display = 'block';
             cartItems.innerHTML = '';
-
             let total = 0;
             for (let i = 0; i < cartProducts.length; i++) {
                 let displayPrice = cartPrices[i];
-                // Форматирование :g
                 if (displayPrice % 1 === 0) displayPrice = displayPrice.toFixed(0);
                 else displayPrice = displayPrice.toFixed(2).replace(/\.?0+$/, "");
                 
                 cartItems.innerHTML += `${cartProducts[i]} — ${displayPrice} руб.<br>`;
                 total += cartPrices[i];
             }
-
             let displayTotal = total;
             if (displayTotal % 1 === 0) displayTotal = displayTotal.toFixed(0);
             else displayTotal = displayTotal.toFixed(2).replace(/\.?0+$/, "");
-
             cartTotal.innerHTML = `Итого: ${displayTotal} руб.`;
         }
     </script>
