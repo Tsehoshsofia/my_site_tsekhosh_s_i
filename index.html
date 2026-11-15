@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Квест: Списки в Python</title>
     <style>
-        /* Базовые настройки */
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
 
         :root {
-            --primary-blue: #1c4ed8; /* Цвет линии и кнопок */
+            --primary-blue: #1c4ed8;
             --text-dark: #111;
             --text-light: #444;
-            --code-color: #c7254e; /* Розово-красный цвет кода */
+            --code-color: #c7254e;
             --code-bg: #f4f4f6;
-            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-bg: rgba(255, 255, 255, 0.88);
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавная прокрутка к квесту */
         }
 
         body {
@@ -22,24 +25,22 @@
             margin: 0;
             padding: 40px 20px;
             min-height: 100vh;
-            /* Замени ссылку ниже на путь к твоей картинке с девушкой */
+            /* Вставь сюда свою картинку с девушкой */
             background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
             background-size: cover;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
 
-        /* Контейнер, ограничивающий ширину как на скрине */
         .quest-wrapper {
             width: 100%;
-            max-width: 850px;
+            max-width: 900px;
             display: flex;
             flex-direction: column;
             gap: 40px;
         }
 
-        /* Сама карточка с матовым стеклом */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -51,7 +52,6 @@
             position: relative;
         }
 
-        /* Заголовки */
         h2 {
             font-size: 28px;
             color: var(--text-dark);
@@ -60,7 +60,6 @@
             font-weight: 700;
         }
 
-        /* Синяя линия под заголовком */
         .blue-line {
             height: 3px;
             background-color: var(--primary-blue);
@@ -68,7 +67,6 @@
             margin-bottom: 25px;
         }
 
-        /* Абзацы текста */
         p {
             font-size: 16px;
             line-height: 1.7;
@@ -76,7 +74,6 @@
             margin-bottom: 20px;
         }
 
-        /* Стиль кода, как на твоем скриншоте (розовая плашка) */
         .inline-code {
             font-family: 'Roboto Mono', monospace;
             color: var(--code-color);
@@ -89,7 +86,6 @@
             margin: 5px 0;
         }
 
-        /* Блок для многострочного кода, чтобы было удобно читать */
         .code-block {
             background-color: var(--code-bg);
             color: var(--code-color);
@@ -103,7 +99,6 @@
             white-space: pre-wrap;
         }
 
-        /* Вывод программы */
         .console-output {
             background: rgba(0,0,0,0.05);
             border-left: 4px solid var(--primary-blue);
@@ -115,7 +110,6 @@
             border-radius: 0 8px 8px 0;
         }
 
-        /* Кнопка как на скриншоте */
         .btn-next {
             display: block;
             width: 100%;
@@ -140,7 +134,14 @@
             color: white;
         }
 
-        /* Адаптив для телефонов */
+        /* Стили для контейнера с iframe */
+        .iframe-container {
+            display: flex; 
+            justify-content: center; 
+            width: 100%; 
+            margin: 20px 0;
+        }
+
         @media (max-width: 600px) {
             .glass-card {
                 padding: 25px 20px;
@@ -163,7 +164,7 @@
             
             <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']<br>empty_list = list()</div>
             
-            <a href="#" class="btn-next">Перейти к вопросу</a>
+            <a href="#quest-iframe" class="btn-next">Перейти к вопросу</a>
         </div>
 
         <!-- Ситуация 2. Индексация -->
@@ -180,7 +181,7 @@
                 Lada Vesta
             </div>
 
-            <a href="#" class="btn-next">Перейти к вопросу</a>
+            <a href="#quest-iframe" class="btn-next">Перейти к вопросу</a>
         </div>
 
         <!-- Ситуация 3. Добавление -->
@@ -197,7 +198,7 @@
                 ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']
             </div>
 
-            <a href="#" class="btn-next">Перейти к вопросу</a>
+            <a href="#quest-iframe" class="btn-next">Перейти к вопросу</a>
         </div>
 
         <!-- Ситуация 4. Удаление -->
@@ -209,7 +210,7 @@
             
             <div class="code-block">garage = [10, 'Python', 3.14, 'Python']<br><br>garage.remove('Python') <span style="color:#6a9955;"># Удалит первый 'Python'</span><br>print(garage) <span style="color:#6a9955;"># [10, 3.14, 'Python']</span><br><br>garage.pop(0) <span style="color:#6a9955;"># Удалит 10</span><br>print(garage) <span style="color:#6a9955;"># [3.14, 'Python']</span></div>
 
-            <a href="#" class="btn-next">Перейти к вопросу</a>
+            <a href="#quest-iframe" class="btn-next">Перейти к вопросу</a>
         </div>
 
         <!-- Ситуация 5. Срезы -->
@@ -227,19 +228,19 @@
                 ['УАЗ', 'Vesta']
             </div>
 
-            <a href="#" class="btn-next">Перейти к вопросу</a>
+            <a href="#quest-iframe" class="btn-next">Перейти к вопросу</a>
         </div>
 
-        <!-- Ситуация 6. Методы и функции -->
-        <div class="glass-card">
-            <h2>Ситуация 6. Полезные функции</h2>
-            <div class="blue-line"></div>
-            
-            <p>Подведем итоги в гараже. Мы можем узнать длину списка, сумму чисел, найти максимум или минимум, а также отсортировать список.</p>
-            
-            <div class="code-block">numbers = [10, 2, 11, 9]<br>print(len(numbers)) <span style="color:#6a9955;"># 4 (длина)</span><br>print(sum(numbers)) <span style="color:#6a9955;"># 32 (сумма)</span><br>print(max(numbers)) <span style="color:#6a9955;"># 11 (максимум)</span><br><br>numbers.sort()<br>print(numbers) <span style="color:#6a9955;"># [2, 9, 10, 11]</span></div>
-
-            <a href="#" class="btn-next">Завершить обучение</a>
+        <!-- Блок с твоим квестом -->
+        <div id="quest-iframe" style="display: flex; justify-content: center; width: 100%; margin: 20px 0; scroll-margin-top: 20px;">
+            <iframe
+                src="https://tsehoshsofia.github.io/my-project-tsekhosh_s_i/"
+                width="100%"
+                height="750"
+                style="border: none; max-width: 900px; min-height: 750px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); background: #fff;"
+                title="Мастер списков Python"
+                loading="lazy">
+            </iframe>
         </div>
 
     </div>
