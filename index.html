@@ -47,21 +47,26 @@
             padding-bottom: 20px;
         }
 
-        /* 4. ПЛАШКА */
+        /* 4. ПЛАШКА (Максимально похожая на твой скриншот) */
         .theory-card {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            /* Полупрозрачный белый фон (как на скрине) */
+            background-color: rgba(255, 255, 255, 0.75); 
             
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+            /* Размываем то, что за карточкой, чтобы текст читался */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             
             padding: 30px 35px;
             box-sizing: border-box;
+            
+            /* Строгий черный текст, как на скрине */
             font-size: 20px;
             line-height: 1.5;
-            color: #111111;
+            color: #000000;
         }
 
         /* 5. ЗАГОЛОВКИ */
@@ -86,14 +91,14 @@
             line-height: 1.6;
         }
 
-        /* 7. КОД */
+        /* 7. КОД (Розовая плашка с красным текстом) */
         code {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.1);
+            background-color: rgba(220, 210, 230, 0.4); /* Светло-розоватый/сиреневатый фон */
             padding: 4px 8px;
             border-radius: 6px;
-            color: #c7254e;
+            color: #c7254e; /* Красный текст */
             display: inline-block;
             margin: 5px 0;
         }
@@ -101,7 +106,7 @@
         .code-block {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.1);
+            background-color: rgba(220, 210, 230, 0.4);
             padding: 15px;
             border-radius: 8px;
             color: #c7254e;
@@ -120,10 +125,10 @@
             max-width: 500px;
             margin: 20px auto 0 auto;
             padding: 14px 20px;
-            background-color: #F4F9FF;
+            background-color: #F4F9FF; /* Светло-голубая заливка */
             border: 2px solid #4169E1;
             border-radius: 10px;
-            color: #4169E1;
+            color: #4169E1; /* Синий текст */
             font-size: 18px;
             font-weight: bold;
             text-align: center;
@@ -198,13 +203,12 @@ print(cars[4:2:-1]) # в обратном порядке</div>
                 <li><code>append(x)</code> — добавляет элемент <b>в конец</b> списка.</li>
                 <li><code>insert(i, x)</code> — вставляет элемент на <b>конкретную позицию</b> (по индексу), сдвигая остальные.</li>
             </ul>
-            <p>Далее разберем каждый из них на примерах.</p>
         </div>
 
         <!-- 5 (Метод append) -->
         <div class="theory-card">
             <h2>Добавление: метод append()</h2>
-            <p>Метод <code>append()</code> добавляет новый элемент <b>строго в конец списка</b>. Это самый быстрый и частый способ добавления.</p>
+            <p>Метод <code>append()</code> добавляет новый элемент <b>строго в конец списка</b>.</p>
             <div class="code-block">garage = ['Lada Granta', 'Niva Travel']
 garage.append('Aurus Senat')
 print(garage) 
@@ -216,7 +220,6 @@ print(garage)
             <h2>Добавление: метод insert()</h2>
             <p>Метод <code>insert(index, value)</code> вставляет элемент на <b>конкретную позицию</b>. Все элементы, которые были после указанного индекса, сдвигаются вправо.</p>
             <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Aurus Senat']
-# Вставляем УАЗ на индекс 1
 garage.insert(1, 'УАЗ Патриот')
 print(garage)
 # Результат: ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']</div>
@@ -237,7 +240,7 @@ print(garage)
         <!-- 8 (Метод remove) -->
         <div class="theory-card">
             <h2>Удаление: метод remove()</h2>
-            <p>Метод <code>remove(x)</code> ищет элемент по значению и удаляет <b>первое</b> совпадение. Если элемента нет в списке, возникает ошибка <code>ValueError</code>.</p>
+            <p>Метод <code>remove(x)</code> ищет элемент по значению и удаляет <b>первое</b> совпадение.</p>
             <div class="code-block">variables = [10, 'Python', 3.14, 'Python']
 variables.remove('Python') 
 # Удалит первый 'Python'
@@ -252,9 +255,7 @@ print(variables)
             <div class="code-block">car_models = ['Lada Granta', 'Niva Travel', 'Aurus Senat']
 car_models.pop(1) # Удалит 'Niva Travel'
 print(car_models) 
-# Результат: ['Lada Granta', 'Aurus Senat']
-
-car_models.pop() # Удалит последний 'Aurus Senat'</div>
+# Результат: ['Lada Granta', 'Aurus Senat']</div>
         </div>
 
         <!-- 10 (Оператор del) -->
@@ -264,15 +265,13 @@ car_models.pop() # Удалит последний 'Aurus Senat'</div>
             <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
 del cars[1] # Удалит 'Niva'
 print(cars) 
-# Результат: ['Lada', 'Vesta', 'УАЗ']
-
-del cars[:2] # Удалит первые два элемента</div>
+# Результат: ['Lada', 'Vesta', 'УАЗ']</div>
         </div>
 
         <!-- 11 (Метод clear) -->
         <div class="theory-card">
             <h2>Удаление: метод clear()</h2>
-            <p>Метод <code>clear()</code> удаляет <b>все</b> элементы из списка, оставляя его пустым. Сама переменная при этом сохраняется.</p>
+            <p>Метод <code>clear()</code> удаляет <b>все</b> элементы из списка, оставляя его пустым.</p>
             <div class="code-block">cart = ['Смартфон', 'Чехол', 'Книга']
 cart.clear()
 print(cart) 
