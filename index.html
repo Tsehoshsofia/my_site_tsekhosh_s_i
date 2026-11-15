@@ -546,37 +546,41 @@ fruits.<input type="text" id="task13Input" class="blank-input" placeholder="..."
                 <div class="result-box" id="resTask14"></div>
             </div>
 
-            <!-- Задача 15 -->
+               <!-- Задача 15 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
                 <p><b>Задача 15.</b> Полностью очистите список <code>cart</code>, оставив его пустым.</p>
                 <div class="code-block">cart = ['Хлеб', 'Молоко', 'Сыр']
-cart.<input type="text" id="task15Input" class="blank-input" placeholder="...", style="width: 100px;"></div>
+cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." style="width: 100px;"></div>
                 <button onclick="checkTask15()">Проверить код</button>
                 <div class="result-box" id="resTask15"></div>
             </div>
-        </div>
+        </div> <!-- Закрытие блока "Большая проверка" -->
 
         <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
-        <div class="theory-card" style="text-align: center;">
-            <h2 style="justify-content: center; border-bottom: none; font-size: 24px;"> Теория пройдена!</h2>
-            <p style="font-weight: bold; font-size: 22px; margin-bottom: 20px;">Время проверить знания на практике.</p>
-            <a href="https://project12909115.tilda.ws/page358355909.html" class="btn">Перейти к вопросам</a>
+        <div class="theory-card" style="text-align: center; padding-bottom: 30px;">
+            <h2 style="justify-content: center; border-bottom: none; font-size: 24px; margin-bottom: 10px;">🎉 Теория пройдена!</h2>
+            
+            <p style="font-weight: bold; font-size: 20px; margin-bottom: 10px; text-align: center;">
+                Готов проверить знания на практике
+            </p>
+            
+            <!-- Стрелка вниз -->
+            <div style="font-size: 32px; color: #4169E1; line-height: 1;">
+                ↓
+            </div>
         </div>
 
-    </div>
+    </div> <!-- Закрытие главного контейнера .quest-container -->
 
     <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
     <script>
-       
-     
-
         // Утилита для вывода
         function showResult(id, text, isError = false) {
             const el = document.getElementById(id);
             el.style.display = 'block';
             el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : `<span style="color:green;">${text}</span>`;
         }
-
+        
         // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (5-9) ---
         function checkTask5() {
             const val = document.getElementById('task5Input').value.replace(/\s/g, '').toLowerCase();
