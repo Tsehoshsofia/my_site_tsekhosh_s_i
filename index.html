@@ -5,53 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Теория: Списки в Python</title>
     <style>
-        /* 1. БАЗОВЫЕ НАСТРОЙКИ (Взято из твоего Twine) */
+        /* Базовые настройки */
         body {
             background-color: #FFFFFF;
             margin: 0;
-            padding: 0;
+            padding: 40px 20px;
             font-family: "Times New Roman", Times, serif;
-            /* Убираем сглаживание, чтобы при зуме шрифт был четким */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url("print.jpeg"); /* Твой фон */
+            
+            /* Фон */
+            background-image: url("print.jpeg");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            
+            /* ВОТ ГЛАВНОЕ ИСПРАВЛЕНИЕ: выстраиваем всё в колонку */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px; /* Расстояние между теорией и квестом */
         }
 
-        /* 2. КОНТЕЙНЕР ДЛЯ КОНТЕНТА (В стиле tw-passage) */
+        /* Карточка с теорией */
         .theory-container {
             width: 750px;
-            max-width: calc(100% - 40px);
-            
-            /* Эффект твоей карточки из Twine */
+            max-width: 100%;
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.5);
-            
             padding: 30px 35px;
-            margin: 40px 0;
-            
-            /* Размер текста как в квесте */
             font-size: 20px;
             line-height: 1.5;
             color: #111111;
-            
-            /* Прокрутка, если текст длинный */
-            max-height: 85vh;
-            overflow-y: auto;
+            box-sizing: border-box; /* Чтобы padding не увеличивал ширину */
         }
 
-        /* 3. ЗАГОЛОВКИ (Как в твоих ситуациях) */
+        /* Заголовки */
         h2 {
             font-size: 28px;
             font-weight: bold;
@@ -61,18 +56,15 @@
             border-bottom: 3px solid #4169E1;
             padding-bottom: 10px;
         }
-        
-        h2:first-child {
-            margin-top: 0;
-        }
+        h2:first-child { margin-top: 0; }
 
-        /* 4. АБЗАЦЫ И ТЕКСТ */
+        /* Текст */
         p {
             margin: 10px 0;
             text-align: justify;
         }
 
-        /* 5. ИНЛАЙН-КОД И БЛОКИ КОДА (Розовый, как у тебя) */
+        /* Код */
         code {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
@@ -84,7 +76,6 @@
             margin: 5px 0;
         }
 
-        /* Блок кода для нескольких строк */
         .code-block {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
@@ -100,12 +91,12 @@
             box-sizing: border-box;
         }
 
-        /* 6. КНОПКИ (Как в твоем квесте) */
+        /* Кнопка */
         .btn {
             display: block;
             width: 100%;
             max-width: 500px;
-            margin: 20px auto;
+            margin: 30px auto 10px auto;
             padding: 12px 20px;
             background-color: #F4F9FF;
             border: 2px solid #4169E1;
@@ -127,20 +118,26 @@
             box-shadow: 0 5px 12px rgba(65, 105, 225, 0.3);
         }
 
-        /* 7. БЛОК С КВЕСТОМ (В самом конце) */
-        #quest-iframe {
-            margin-top: 40px;
+        /* Контейнер для квеста */
+        .quest-container {
             width: 100%;
-            height: 750px;
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            background: #FFFFFF;
+            max-width: 900px; /* Квест чуть шире, чтобы было удобно играть */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Если карточка теории скролится внутри себя, это убирает двойную прокрутку */
+        @media (max-height: 800px) {
+            .theory-container {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Блок с теорией -->
     <div class="theory-container">
         <h2>Создание списка</h2>
         <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные: числа, строки, и даже другие списки.</p>
@@ -161,50 +158,33 @@ garage.append('Aurus Senat')
 print(garage)  # ['Lada Granta', 'Niva Travel', 'Aurus Senat']
 
 garage.insert(1, 'УАЗ Патриот')
-print(garage)  # ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']</div>
+print(garage)</div>
 
         <h2>Удаление элементов</h2>
-        <p>Метод <code>remove()</code> удаляет первый элемент по его значению. Метод <code>pop()</code> или оператор <code>del</code> удаляют элемент по индексу (если индекс не указан, <code>pop()</code> удаляет последний).</p>
+        <p>Метод <code>remove()</code> удаляет первый элемент по его значению. Метод <code>pop()</code> или оператор <code>del</code> удаляют элемент по индексу.</p>
         <div class="code-block">garage = [10, 'Python', 3.14, 'Python']
-
 garage.remove('Python')  # Удалит первый 'Python'
-print(garage)  # [10, 3.14, 'Python']
+garage.pop(0)  # Удалит 10</div>
 
-garage.pop(0)  # Удалит 10
-print(garage)  # [3.14, 'Python']</div>
-
-        <h2>Срезы списка</h2>
-        <p>Срез позволяет получить подпоследовательность элементов. Синтаксис: <code>[начало:конец:шаг]</code>. Конечный индекс не включается в результат.</p>
+        <h2>Срезы и функции</h2>
+        <p>Срез позволяет получить часть списка: <code>[начало:конец:шаг]</code>. Для работы со списками также часто используются <code>len()</code> (длина), <code>sum()</code> (сумма) и <code>sort()</code> (сортировка).</p>
         <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
-
 print(cars[:3])  # Первые три
-print(cars[1:3])  # Со второй по третью
 print(cars[4:2:-1])  # В обратном порядке</div>
 
-        <h2>Полезные функции</h2>
-        <p>Для работы со списками часто используются встроенные функции: <code>len()</code> (длина), <code>sum()</code> (сумма), <code>max()</code> (максимум) и <code>min()</code> (минимум), а также методы <code>sort()</code> для сортировки и <code>reverse()</code> для переворота.</p>
-        <div class="code-block">numbers = [10, 2, 11, 9]
-print(len(numbers))  # 4
-print(sum(numbers))  # 32
-print(max(numbers))  # 11
-
-numbers.sort()
-print(numbers)  # [2, 9, 10, 11]</div>
-
-        <!-- Блок перехода к квесту -->
-        <h2>Теория пройдена!</h2>
-        <p>Теперь вы знаете, как создавать, изменять и удалять элементы списков. Время проверить знания на практике.</p>
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">Теория пройдена! Время проверить знания на практике.</p>
         
+        <!-- Кнопка-якорь для скролла вниз -->
         <a href="#quest-section" class="btn">Перейти к вопросам</a>
     </div>
 
-    <!-- Твой квест в самом низу -->
-    <div id="quest-section" style="width: 100%; display: flex; justify-content: center; margin-bottom: 40px;">
+    <!-- Блок с квестом (внизу) -->
+    <div id="quest-section" class="quest-container">
         <iframe
             src="https://tsehoshsofia.github.io/my-project-tsekhosh_s_i/"
             width="100%"
-            height="750"
-            style="border: none; max-width: 900px; min-height: 750px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); background: #fff;"
+            height="800"
+            style="border: none; min-height: 800px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); background: #fff;"
             title="Мастер списков Python"
             loading="lazy">
         </iframe>
