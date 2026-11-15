@@ -3,279 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конспект: Списки в Python</title>
+    <title>Квест: Списки в Python</title>
     <style>
-        /* Базовые настройки и фоновое изображение */
+        /* Базовые настройки */
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
+
         :root {
-            --primary-blue: #2b50d6;
-            --bg-glass: rgba(255, 255, 255, 0.85);
-            --text-main: #1a1a1a;
-            --text-muted: #555555;
-            --code-color: #c7254e;
-            --code-bg: rgba(240, 240, 245, 0.7);
-            --border-glass: rgba(255, 255, 255, 0.4);
+            --primary-blue: #1c4ed8; /* Цвет линии и кнопок */
+            --text-dark: #111;
+            --text-light: #444;
+            --code-color: #c7254e; /* Розово-красный цвет кода */
+            --code-bg: #f4f4f6;
+            --glass-bg: rgba(255, 255, 255, 0.85);
         }
 
         body {
-            font-family: 'Georgia', serif; /* Шрифт с засечками, как на скриншоте */
-            color: var(--text-main);
+            font-family: 'Merriweather', serif;
             margin: 0;
             padding: 40px 20px;
-            /* Фоновое изображение (можно заменить на ваше из квеста) */
-            background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop') no-repeat center center fixed;
-            background-size: cover;
             min-height: 100vh;
+            /* Замени ссылку ниже на путь к твоей картинке с девушкой */
+            background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Контейнер для центрирования контента */
-        .quest-container {
-            max-width: 900px;
-            margin: 0 auto;
+        /* Контейнер, ограничивающий ширину как на скрине */
+        .quest-wrapper {
+            width: 100%;
+            max-width: 850px;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 40px;
         }
 
-        /* Карточка с эффектом матового стекла */
+        /* Сама карточка с матовым стеклом */
         .glass-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-glass);
-            border-radius: 16px;
-            padding: 35px 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 12px;
+            padding: 40px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             position: relative;
-            overflow: hidden;
         }
 
         /* Заголовки */
-        h1 {
-            font-size: 2.2rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-weight: bold;
-            letter-spacing: -0.5px;
-        }
-
         h2 {
-            font-size: 1.5rem;
+            font-size: 28px;
+            color: var(--text-dark);
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
-        /* Синяя декоративная линия под заголовком, как на скриншоте */
-        .title-divider {
+        /* Синяя линия под заголовком */
+        .blue-line {
             height: 3px;
-            width: 100%;
             background-color: var(--primary-blue);
+            width: 100%;
             margin-bottom: 25px;
-            border-radius: 2px;
         }
 
-        /* Текст */
+        /* Абзацы текста */
         p {
-            font-size: 1.1rem;
-            line-height: 1.6;
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-light);
             margin-bottom: 20px;
-            color: var(--text-main);
         }
 
-        .text-muted {
-            color: var(--text-muted);
-            font-size: 1rem;
-        }
-
-        /* Стили для инлайн-кода (как на скриншоте в розовой плашке) */
+        /* Стиль кода, как на твоем скриншоте (розовая плашка) */
         .inline-code {
-            font-family: 'Consolas', 'Courier New', monospace;
+            font-family: 'Roboto Mono', monospace;
+            color: var(--code-color);
+            background-color: var(--code-bg);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        /* Блок для многострочного кода, чтобы было удобно читать */
+        .code-block {
             background-color: var(--code-bg);
             color: var(--code-color);
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            font-weight: bold;
-        }
-
-        /* Блоки с кодом (в стиле редактора) */
-        pre {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 12px;
-            overflow-x: auto;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95rem;
+            font-family: 'Roboto Mono', monospace;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 15px;
             line-height: 1.5;
-            margin-bottom: 15px;
-            border: 1px solid #333;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
         }
 
-        /* Подсветка синтаксиса */
-        .comment { color: #6a9955; }
-        .string { color: #ce9178; }
-        .keyword { color: #569cd6; }
-
-        /* Блок вывода */
-        .console {
-            background-color: rgba(0, 0, 0, 0.05);
+        /* Вывод программы */
+        .console-output {
+            background: rgba(0,0,0,0.05);
             border-left: 4px solid var(--primary-blue);
             padding: 15px 20px;
-            border-radius: 0 8px 8px 0;
-            font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 0.95rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            color: var(--text-dark);
             margin-bottom: 25px;
-            color: #333;
+            border-radius: 0 8px 8px 0;
         }
 
-        .console::before {
-            content: "Вывод:";
+        /* Кнопка как на скриншоте */
+        .btn-next {
             display: block;
-            font-family: 'Georgia', serif;
-            font-weight: bold;
-            font-size: 0.85rem;
-            color: var(--primary-blue);
-            margin-bottom: 5px;
-        }
-
-        /* Кнопка */
-        .btn {
-            display: inline-block;
             width: 100%;
-            padding: 15px;
-            background-color: transparent;
-            color: var(--primary-blue);
+            max-width: 400px;
+            margin: 30px auto 0 auto;
+            padding: 16px 20px;
+            background: transparent;
             border: 2px solid var(--primary-blue);
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
+            border-radius: 10px;
+            color: var(--primary-blue);
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            font-weight: 700;
             text-align: center;
             text-decoration: none;
-            cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
-            font-family: 'Georgia', serif;
+            cursor: pointer;
         }
 
-        .btn:hover {
-            background-color: var(--primary-blue);
+        .btn-next:hover {
+            background: var(--primary-blue);
             color: white;
+        }
+
+        /* Адаптив для телефонов */
+        @media (max-width: 600px) {
+            .glass-card {
+                padding: 25px 20px;
+            }
+            h2 { font-size: 22px; }
+            p { font-size: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="quest-container">
-        
-        <!-- Вводная карточка -->
-        <div class="glass-card" style="text-align: center;">
-            <h1>Основы работы со списками</h1>
-            <div class="title-divider"></div>
-            <p>Список — это непрерывная динамическая коллекция элементов. Каждому элементу присваивается порядковый номер (индекс). Первый индекс равен нулю.</p>
-            <p class="text-muted">Изучите теорию ниже, чтобы успешно пройти следующие испытания.</p>
+    <div class="quest-wrapper">
+
+        <!-- Ситуация 1. Создание -->
+        <div class="glass-card">
+            <h2>Ситуация 1. Создание списка</h2>
+            <div class="blue-line"></div>
+            
+            <p>Мы начинаем наше приключение. В Python списки создаются с помощью квадратных скобок или функции <span class="inline-code">list()</span>. Внутри могут храниться любые данные.</p>
+            
+            <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']<br>empty_list = list()</div>
+            
+            <a href="#" class="btn-next">Перейти к вопросу</a>
         </div>
 
-        <!-- Карточка 1: Создание -->
+        <!-- Ситуация 2. Индексация -->
         <div class="glass-card">
-            <h2>1. Создание списка</h2>
-            <div class="title-divider"></div>
-            <p>Списки создаются с помощью квадратных скобок <span class="inline-code">[]</span> или функции <span class="inline-code">list()</span>. Внутри могут храниться любые типы данных.</p>
+            <h2>Ситуация 2. Индексация</h2>
+            <div class="blue-line"></div>
             
-<pre><code>my_list = [] <span class="comment"># пустой список</span>
-numbers = [40, 20, 90, 11, 5]
-cars = <span class="string">['Lada Granta', 'Niva Travel', 'Lada Vesta']</span>
-mixed = [3.14, 10, <span class="string">'Hello'</span>, <span class="keyword">True</span>]</code></pre>
-        </div>
-
-        <!-- Карточка 2: Индексация -->
-        <div class="glass-card">
-            <h2>2. Индексация и изменение</h2>
-            <div class="title-divider"></div>
-            <p>Обращение к элементам идет по индексу. Списки изменяемы: вы можете заменить элемент, обратившись к нему по индексу.</p>
+            <p>Мы решили узнать, что находится в гараже. Каждый элемент имеет свой индекс, начиная с <span class="inline-code">0</span>. Также мы можем менять машины местами или получать последнюю с помощью индекса <span class="inline-code">-1</span>.</p>
             
-<pre><code>car_models = <span class="string">['Lada Granta', 'KIA', 'Lada Vesta', 'УАЗ Патриот']</span>
+            <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']<br>print(car_models[0]) <span style="color:#6a9955;"># Lada Granta</span><br>car_models[1] = 'Niva Travel' <span style="color:#6a9955;"># Замена KIA</span><br>print(car_models[-1]) <span style="color:#6a9955;"># Lada Vesta</span></div>
 
-<span class="comment"># Получение</span>
-print(car_models[0]) 
-
-<span class="comment"># Замена</span>
-car_models[1] = <span class="string">'Niva Travel'</span>
-print(car_models)
-
-<span class="comment"># Обратный индекс (с конца)</span>
-print(car_models[-1]) <span class="comment"># последний элемент</span></code></pre>
-            
-            <div class="console">
-Lada Granta<br>
-['Lada Granta', 'Niva Travel', 'Lada Vesta', 'УАЗ Патриот']<br>
-УАЗ Патриот
+            <div class="console-output">
+                Lada Granta<br>
+                Lada Vesta
             </div>
+
+            <a href="#" class="btn-next">Перейти к вопросу</a>
         </div>
 
-        <!-- Карточка 3: Методы добавления -->
+        <!-- Ситуация 3. Добавление -->
         <div class="glass-card">
-            <h2>3. Добавление элементов</h2>
-            <div class="title-divider"></div>
-            <p>Метод <span class="inline-code">append()</span> добавляет элемент в конец списка. Метод <span class="inline-code">insert()</span> позволяет вставить элемент на конкретную позицию.</p>
+            <h2>Ситуация 3. Добавление элементов</h2>
+            <div class="blue-line"></div>
             
-<pre><code>my_list = [1, 2, 3]
-
-my_list.append(4)
-print(my_list) <span class="comment"># [1, 2, 3, 4]</span>
-
-my_list.insert(1, 9) <span class="comment"># вставить 9 на индекс 1</span>
-print(my_list) <span class="comment"># [1, 9, 2, 3, 4]</span></code></pre>
-        </div>
-
-        <!-- Карточка 4: Удаление -->
-        <div class="glass-card">
-            <h2>4. Удаление элементов</h2>
-            <div class="title-divider"></div>
-            <p><span class="inline-code">remove(x)</span> удаляет первый элемент по значению. <span class="inline-code">pop(i)</span> удаляет по индексу (или последний). Оператор <span class="inline-code">del</span> также удаляет по индексу.</p>
+            <p>Мы купили новый автомобиль 'Aurus Senat' и хотим добавить его в конец списка. Для этого используем метод <span class="inline-code">append()</span>. А если нужно поставить машину в середину гаража — используем <span class="inline-code">insert()</span>.</p>
             
-<pre><code>variables = [10, <span class="keyword">True</span>, <span class="string">'Python'</span>, 3.14, <span class="string">'Python'</span>]
+            <div class="code-block">garage = ['Lada Granta', 'Niva Travel']<br>garage.append('Aurus Senat')<br>print(garage)<br><br>garage.insert(1, 'УАЗ Патриот')<br>print(garage)</div>
 
-variables.remove(<span class="string">'Python'</span>) <span class="comment"># удалит первую строку 'Python'</span>
-print(variables)
-
-variables.pop(0) <span class="comment"># удалит элемент с индексом 0 (число 10)</span>
-print(variables)
-
-<span class="keyword">del</span> variables[0] <span class="comment"># удалит элемент с индексом 0 (True)</span>
-print(variables)</code></pre>
-            
-            <div class="console">
-[10, True, 3.14, 'Python']<br>
-[True, 3.14, 'Python']<br>
-[3.14, 'Python']
+            <div class="console-output">
+                ['Lada Granta', 'Niva Travel', 'Aurus Senat']<br>
+                ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']
             </div>
+
+            <a href="#" class="btn-next">Перейти к вопросу</a>
         </div>
 
-        <!-- Карточка 5: Срезы -->
+        <!-- Ситуация 4. Удаление -->
         <div class="glass-card">
-            <h2>5. Срезы списка</h2>
-            <div class="title-divider"></div>
-            <p>Срез — это подпоследовательность. Синтаксис: <span class="inline-code">[начало:конец:шаг]</span>. Конечный индекс не включается в результат.</p>
+            <h2>Ситуация 4. Удаление элементов</h2>
+            <div class="blue-line"></div>
             
-<pre><code>cars = <span class="string">['Lada', 'Niva', 'Vesta', 'УАЗ']</span>
+            <p>Пришло время продать старую машину. Метод <span class="inline-code">remove()</span> удаляет по названию, а <span class="inline-code">pop()</span> или оператор <span class="inline-code">del</span> — по индексу.</p>
+            
+            <div class="code-block">garage = [10, 'Python', 3.14, 'Python']<br><br>garage.remove('Python') <span style="color:#6a9955;"># Удалит первый 'Python'</span><br>print(garage) <span style="color:#6a9955;"># [10, 3.14, 'Python']</span><br><br>garage.pop(0) <span style="color:#6a9955;"># Удалит 10</span><br>print(garage) <span style="color:#6a9955;"># [3.14, 'Python']</span></div>
 
-print(cars[:3])   <span class="comment"># с 0 по 2 индекс</span>
-print(cars[1:3])  <span class="comment"># с 1 по 2 индекс</span>
-print(cars[1:])   <span class="comment"># с 1 до конца</span>
-print(cars[4:2:-1]) <span class="comment"># с шагом -1 (в обратном порядке)</span></code></pre>
-            
-            <div class="console">
-['Lada', 'Niva', 'Vesta']<br>
-['Niva', 'Vesta']<br>
-['Niva', 'Vesta', 'УАЗ']<br>
-['УАЗ', 'Vesta']
-            </div>
+            <a href="#" class="btn-next">Перейти к вопросу</a>
         </div>
 
-        <!-- Кнопка перехода (Заглушка для квеста) -->
-        <div class="glass-card" style="text-align: center; padding: 25px;">
-            <p>Готовы проверить знания на практике?</p>
-            <a href="#" class="btn" onclick="alert('Здесь будет переход на следующий шаг квеста!')">Перейти к вопросу</a>
+        <!-- Ситуация 5. Срезы -->
+        <div class="glass-card">
+            <h2>Ситуация 5. Срезы списка</h2>
+            <div class="blue-line"></div>
+            
+            <p>Иногда нам нужно выбрать только часть машин. Срез работает по правилу <span class="inline-code">[начало:конец:шаг]</span>. Конечный индекс не включается в результат.</p>
+            
+            <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']<br><br>print(cars[:3]) <span style="color:#6a9955;"># Первые три</span><br>print(cars[1:3]) <span style="color:#6a9955;"># Со второй по третью</span><br>print(cars[4:2:-1]) <span style="color:#6a9955;"># В обратном порядке</span></div>
+
+            <div class="console-output">
+                ['Lada', 'Niva', 'Vesta']<br>
+                ['Niva', 'Vesta']<br>
+                ['УАЗ', 'Vesta']
+            </div>
+
+            <a href="#" class="btn-next">Перейти к вопросу</a>
+        </div>
+
+        <!-- Ситуация 6. Методы и функции -->
+        <div class="glass-card">
+            <h2>Ситуация 6. Полезные функции</h2>
+            <div class="blue-line"></div>
+            
+            <p>Подведем итоги в гараже. Мы можем узнать длину списка, сумму чисел, найти максимум или минимум, а также отсортировать список.</p>
+            
+            <div class="code-block">numbers = [10, 2, 11, 9]<br>print(len(numbers)) <span style="color:#6a9955;"># 4 (длина)</span><br>print(sum(numbers)) <span style="color:#6a9955;"># 32 (сумма)</span><br>print(max(numbers)) <span style="color:#6a9955;"># 11 (максимум)</span><br><br>numbers.sort()<br>print(numbers) <span style="color:#6a9955;"># [2, 9, 10, 11]</span></div>
+
+            <a href="#" class="btn-next">Завершить обучение</a>
         </div>
 
     </div>
