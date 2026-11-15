@@ -10,12 +10,9 @@
             margin: 0; padding: 0; width: 100%; height: 100%;
             font-family: "Times New Roman", Times, serif;
             overflow: hidden; 
-            
-            /* Отключаем искусственное сглаживание, чтобы шрифт был резким */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            
             scroll-behavior: smooth;
         }
 
@@ -35,42 +32,32 @@
             padding-bottom: 20px; padding-right: 5px;
         }
 
-        /* 4. ПЛАШКА (Белый фон для идеальной четкости) */
+        /* 4. ПЛАШКА */
         .theory-card {
             background-color: rgba(255, 255, 255, 0.98); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
             border-radius: 20px; border: 1px solid #e0e0e0;
             padding: 30px 35px; box-sizing: border-box;
-            font-size: 20px; 
-            line-height: 1.6; 
-            color: #000000;
+            font-size: 20px; line-height: 1.6; color: #000000;
         }
 
         /* 5. ЗАГОЛОВКИ */
         h2 {
             font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 20px;
             color: #000000; border-bottom: 3px solid #4169E1; padding-bottom: 10px;
-            display: flex; align-items: center; gap: 12px; 
-            letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px;
         }
 
         /* 6. ТЕКСТ */
         p { 
-            margin: 10px 0; 
-            text-align: justify; 
-            color: #000000; 
-            font-weight: 500; 
-            letter-spacing: 0.2px; 
+            margin: 10px 0; text-align: justify; color: #000000; 
+            font-weight: 500; letter-spacing: 0.2px; 
             text-shadow: 0px 0px 1px rgba(255,255,255,0.8); 
         }
-        
         ul { 
-            margin-left: 20px; 
-            line-height: 1.6; 
-            color: #000000; 
-            font-weight: 500; 
-            letter-spacing: 0.2px;
+            margin-left: 20px; line-height: 1.6; color: #000000; 
+            font-weight: 500; letter-spacing: 0.2px;
         }
 
         /* 7. КОД */
@@ -150,10 +137,7 @@
             display: flex; flex-direction: column; justify-content: center;
             align-items: center; min-height: 400px;
         }
-        .start-screen h1 { 
-            font-size: 42px; margin: 0 0 10px 0; font-weight: bold; color: #000; 
-            letter-spacing: 1px;
-        }
+        .start-screen h1 { font-size: 42px; margin: 0 0 10px 0; font-weight: bold; color: #000; letter-spacing: 1px; }
         .start-screen .subtitle { font-size: 24px; color: #4169E1; margin-bottom: 30px; font-weight: bold; }
         .start-screen .description { font-size: 20px; color: #000; margin-bottom: 40px; text-align: center; max-width: 600px; font-weight: 500; }
         .start-screen .author { font-size: 18px; color: #333; margin-bottom: 40px; font-style: italic; font-weight: bold; }
@@ -537,382 +521,4 @@ fruits.<input type="text" id="task11Input" class="blank-input" placeholder="..."
 
             <!-- Задача 12 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 12.</b> Вставьте слово <code>'Груша'</code> на <b>второе место</b> (то есть под <b>индекс 1</b>).</p>
-                <div class="code-block">fruits = ['Банан', 'Апельсин']
-fruits.<input type="text" id="task12Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask12()">Проверить код</button>
-                <div class="result-box" id="resTask12"></div>
-            </div>
-
-            <!-- Задача 13 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 13.</b> Удалите слово <code>'Банан'</code> из списка по его значению.</p>
-                <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
-fruits.<input type="text" id="task13Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask13()">Проверить код</button>
-                <div class="result-box" id="resTask13"></div>
-            </div>
-
-            <!-- Задача 14 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 14.</b> Удалите второй элемент (индекс 1) из списка с помощью оператора <code>del</code>.</p>
-                <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
-<input type="text" id="task14Input" class="blank-input" placeholder="...", style="width: 150px;"> fruits[1]</div>
-                <button onclick="checkTask14()">Проверить код</button>
-                <div class="result-box" id="resTask14"></div>
-            </div>
-
-            <!-- Задача 15 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 15.</b> Полностью очистите список <code>cart</code>, оставив его пустым.</p>
-                <div class="code-block">cart = ['Хлеб', 'Молоко', 'Сыр']
-cart.<input type="text" id="task15Input" class="blank-input" placeholder="...", style="width: 100px;"></div>
-                <button onclick="checkTask15()">Проверить код</button>
-                <div class="result-box" id="resTask15"></div>
-            </div>
-        </div>
-
-        <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
-        <div class="theory-card" style="text-align: center;">
-            <h2 style="justify-content: center; border-bottom: none; font-size: 24px;">🎉 Теория пройдена!</h2>
-            <p style="font-weight: bold; font-size: 22px; margin-bottom: 20px;">Время проверить знания на практике.</p>
-            <a href="https://project12909115.tilda.ws/page358355909.html" class="btn">Перейти к вопросам</a>
-        </div>
-
-    </div>
-
-    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
-    <script>
-        // Прокрутка
-        function scrollToCard() {
-            const container = document.getElementById('main-container');
-            const firstCard = document.getElementById('card-1');
-            container.scrollTo({ top: firstCard.offsetTop - 20, behavior: 'smooth' });
-        }
-
-        // Утилита для вывода
-        function showResult(id, text, isError = false) {
-            const el = document.getElementById(id);
-            el.style.display = 'block';
-            el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : `<span style="color:green;">${text}</span>`;
-        }
-
-        // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (5-9) ---
-        function checkTask5() {
-            const val = document.getElementById('task5Input').value.replace(/\s/g, '').toLowerCase();
-            if (val.includes("'red'") && val.includes("'green'") && val.includes("'blue'") && val.startsWith('[') && val.endsWith(']')) {
-                showResult('resTask5', `>>> Верно! colors = ['red', 'green', 'blue']`);
-            } else {
-                showResult('resTask5', `Ошибка. Попробуй формат: ['red', 'green', 'blue']`, true);
-            }
-        }
-
-        function checkTask6() {
-            const val = document.getElementById('task6Input').value.trim();
-            if (val === ':2' || val === '0:2') {
-                showResult('resTask6', `>>> Верно! [10, 20]`);
-            } else {
-                showResult('resTask6', `Ошибка. Для первых двух элементов нужен срез :2`, true);
-            }
-        }
-
-        function checkTask7() {
-            const val = document.getElementById('task7Input').value.trim();
-            if (val === '1') {
-                showResult('resTask7', `>>> Верно! ['Lada', 'BMW', 'Vesta']`);
-            } else {
-                showResult('resTask7', `Ошибка. Второй элемент имеет индекс 1.`, true);
-            }
-        }
-
-        function checkTask8() {
-            const val = document.getElementById('task8Input').value.trim().toLowerCase();
-            if (val === 'in') {
-                showResult('resTask8', `>>> Верно! Оператор in проверяет вхождение.`);
-            } else {
-                showResult('resTask8', `Ошибка. Для проверки вхождения используется оператор in.`, true);
-            }
-        }
-
-        function checkTask9() {
-            const val = document.getElementById('task9Input').value.trim().toLowerCase();
-            if (val === 'remove') {
-                showResult('resTask9', `>>> Верно! ['Lada', 'Vesta']`);
-            } else {
-                showResult('resTask9', `Ошибка. Для удаления по значению используется метод remove.`, true);
-            }
-        }
-
-        // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (10-15) ---
-        function checkTask10() {
-            const val = document.getElementById('task10Input').value.replace(/\s/g, '');
-            if (val === '[]') {
-                showResult('resTask10', `>>> Верно! my_list = []`);
-            } else {
-                showResult('resTask10', `Ошибка. Пустой список создается с помощью [].`, true);
-            }
-        }
-
-        function checkTask11() {
-            const val = document.getElementById('task11Input').value.replace(/\s/g, '').toLowerCase();
-            if (val === "append('яблоко')" || val === 'append("яблоко")') {
-                showResult('resTask11', `>>> Верно! ['Банан', 'Апельсин', 'Яблоко']`);
-            } else {
-                showResult('resTask11', `Ошибка. Используй метод append() и не забудь кавычки.`, true);
-            }
-        }
-
-        function checkTask12() {
-            const val = document.getElementById('task12Input').value.replace(/\s/g, '').toLowerCase();
-            if (val === "insert(1,'груша')" || val === 'insert(1,"груша")') {
-                showResult('resTask12', `>>> Верно! ['Банан', 'Груша', 'Апельсин']`);
-            } else {
-                showResult('resTask12', `Ошибка. Используй insert(1, 'Груша').`, true);
-            }
-        }
-
-        function checkTask13() {
-            const val = document.getElementById('task13Input').value.replace(/\s/g, '').toLowerCase();
-            if (val === "remove('банан')" || val === 'remove("банан")') {
-                showResult('resTask13', `>>> Верно! ['Апельсин', 'Яблоко']`);
-            } else {
-                showResult('resTask13', `Ошибка. Используй метод remove('Банан').`, true);
-            }
-        }
-
-        function checkTask14() {
-            const val = document.getElementById('task14Input').value.trim().toLowerCase();
-            if (val === 'del') {
-                showResult('resTask14', `>>> Верно! ['Банан', 'Яблоко']`);
-            } else {
-                showResult('resTask14', `Ошибка. Для удаления по индексу используется оператор del.`, true);
-            }
-        }
-
-        function checkTask15() {
-            const val = document.getElementById('task15Input').value.replace(/\s/g, '').toLowerCase();
-            if (val === 'clear()') {
-                showResult('resTask15', `>>> Верно! []`);
-            } else {
-                showResult('resTask15', `Ошибка. Для полной очистки используется метод clear().`, true);
-            }
-        }
-
-        // --- ИНТЕРАКТИВ (ТЕОРИЯ) ---
-        function runCreate() {
-            const input = document.getElementById('createInput').value;
-            if (!input.trim()) return;
-            const arr = input.split(',').map(s => s.trim());
-            showResult('resCreate', `>>> ['${arr.join("', '")}']`);
-        }
-
-        function runIndex() {
-            const list = ['Lada', 'KIA', 'Vesta', 'УАЗ'];
-            const index = parseInt(document.getElementById('indexInput').value);
-            if (isNaN(index)) return;
-            if (index >= list.length || index < -list.length) {
-                showResult('resIndex', `IndexError: list index out of range`, true);
-            } else {
-                const realIndex = index < 0 ? list.length + index : index;
-                showResult('resIndex', `>>> ${list[realIndex]}`);
-            }
-        }
-
-        function runSlice() {
-            const list = ['Lada', 'Niva', 'Vesta', 'УАЗ'];
-            const start = parseInt(document.getElementById('sliceStart').value) || 0;
-            const end = parseInt(document.getElementById('sliceEnd').value);
-            if (isNaN(end)) return;
-            const sliced = list.slice(start, end);
-            showResult('resSlice', `>>> [${sliced.map(s => `'${s}'`).join(', ')}]`);
-        }
-
-        function runAppend() {
-            const list = ['Lada', 'Niva'];
-            const val = document.getElementById('appendInput').value;
-            if (!val.trim()) return;
-            list.push(val);
-            showResult('resAppend', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
-        }
-
-        function runInsert() {
-            const list = ['Lada', 'Niva', 'Aurus'];
-            const index = parseInt(document.getElementById('insertIndex').value);
-            const val = document.getElementById('insertValue').value;
-            if (isNaN(index) || !val.trim()) return;
-            list.splice(index, 0, val);
-            showResult('resInsert', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
-        }
-
-        function runRemove() {
-            const list = ['Молоко', 'Хлеб', 'Сметана'];
-            const val = document.getElementById('removeInput').value;
-            if (!val.trim()) return;
-            const idx = list.indexOf(val);
-            if (idx !== -1) {
-                list.splice(idx, 1);
-                showResult('resRemove', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
-            } else {
-                showResult('resRemove', `ValueError: list.remove(x): x not in list`, true);
-            }
-        }
-
-        function runDel() {
-            const list = ['Молоко', 'Хлеб', 'Сметана'];
-            const index = parseInt(document.getElementById('popIndex').value);
-            if (isNaN(index)) return;
-            if (index >= list.length || index < -list.length) {
-                showResult('resPop', `IndexError: list assignment index out of range`, true);
-                return;
-            }
-            const realIndex = index < 0 ? list.length + index : index;
-            list.splice(realIndex, 1);
-            showResult('resPop', `(del) >>> [${list.map(s => `'${s}'`).join(', ')}]`);
-        }
-
-        function runPop() {
-            const list = ['Молоко', 'Хлеб', 'Сметана'];
-            const index = parseInt(document.getElementById('popIndex').value);
-            if (isNaN(index)) return;
-            if (index >= list.length || index < -list.length) {
-                showResult('resPop', `IndexError: pop index out of range`, true);
-                return;
-            }
-            const realIndex = index < 0 ? list.length + index : index;
-            const popped = list.splice(realIndex, 1)[0];
-            showResult('resPop', `Удалено: '${popped}'<br>(pop) >>> [${list.map(s => `'${s}'`).join(', ')}]`);
-        }
-
-        function runClear() {
-            showResult('resClear', `>>> []`);
-        }
-
-        // --- ИНТЕРАКТИВНЫЕ ЗАДАЧИ ---
-        function runInsertTask() {
-            const name = document.getElementById('urgentName').value.trim();
-            const price = parseFloat(document.getElementById('urgentPrice').value);
-            const place = parseInt(document.getElementById('urgentPlace').value);
-            if (!name || isNaN(price) || isNaN(place)) { alert("Заполните все поля!"); return; }
-            const products = ['Хлеб', 'Молоко'];
-            const prices = [65, 99];
-            const index = Math.min(place - 1, products.length);
-            products.splice(index, 0, name);
-            prices.splice(index, 0, price);
-            let output = "";
-            for (let i = 0; i < products.length; i++) {
-                output += `${products[i]} — ${prices[i]} руб.<br>`;
-            }
-            showResult('resInsertTask', output);
-        }
-
-        function runRemoveTask() {
-            const val = document.getElementById('removeTaskName').value.trim();
-            if (!val) return;
-            const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
-            const idx = cart.indexOf(val);
-            if (idx !== -1) {
-                cart.splice(idx, 1);
-                showResult('resRemoveTask', `Товар '${val}' удален.<br>Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
-            } else {
-                showResult('resRemoveTask', `Такого товара нет в корзине.`, true);
-            }
-        }
-
-        function runDelTask() {
-            const num = parseInt(document.getElementById('popTaskNum').value);
-            if (isNaN(num)) return;
-            const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
-            if (num >= 1 && num <= cart.length) {
-                cart.splice(num - 1, 1);
-                showResult('resPopTask', `(del) Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
-            } else {
-                showResult('resPopTask', `Ошибка: такого номера нет.`, true);
-            }
-        }
-
-        function runPopTask() {
-            const num = parseInt(document.getElementById('popTaskNum').value);
-            if (isNaN(num)) return;
-            const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
-            if (num >= 1 && num <= cart.length) {
-                const removed = cart.splice(num - 1, 1)[0];
-                showResult('resPopTask', `(pop) Удалено: '${removed}'<br>Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
-            } else {
-                showResult('resPopTask', `Ошибка: такого номера нет.`, true);
-            }
-        }
-
-        // --- КАТАЛОГ ---
-        let catalogCart = [];
-        function runCatalogTask() {
-            const choice = document.getElementById('catalogChoice').value.trim();
-            const resultBox = document.getElementById('resCatalogTask');
-            const listDiv = document.getElementById('catalogCartList');
-            const totalDiv = document.getElementById('catalogCartTotal');
-            if (!choice) return;
-            resultBox.style.display = 'block';
-            if (choice.toLowerCase() === 'стоп') {
-                listDiv.innerHTML += `<br><b>Оформление:</b><br>`;
-                let total = 0;
-                catalogCart.forEach(item => {
-                    listDiv.innerHTML += `${item.name} — ${item.price} руб.<br>`;
-                    total += item.price;
-                });
-                totalDiv.innerHTML = `Итого: ${total} руб.`;
-                return;
-            }
-            const catalog = [
-                { name: 'Хлеб', price: 65 },
-                { name: 'Молоко', price: 99 },
-                { name: 'Сметана', price: 85 },
-                { name: 'Сыр', price: 150 }
-            ];
-            const found = catalog.find(item => item.name.toLowerCase() === choice.toLowerCase());
-            if (found) {
-                catalogCart.push(found);
-                listDiv.innerHTML += `Добавлено: ${found.name} за ${found.price} руб.<br>`;
-            } else {
-                listDiv.innerHTML += `<span style="color:red;">Такого товара нет.</span><br>`;
-            }
-        }
-
-        // --- ЧЕК ---
-        let cartProducts = [];
-        let cartPrices = [];
-        function addItem() {
-            const nameInput = document.getElementById('prodName');
-            const priceInput = document.getElementById('prodPrice');
-            const name = nameInput.value.trim();
-            const price = parseFloat(priceInput.value);
-            if (name === "" || isNaN(price) || price < 0) { alert("Введите корректные данные!"); return; }
-            cartProducts.push(name);
-            cartPrices.push(price);
-            nameInput.value = ''; priceInput.value = '';
-            updateReceipt();
-        }
-        function resetCart() {
-            cartProducts = []; cartPrices = [];
-            document.getElementById('resultBox').style.display = 'none';
-        }
-        function updateReceipt() {
-            const resultBox = document.getElementById('resultBox');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            resultBox.style.display = 'block';
-            cartItems.innerHTML = '';
-            let total = 0;
-            for (let i = 0; i < cartProducts.length; i++) {
-                let displayPrice = cartPrices[i];
-                if (displayPrice % 1 === 0) displayPrice = displayPrice.toFixed(0);
-                else displayPrice = displayPrice.toFixed(2).replace(/\.?0+$/, "");
-                cartItems.innerHTML += `${cartProducts[i]} — ${displayPrice} руб.<br>`;
-                total += cartPrices[i];
-            }
-            let displayTotal = total;
-            if (displayTotal % 1 === 0) displayTotal = displayTotal.toFixed(0);
-            else displayTotal = displayTotal.toFixed(2).replace(/\.?0+$/, "");
-            cartTotal.innerHTML = `Итого: ${displayTotal} руб.`;
-        }
-    </script>
-</body>
-</html>
+                <p><b>Задача 12.</b> Вставьте слово <code>'Груша'</code> на <b
