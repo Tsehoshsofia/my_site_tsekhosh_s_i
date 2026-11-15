@@ -556,22 +556,26 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
             </div>
         </div> <!-- Закрытие блока "Большая проверка" -->
 
-               <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
-        <div class="theory-card" style="text-align: center; padding-bottom: 30px;">
+                     <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
+        <div class="theory-card" style="text-align: center; padding-bottom: 30px; overflow: hidden;">
             <h2 style="justify-content: center; border-bottom: none; font-size: 28px; margin-bottom: 15px;">Теория пройдена!</h2>
             
-            <p style="font-weight: bold; font-size: 20px; margin-bottom: 25px; text-align: center;">
+            <p style="font-weight: bold; font-size: 20px; margin-bottom: 10px; text-align: center;">
                 Готов проверить знания на практике
             </p>
             
-            <!-- Широкая синяя стрелка -->
-            <div style="display: inline-flex; align-items: center; justify-content: center;">
-                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 20H58M58 20L40 2M58 20L40 38" stroke="#4169E1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Нарисованная SVG-стрелка -->
+            <div style="display: flex; justify-content: center; margin-top: -10px;">
+                <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Основная синяя форма стрелки -->
+                    <path d="M 20 20 C 50 10, 80 30, 75 65 L 90 65 L 65 95 L 50 65 L 62 65 C 65 40, 45 25, 20 35 Z" fill="#4A90E2" />
+                    <!-- Блик (объем) -->
+                    <path d="M 22 25 C 48 18, 72 35, 68 60 L 75 60 C 78 32, 48 15, 22 25 Z" fill="#90C5FF" opacity="0.8" />
+                    <!-- Внутренняя тень для объема -->
+                    <path d="M 65 95 L 50 65 L 62 65 C 65 40, 45 25, 20 35 C 15 36, 15 35, 20 32 C 50 18, 73 35, 67 62 L 80 62 L 60 88 Z" fill="#2B6CB0" opacity="0.4" />
                 </svg>
             </div>
         </div>
-
     <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
     <script>
         // Утилита для вывода
