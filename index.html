@@ -13,6 +13,9 @@
             height: 100%;
             font-family: "Times New Roman", Times, serif;
             overflow: hidden; 
+            /* Сглаживание шрифтов для лучшей читаемости */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* 2. ФОН */
@@ -45,25 +48,26 @@
             flex-direction: column;
             gap: 25px; 
             padding-bottom: 20px;
+            padding-right: 5px; /* Место под скроллбар */
         }
 
-        /* 4. ПЛАШКА (Максимально похожая на твой скриншот) */
+        /* 4. ПЛАШКА (Баланс красоты и читаемости) */
         .theory-card {
-            /* Полупрозрачный белый фон (как на скрине) */
-            background-color: rgba(255, 255, 255, 0.75); 
+            /* Плотность 90% - картинка еще видна, но текст не сливается */
+            background-color: rgba(255, 255, 255, 0.92); 
             
-            /* Размываем то, что за карточкой, чтобы текст читался */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            /* Легкое размытие фона (не текста!) */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             
             padding: 30px 35px;
             box-sizing: border-box;
             
-            /* Строгий черный текст, как на скрине */
+            /* Четкий текст */
             font-size: 20px;
             line-height: 1.5;
             color: #000000;
@@ -91,22 +95,23 @@
             line-height: 1.6;
         }
 
-        /* 7. КОД (Розовая плашка с красным текстом) */
+        /* 7. КОД */
         code {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
-            background-color: rgba(220, 210, 230, 0.4); /* Светло-розоватый/сиреневатый фон */
+            background-color: rgba(65, 105, 225, 0.12); /* Чуть плотнее фон для кода */
             padding: 4px 8px;
             border-radius: 6px;
-            color: #c7254e; /* Красный текст */
+            color: #c7254e;
             display: inline-block;
             margin: 5px 0;
+            font-weight: bold; /* Жирный код читается лучше */
         }
 
         .code-block {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
-            background-color: rgba(220, 210, 230, 0.4);
+            background-color: rgba(65, 105, 225, 0.08);
             padding: 15px;
             border-radius: 8px;
             color: #c7254e;
@@ -116,6 +121,7 @@
             display: block;
             width: 100%;
             box-sizing: border-box;
+            border-left: 4px solid #4169E1; /* Аккуратная полоска слева */
         }
 
         /* 8. КНОПКА */
@@ -125,10 +131,10 @@
             max-width: 500px;
             margin: 20px auto 0 auto;
             padding: 14px 20px;
-            background-color: #F4F9FF; /* Светло-голубая заливка */
+            background-color: #F4F9FF; 
             border: 2px solid #4169E1;
             border-radius: 10px;
-            color: #4169E1; /* Синий текст */
+            color: #4169E1; 
             font-size: 18px;
             font-weight: bold;
             text-align: center;
