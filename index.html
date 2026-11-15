@@ -5,61 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Теория: Списки в Python</title>
     <style>
-        /* Базовые настройки */
-        body {
-            background-color: #FFFFFF;
+        /* 1. БАЗОВЫЕ НАСТРОЙКИ */
+        body, html {
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             font-family: "Times New Roman", Times, serif;
-            
-            /* Твой фоновый рисунок */
-            background-image: url("print.jpeg");
+            overflow: hidden; /* Убираем общую прокрутку страницы */
+        }
+
+        /* 2. ФОН (Как в твоем квесте) */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("print.jpeg"); /* Твой фон */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
-            
-            /* Выстраиваем по центру */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            z-index: -1;
         }
 
-        /* Карточка с теорией (Идеально четкая) */
-        .theory-container {
+        /* 3. КАРТОЧКА С ТЕКСТОМ (В точности как в Twine) */
+        .quest-card {
+            position: fixed;
+            bottom: 5vh; /* Прижимаем к низу */
+            left: 50%;
+            transform: translateX(-50%); /* Центрируем по горизонтали */
+            
             width: 750px;
-            max-width: 100%;
-            background-color: #ffffff; /* 100% белый фон для четкости */
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3); 
+            max-width: calc(100% - 40px);
+            max-height: 80vh; /* Если текста много, будет прокрутка внутри */
+            overflow-y: auto;
+            
+            /* Настройки стекла из твоего Twine */
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            
+            /* Тени и рамки */
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
             border-radius: 20px;
-            border: 1px solid #e0e0e0;
-            padding: 35px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            
+            /* Внутренние отступы */
+            padding: 30px 35px;
+            
+            /* Настройки текста */
             font-size: 20px;
             line-height: 1.5;
             color: #111111;
             box-sizing: border-box;
-            margin-bottom: 40px;
         }
 
-        /* Заголовки */
+        /* 4. ЗАГОЛОВКИ */
         h2 {
             font-size: 28px;
             font-weight: bold;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 20px;
             color: #000000;
             border-bottom: 3px solid #4169E1;
             padding-bottom: 10px;
         }
-        h2:first-child { margin-top: 0; }
 
-        /* Текст */
+        /* 5. ТЕКСТ */
         p {
             margin: 10px 0;
             text-align: justify;
         }
 
-        /* Код */
+        /* 6. КОД (Розовый, как у тебя) */
         code {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
@@ -86,13 +105,13 @@
             box-sizing: border-box;
         }
 
-        /* Кнопка-ссылка */
+        /* 7. КНОПКА (Как в твоем квесте) */
         .btn {
             display: block;
             width: 100%;
             max-width: 500px;
-            margin: 40px auto 10px auto;
-            padding: 14px 20px;
+            margin: 30px auto 0 auto;
+            padding: 12px 20px;
             background-color: #F4F9FF;
             border: 2px solid #4169E1;
             border-radius: 10px;
@@ -100,7 +119,7 @@
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            text-decoration: none; /* Убираем подчеркивание ссылки */
+            text-decoration: none;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             cursor: pointer;
@@ -113,12 +132,20 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(65, 105, 225, 0.3);
         }
+        
+        /* Красивый скроллбар внутри карточки, если текст не помещается */
+        .quest-card::-webkit-scrollbar { width: 8px; }
+        .quest-card::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+        .quest-card::-webkit-scrollbar-thumb { background: #4169E1; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- Блок с теорией -->
-    <div class="theory-container">
+    <!-- Фоновое изображение -->
+    <div class="background-layer"></div>
+
+    <!-- Карточка с теорией -->
+    <div class="quest-card">
         <h2>Создание списка</h2>
         <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные: числа, строки, и даже другие списки.</p>
         <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']
@@ -152,9 +179,9 @@ garage.pop(0)  # Удалит 10</div>
 print(cars[:3])  # Первые три
 print(cars[4:2:-1])  # В обратном порядке</div>
 
-        <p style="text-align: center; margin-top: 40px; font-weight: bold;">Теория пройдена! Время проверить знания на практике.</p>
+        <p style="text-align: center; margin-top: 30px; font-weight: bold;">Теория пройдена! Время проверить знания на практике.</p>
         
-        <!-- Кнопка с прямой ссылкой на Tilda -->
+        <!-- Кнопка перехода -->
         <a href="https://project12909115.tilda.ws/page358355909.html" class="btn">Перейти к вопросам</a>
     </div>
 
