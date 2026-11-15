@@ -5,249 +5,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конспект: Списки в Python</title>
     <style>
+        /* Базовые настройки и фоновое изображение */
         :root {
-            --bg-color: #f5f7fa;
-            --text-color: #333;
-            --code-bg: #1e1e1e;
-            --code-text: #d4d4d4;
-            --console-bg: #f1f8ff;
-            --console-border: #c8e1ff;
-            --accent-color: #306998; /* Цвет Python */
-            --card-bg: #ffffff;
+            --primary-blue: #2b50d6;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --text-main: #1a1a1a;
+            --text-muted: #555555;
+            --code-color: #c7254e;
+            --code-bg: rgba(240, 240, 245, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.4);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Georgia', serif; /* Шрифт с засечками, как на скриншоте */
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
+            /* Фоновое изображение (можно заменить на ваше из квеста) */
+            background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
         }
 
-        .container {
+        /* Контейнер для центрирования контента */
+        .quest-container {
             max-width: 900px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
 
+        /* Карточка с эффектом матового стекла */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 35px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Заголовки */
         h1 {
-            text-align: center;
-            color: var(--accent-color);
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 40px;
-        }
-
-        /* Стили для карточек */
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 25px;
-            margin-bottom: 30px;
-            border-top: 5px solid var(--accent-color);
-        }
-
-        .card h2 {
+            font-size: 2.2rem;
             margin-top: 0;
-            color: var(--accent-color);
-            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: -0.5px;
         }
 
-        .card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        p {
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0;
             margin-bottom: 15px;
         }
 
-        /* Стили для кода Python */
-        pre {
+        /* Синяя декоративная линия под заголовком, как на скриншоте */
+        .title-divider {
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-blue);
+            margin-bottom: 25px;
+            border-radius: 2px;
+        }
+
+        /* Текст */
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .text-muted {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Стили для инлайн-кода (как на скриншоте в розовой плашке) */
+        .inline-code {
+            font-family: 'Consolas', 'Courier New', monospace;
             background-color: var(--code-bg);
-            color: var(--code-text);
-            padding: 15px;
-            border-radius: 8px;
+            color: var(--code-color);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        /* Блоки с кодом (в стиле редактора) */
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 12px;
             overflow-x: auto;
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 1.4;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            border: 1px solid #333;
         }
 
-        code {
-            font-family: 'Consolas', 'Courier New', monospace;
-            background-color: rgba(0,0,0,0.05);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #e83e8c;
-        }
+        /* Подсветка синтаксиса */
+        .comment { color: #6a9955; }
+        .string { color: #ce9178; }
+        .keyword { color: #569cd6; }
 
-        pre code {
-            background-color: transparent;
-            padding: 0;
-            color: inherit;
-        }
-
-        /* Стили для консоли вывода */
+        /* Блок вывода */
         .console {
-            background-color: var(--console-bg);
-            border-left: 4px solid var(--console-border);
-            padding: 10px 15px;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary-blue);
+            padding: 15px 20px;
             border-radius: 0 8px 8px 0;
             font-family: 'Consolas', 'Courier New', monospace;
-            font-size: 14px;
-            color: #24292e;
-            margin-top: 10px;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            color: #333;
         }
 
         .console::before {
             content: "Вывод:";
             display: block;
+            font-family: 'Georgia', serif;
             font-weight: bold;
-            color: #6a737d;
-            font-size: 12px;
+            font-size: 0.85rem;
+            color: var(--primary-blue);
             margin-bottom: 5px;
         }
 
-        /* Комментарии в коде */
-        .comment {
-            color: #6a9955;
+        /* Кнопка */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            font-family: 'Georgia', serif;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-blue);
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Введение в списки Python</h1>
-
-        <!-- Раздел 1 -->
-        <div class="card">
-            <h2>1. Создание списка</h2>
-            <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Каждый элемент списка может быть любым типом данных.</p>
-            <pre><code>my_list = [] <span class="comment"># пустой список</span>
-my_list = list() <span class="comment"># пустой список</span>
-
-numbers_list = [40, 20, 90, 11, 5]
-car_models_list = ['Lada Granta', 'Lada Vesta', 'Niva Travel']
-mixed_list = [3.14, 10, 'Hello world!', False, 'Python is the best']</code></pre>
+    <div class="quest-container">
+        
+        <!-- Вводная карточка -->
+        <div class="glass-card" style="text-align: center;">
+            <h1>Основы работы со списками</h1>
+            <div class="title-divider"></div>
+            <p>Список — это непрерывная динамическая коллекция элементов. Каждому элементу присваивается порядковый номер (индекс). Первый индекс равен нулю.</p>
+            <p class="text-muted">Изучите теорию ниже, чтобы успешно пройти следующие испытания.</p>
         </div>
 
-        <!-- Раздел 2 -->
-        <div class="card">
-            <h2>2. Индексация</h2>
-            <p>Списки индексируются, начиная с <code>0</code>. Вы можете обращаться к элементам по индексам, чтобы получать, изменять или заменять их.</p>
-            <pre><code>car_models = ['Lada Granta', 'Niva Travel', 'Lada Vesta', 'УАЗ Патриот', 'Aurus Senat']
-print(car_models[0])
-print(car_models[1])</code></pre>
+        <!-- Карточка 1: Создание -->
+        <div class="glass-card">
+            <h2>1. Создание списка</h2>
+            <div class="title-divider"></div>
+            <p>Списки создаются с помощью квадратных скобок <span class="inline-code">[]</span> или функции <span class="inline-code">list()</span>. Внутри могут храниться любые типы данных.</p>
+            
+<pre><code>my_list = [] <span class="comment"># пустой список</span>
+numbers = [40, 20, 90, 11, 5]
+cars = <span class="string">['Lada Granta', 'Niva Travel', 'Lada Vesta']</span>
+mixed = [3.14, 10, <span class="string">'Hello'</span>, <span class="keyword">True</span>]</code></pre>
+        </div>
+
+        <!-- Карточка 2: Индексация -->
+        <div class="glass-card">
+            <h2>2. Индексация и изменение</h2>
+            <div class="title-divider"></div>
+            <p>Обращение к элементам идет по индексу. Списки изменяемы: вы можете заменить элемент, обратившись к нему по индексу.</p>
+            
+<pre><code>car_models = <span class="string">['Lada Granta', 'KIA', 'Lada Vesta', 'УАЗ Патриот']</span>
+
+<span class="comment"># Получение</span>
+print(car_models[0]) 
+
+<span class="comment"># Замена</span>
+car_models[1] = <span class="string">'Niva Travel'</span>
+print(car_models)
+
+<span class="comment"># Обратный индекс (с конца)</span>
+print(car_models[-1]) <span class="comment"># последний элемент</span></code></pre>
+            
             <div class="console">
 Lada Granta<br>
-Niva Travel
-            </div>
-            <p>Индексирование работает и в обратную сторону. Индекс <code>-1</code> дает доступ к последнему элементу, <code>-2</code> к предпоследнему и т.д.</p>
-            <pre><code>print(car_models[-1])
-print(car_models[-2])</code></pre>
-            <div class="console">
-Aurus Senat<br>
+['Lada Granta', 'Niva Travel', 'Lada Vesta', 'УАЗ Патриот']<br>
 УАЗ Патриот
             </div>
         </div>
 
-        <!-- Раздел 3 -->
-        <div class="card">
-            <h2>3. Срезы списка</h2>
-            <p>Срезом называется подпоследовательность. Синтаксис среза: <code>переменная[начальный_индекс:конечный_индекс_минус_1:шаг]</code>.</p>
-            <pre><code>car_models = ['Lada Granta', 'Niva Travel', 'Lada Vesta', 'УАЗ Патриот']
-print(car_models[:3])  <span class="comment"># с 0 по 2 индекс</span>
-print(car_models[1:3]) <span class="comment"># с 1 по 2 индекс</span>
-print(car_models[1:])  <span class="comment"># с 1 до конца</span></code></pre>
-            <div class="console">
-['Lada Granta', 'Niva Travel', 'Lada Vesta']<br>
-['Niva Travel', 'Lada Vesta']<br>
-['Niva Travel', 'Lada Vesta', 'УАЗ Патриот']
-            </div>
-        </div>
+        <!-- Карточка 3: Методы добавления -->
+        <div class="glass-card">
+            <h2>3. Добавление элементов</h2>
+            <div class="title-divider"></div>
+            <p>Метод <span class="inline-code">append()</span> добавляет элемент в конец списка. Метод <span class="inline-code">insert()</span> позволяет вставить элемент на конкретную позицию.</p>
+            
+<pre><code>my_list = [1, 2, 3]
 
-        <!-- Раздел 4 -->
-        <div class="card">
-            <h2>4. Добавление элементов</h2>
-            <p>Метод <code>append()</code> добавляет элемент в конец списка. Метод <code>insert()</code> добавляет элемент на заданную позицию.</p>
-            <pre><code>my_list = [1, 2, 3]
 my_list.append(4)
-print(my_list)
+print(my_list) <span class="comment"># [1, 2, 3, 4]</span>
 
 my_list.insert(1, 9) <span class="comment"># вставить 9 на индекс 1</span>
-print(my_list)</code></pre>
-            <div class="console">
-[1, 2, 3, 4]<br>
-[1, 9, 2, 3, 4]
-            </div>
+print(my_list) <span class="comment"># [1, 9, 2, 3, 4]</span></code></pre>
         </div>
 
-        <!-- Раздел 5 -->
-        <div class="card">
-            <h2>5. Удаление элементов</h2>
-            <p>Метод <code>remove()</code> удаляет первый элемент по указанному значению. Метод <code>pop()</code> удаляет элемент по индексу (или последний, если индекс не указан). Оператор <code>del</code> также удаляет по индексу.</p>
-            <pre><code>variables_list = [10, True, 'Python', 3.14, 'Python']
-variables_list.remove('Python') 
-print(variables_list)
+        <!-- Карточка 4: Удаление -->
+        <div class="glass-card">
+            <h2>4. Удаление элементов</h2>
+            <div class="title-divider"></div>
+            <p><span class="inline-code">remove(x)</span> удаляет первый элемент по значению. <span class="inline-code">pop(i)</span> удаляет по индексу (или последний). Оператор <span class="inline-code">del</span> также удаляет по индексу.</p>
+            
+<pre><code>variables = [10, <span class="keyword">True</span>, <span class="string">'Python'</span>, 3.14, <span class="string">'Python'</span>]
 
-car_models = ['Lada Granta', 'Lada Vesta', 'Niva Travel']
-car_models.pop()
-print(car_models)
+variables.remove(<span class="string">'Python'</span>) <span class="comment"># удалит первую строку 'Python'</span>
+print(variables)
 
-del variables_list[0]
-print(variables_list)</code></pre>
+variables.pop(0) <span class="comment"># удалит элемент с индексом 0 (число 10)</span>
+print(variables)
+
+<span class="keyword">del</span> variables[0] <span class="comment"># удалит элемент с индексом 0 (True)</span>
+print(variables)</code></pre>
+            
             <div class="console">
 [10, True, 3.14, 'Python']<br>
-['Lada Granta', 'Lada Vesta']<br>
-[True, 3.14, 'Python']
+[True, 3.14, 'Python']<br>
+[3.14, 'Python']
             </div>
         </div>
 
-        <!-- Раздел 6 -->
-        <div class="card">
-            <h2>6. Полезные функции и методы</h2>
-            <p>В Python есть встроенные функции для работы со списками, такие как <code>len()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code>, а также методы <code>sort()</code>, <code>reverse()</code> и <code>count()</code>.</p>
-            <pre><code>numbers = [10, 2, 11, 9, 3, 24, 57, 78]
-print(len(numbers))     <span class="comment"># Длина списка</span>
-print(sum(numbers))     <span class="comment"># Сумма элементов</span>
-print(max(numbers))     <span class="comment"># Максимум</span>
-print(min(numbers))     <span class="comment"># Минимум</span>
+        <!-- Карточка 5: Срезы -->
+        <div class="glass-card">
+            <h2>5. Срезы списка</h2>
+            <div class="title-divider"></div>
+            <p>Срез — это подпоследовательность. Синтаксис: <span class="inline-code">[начало:конец:шаг]</span>. Конечный индекс не включается в результат.</p>
+            
+<pre><code>cars = <span class="string">['Lada', 'Niva', 'Vesta', 'УАЗ']</span>
 
-numbers.sort()          <span class="comment"># Сортировка</span>
-print(numbers)
-
-numbers.reverse()       <span class="comment"># Разворот списка</span>
-print(numbers.count(11))<span class="comment"># Количество вхождений</span></code></pre>
+print(cars[:3])   <span class="comment"># с 0 по 2 индекс</span>
+print(cars[1:3])  <span class="comment"># с 1 по 2 индекс</span>
+print(cars[1:])   <span class="comment"># с 1 до конца</span>
+print(cars[4:2:-1]) <span class="comment"># с шагом -1 (в обратном порядке)</span></code></pre>
+            
             <div class="console">
-8<br>
-194<br>
-78<br>
-2<br>
-[2, 3, 9, 10, 11, 24, 57, 78]<br>
-1
+['Lada', 'Niva', 'Vesta']<br>
+['Niva', 'Vesta']<br>
+['Niva', 'Vesta', 'УАЗ']<br>
+['УАЗ', 'Vesta']
             </div>
         </div>
 
-        <!-- Раздел 7 -->
-        <div class="card">
-            <h2>7. Оператор in и цикл for</h2>
-            <p>Оператор <code>in</code> проверяет наличие элемента в списке (возвращает <code>True</code> или <code>False</code>). Цикл <code>for</code> позволяет перебирать элементы списка.</p>
-            <pre><code>fruits = ['яблоко', 'апельсин', 'груша', 'ананас']
-
-if 'яблоко' in fruits:
-    print("Яблоко есть в списке!")
-
-for fruit in fruits:
-    print(fruit)</code></pre>
-            <div class="console">
-Яблоко есть в списке!<br>
-яблоко<br>
-апельсин<br>
-груша<br>
-ананас
-            </div>
+        <!-- Кнопка перехода (Заглушка для квеста) -->
+        <div class="glass-card" style="text-align: center; padding: 25px;">
+            <p>Готовы проверить знания на практике?</p>
+            <a href="#" class="btn" onclick="alert('Здесь будет переход на следующий шаг квеста!')">Перейти к вопросу</a>
         </div>
 
     </div>
