@@ -30,12 +30,12 @@
             padding-bottom: 20px; padding-right: 5px;
         }
 
-        /* 4. ПЛАШКА */
+        /* 4. ПЛАШКА (Контрастный фон и текст) */
         .theory-card {
-            background-color: rgba(255, 255, 255, 0.92); 
+            background-color: rgba(255, 255, 255, 0.98); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 20px; border: 1px solid #e0e0e0;
             padding: 30px 35px; box-sizing: border-box;
             font-size: 20px; line-height: 1.5; color: #000000;
         }
@@ -48,13 +48,13 @@
         }
 
         /* 6. ТЕКСТ */
-        p { margin: 10px 0; text-align: justify; }
-        ul { margin-left: 20px; line-height: 1.6; }
+        p { margin: 10px 0; text-align: justify; color: #000000; }
+        ul { margin-left: 20px; line-height: 1.6; color: #000000; }
 
         /* 7. КОД */
         code {
             font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.12); padding: 4px 8px;
+            background-color: rgba(65, 105, 225, 0.15); padding: 4px 8px;
             border-radius: 6px; color: #c7254e; display: inline-block;
             margin: 5px 0; font-weight: bold;
         }
@@ -65,13 +65,15 @@
             border-radius: 8px; color: #c7254e; margin: 15px 0;
             white-space: pre-wrap; line-height: 1.4; display: block;
             width: 100%; box-sizing: border-box; border-left: 4px solid #4169E1;
+            font-weight: bold;
         }
 
         /* 8. КОНСОЛЬ */
         .console-output {
-            background-color: rgba(0,0,0,0.05); border-left: 4px solid #4169E1; 
+            background-color: #f8f9fa; border-left: 4px solid #4169E1; 
             padding: 15px; font-family: 'Consolas', monospace; font-size: 16px; 
-            border-radius: 0 8px 8px 0; margin-top: 15px; color: #333;
+            border-radius: 0 8px 8px 0; margin-top: 15px; color: #000000;
+            border: 1px solid #ddd;
         }
         .console-title {
             display: block; font-weight: bold; font-family: 'Times New Roman', Times, serif;
@@ -87,7 +89,7 @@
         .interactive-box input, .interactive-box select {
             font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
             margin: 5px 2px; border: 2px solid #ccc; border-radius: 6px;
-            outline: none; box-sizing: border-box;
+            outline: none; box-sizing: border-box; color: #000; font-weight: bold;
         }
 
         .interactive-box input:focus, .interactive-box select:focus { border-color: #4169E1; }
@@ -104,7 +106,8 @@
         .result-box {
             margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
             text-align: left; background-color: #fff; padding: 10px;
-            border-radius: 8px; border: 1px solid #ccc; display: none; color: #333;
+            border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
+            font-weight: bold;
         }
 
         /* 10. КНОПКА ПЕРЕХОДА */
@@ -125,16 +128,16 @@
             display: flex; flex-direction: column; justify-content: center;
             align-items: center; min-height: 400px;
         }
-        .start-screen h1 { font-size: 42px; margin: 0 0 10px 0; font-weight: bold; }
+        .start-screen h1 { font-size: 42px; margin: 0 0 10px 0; font-weight: bold; color: #000; }
         .start-screen .subtitle { font-size: 24px; color: #4169E1; margin-bottom: 30px; font-weight: bold; }
-        .start-screen .description { font-size: 20px; color: #333; margin-bottom: 40px; text-align: center; max-width: 600px; }
-        .start-screen .author { font-size: 18px; color: #555; margin-bottom: 40px; font-style: italic; }
+        .start-screen .description { font-size: 20px; color: #000; margin-bottom: 40px; text-align: center; max-width: 600px; }
+        .start-screen .author { font-size: 18px; color: #333; margin-bottom: 40px; font-style: italic; font-weight: bold; }
 
-        /* 12. ЗАДАЧИ НА ИСПРАВЛЕНИЕ */
+        /* 12. ЗАДАЧИ НА ВВОД */
         .blank-input {
             font-family: 'Consolas', monospace; font-size: 18px;
             font-weight: bold; color: #4169E1; background-color: #fff;
-            border: 2px solid #ccc; border-radius: 4px; padding: 2px 5px;
+            border: 2px solid #999; border-radius: 4px; padding: 2px 5px;
             width: 120px; text-align: center;
         }
 
@@ -440,54 +443,62 @@ catalog_prices = [65, 99, 85, 150]
             </div>
         </div>
 
-        <!-- НОВЫЙ БЛОК: ДОПОЛНИТЕЛЬНЫЕ ЗАДАЧИ -->
+        <!-- БОЛЬШАЯ ПРОВЕРКА: ПИШЕМ КОД САМИ -->
         <div class="theory-card">
-            <h2>🧑‍💻 Задачи на проверку кода</h2>
-            <p>Допишите код, чтобы он заработал правильно. Впишите нужные значения или методы в пропуски.</p>
-            
-            <!-- Задача 5: Создание -->
+            <h2>🏆 Большая проверка: Пишем код</h2>
+            <p>Теперь давайте проверим, как вы усвоили материал. Впишите недостающий код в каждой задаче.</p>
+
+            <!-- Задача 10 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 5.</b> Создай список <code>colors</code> из строк 'red', 'green', 'blue'.</p>
-                <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask5()">Проверить код</button>
-                <div class="result-box" id="resTask5"></div>
+                <p><b>Задача 10.</b> Создайте <b>пустой</b> список с именем <code>my_list</code>.</p>
+                <div class="code-block">my_list = <input type="text" id="task10Input" class="blank-input" placeholder="...", style="width: 100px;"></div>
+                <button onclick="checkTask10()">Проверить код</button>
+                <div class="result-box" id="resTask10"></div>
             </div>
 
-            <!-- Задача 6: Срез -->
+            <!-- Задача 11 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 6.</b> Выведи первые два элемента списка <code>nums</code> с помощью среза.</p>
-                <div class="code-block">nums = [10, 20, 30, 40]
-print(nums[<input type="text" id="task6Input" class="blank-input" placeholder="...", style="width: 100px;">])</div>
-                <button onclick="checkTask6()">Проверить код</button>
-                <div class="result-box" id="resTask6"></div>
+                <p><b>Задача 11.</b> Добавьте слово <code>'Яблоко'</code> в конец готового списка <code>fruits</code>.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин']
+fruits.<input type="text" id="task11Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask11()">Проверить код</button>
+                <div class="result-box" id="resTask11"></div>
             </div>
 
-            <!-- Задача 7: Изменение -->
+            <!-- Задача 12 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 7.</b> Замени второй элемент списка (индекс 1) на 'BMW'.</p>
-                <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
-cars[<input type="text" id="task7Input" class="blank-input" placeholder="...", style="width: 100px;">] = 'BMW'</div>
-                <button onclick="checkTask7()">Проверить код</button>
-                <div class="result-box" id="resTask7"></div>
+                <p><b>Задача 12.</b> Вставьте слово <code>'Груша'</code> на 1-ю позицию (индекс 1) в список <code>fruits</code>.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин']
+fruits.<input type="text" id="task12Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask12()">Проверить код</button>
+                <div class="result-box" id="resTask12"></div>
             </div>
 
-            <!-- Задача 8: Проверка вхождения -->
+            <!-- Задача 13 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 8.</b> Проверь, есть ли слово 'яблоко' в списке <code>fruits</code>.</p>
-                <div class="code-block">fruits = ['банан', 'апельсин']
-if 'яблоко' <input type="text" id="task8Input" class="blank-input" placeholder="...", style="width: 80px;"> fruits:
-    print("Есть!")</div>
-                <button onclick="checkTask8()">Проверить код</button>
-                <div class="result-box" id="resTask8"></div>
+                <p><b>Задача 13.</b> Удалите слово <code>'Банан'</code> из списка по его значению.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
+fruits.<input type="text" id="task13Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask13()">Проверить код</button>
+                <div class="result-box" id="resTask13"></div>
             </div>
 
-            <!-- Задача 9: Комбинированная (поиск и удаление) -->
+            <!-- Задача 14 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 9.</b> Удали 'KIA' из списка <code>cars</code> по значению.</p>
-                <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
-cars.<input type="text" id="task9Input" class="blank-input" placeholder="...">('KIA')</div>
-                <button onclick="checkTask9()">Проверить код</button>
-                <div class="result-box" id="resTask9"></div>
+                <p><b>Задача 14.</b> Удалите второй элемент (индекс 1) из списка с помощью оператора <code>del</code>.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
+<input type="text" id="task14Input" class="blank-input" placeholder="...", style="width: 150px;"> fruits[1]</div>
+                <button onclick="checkTask14()">Проверить код</button>
+                <div class="result-box" id="resTask14"></div>
+            </div>
+
+            <!-- Задача 15 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 15.</b> Полностью очистите список <code>cart</code>, оставив его пустым.</p>
+                <div class="code-block">cart = ['Хлеб', 'Молоко', 'Сыр']
+cart.<input type="text" id="task15Input" class="blank-input" placeholder="...", style="width: 100px;"></div>
+                <button onclick="checkTask15()">Проверить код</button>
+                <div class="result-box" id="resTask15"></div>
             </div>
         </div>
 
@@ -559,6 +570,61 @@ cars.<input type="text" id="task9Input" class="blank-input" placeholder="...">('
                 showResult('resTask9', `>>> <b>Верно!</b> ['Lada', 'Vesta']`);
             } else {
                 showResult('resTask9', `Ошибка. Для удаления по значению используется метод remove.`, true);
+            }
+        }
+
+        // --- БОЛЬШАЯ ПРОВЕРКА (ЗАДАЧИ 10-15) ---
+        function checkTask10() {
+            const val = document.getElementById('task10Input').value.replace(/\s/g, '');
+            if (val === '[]') {
+                showResult('resTask10', `>>> <b>Верно!</b> my_list = []`);
+            } else {
+                showResult('resTask10', `Ошибка. Пустой список создается с помощью [].`, true);
+            }
+        }
+
+        function checkTask11() {
+            const val = document.getElementById('task11Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === "append('яблоко')" || val === 'append("яблоко")') {
+                showResult('resTask11', `>>> <b>Верно!</b> ['Банан', 'Апельсин', 'Яблоко']`);
+            } else {
+                showResult('resTask11', `Ошибка. Используй метод append() и не забудь кавычки.`, true);
+            }
+        }
+
+        function checkTask12() {
+            const val = document.getElementById('task12Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === "insert(1,'груша')" || val === 'insert(1,"груша")') {
+                showResult('resTask12', `>>> <b>Верно!</b> ['Банан', 'Груша', 'Апельсин']`);
+            } else {
+                showResult('resTask12', `Ошибка. Используй insert(1, 'Груша').`, true);
+            }
+        }
+
+        function checkTask13() {
+            const val = document.getElementById('task13Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === "remove('банан')" || val === 'remove("банан")') {
+                showResult('resTask13', `>>> <b>Верно!</b> ['Апельсин', 'Яблоко']`);
+            } else {
+                showResult('resTask13', `Ошибка. Используй метод remove('Банан').`, true);
+            }
+        }
+
+        function checkTask14() {
+            const val = document.getElementById('task14Input').value.trim().toLowerCase();
+            if (val === 'del') {
+                showResult('resTask14', `>>> <b>Верно!</b> ['Банан', 'Яблоко']`);
+            } else {
+                showResult('resTask14', `Ошибка. Для удаления по индексу используется оператор del.`, true);
+            }
+        }
+
+        function checkTask15() {
+            const val = document.getElementById('task15Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === 'clear()') {
+                showResult('resTask15', `>>> <b>Верно!</b> []`);
+            } else {
+                showResult('resTask15', `Ошибка. Для полной очистки используется метод clear().`, true);
             }
         }
 
