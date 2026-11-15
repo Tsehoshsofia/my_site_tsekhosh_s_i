@@ -26,14 +26,23 @@
 
         /* 3. КОНТЕЙНЕР */
         
-     .quest-container {
-        position: fixed; bottom: 2vh; left: 50%; transform: translateX(-50%);
-        width: 750px; max-width: calc(100% - 40px); 
-        max-height: 75vh; /* Было 50vh */
-        overflow-y: auto; display: flex; flex-direction: column; gap: 25px; 
-        padding-bottom: 20px; padding-right: 5px;
+    .quest-container {
+        position: fixed; 
+        top: 0.5cm; /* Отступ от верхнего края 0.5 см */
+        bottom: 2vh; /* Оставляем небольшой отступ снизу */
+        left: 50%; 
+        transform: translateX(-50%);
+        width: 750px; 
+        max-width: calc(100% - 40px); 
+        max-height: calc(100vh - 0.5cm - 2vh); /* Высота = весь экран минус отступы */
+        overflow-y: auto; 
+        display: flex; 
+        flex-direction: column; 
+        gap: 25px; 
+        padding-bottom: 20px; 
+        padding-right: 5px;
     }
-        /* 4. ПЛАШКА */
+            /* 4. ПЛАШКА */
         .theory-card {
             background-color: rgba(255, 255, 255, 0.98); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
