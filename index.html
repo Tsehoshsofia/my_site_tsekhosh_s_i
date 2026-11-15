@@ -5,247 +5,209 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Теория: Списки в Python</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
-
-        :root {
-            --primary-blue: #1c4ed8;
-            --text-dark: #111;
-            --text-light: #333;
-            --code-color: #c7254e;
-            --code-bg: #f4f4f6;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* 1. БАЗОВЫЕ НАСТРОЙКИ (Взято из твоего Twine) */
         body {
-            font-family: 'Merriweather', serif;
+            background-color: #FFFFFF;
             margin: 0;
-            padding: 40px 20px;
-            min-height: 100vh;
-            
-            /* УКАЗЫВАЕМ ВАШ ЛОКАЛЬНЫЙ ФАЙЛ */
-            background: url('print.jpeg') no-repeat center center fixed;
-            background-size: cover;
-            
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            -webkit-font-smoothing: antialiased; 
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            /* Убираем сглаживание, чтобы при зуме шрифт был четким */
+            -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-        }
-
-        .quest-wrapper {
-            width: 100%;
-            max-width: 900px;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            gap: 30px;
+            justify-content: center;
+            align-items: center;
+            background-image: url("print.jpeg"); /* Твой фон */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
-        /* Карточка с плотным белым фоном для идеальной четкости */
-        .card {
-            background: #ffffff; 
-            border-radius: 16px;
-            padding: 40px 50px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25); /* Чуть усилил тень, чтобы выделялось на фото */
-            border: 1px solid #eaeaea;
+        /* 2. КОНТЕЙНЕР ДЛЯ КОНТЕНТА (В стиле tw-passage) */
+        .theory-container {
+            width: 750px;
+            max-width: calc(100% - 40px);
+            
+            /* Эффект твоей карточки из Twine */
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            
+            padding: 30px 35px;
+            margin: 40px 0;
+            
+            /* Размер текста как в квесте */
+            font-size: 20px;
+            line-height: 1.5;
+            color: #111111;
+            
+            /* Прокрутка, если текст длинный */
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
+        /* 3. ЗАГОЛОВКИ (Как в твоих ситуациях) */
         h2 {
-            font-size: 30px;
-            color: var(--text-dark);
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #000000;
+            border-bottom: 3px solid #4169E1;
+            padding-bottom: 10px;
+        }
+        
+        h2:first-child {
             margin-top: 0;
-            margin-bottom: 12px;
-            font-weight: 700;
         }
 
-        .blue-line {
-            height: 3px;
-            background-color: var(--primary-blue);
-            width: 100%;
-            margin-bottom: 25px;
-        }
-
+        /* 4. АБЗАЦЫ И ТЕКСТ */
         p {
+            margin: 10px 0;
+            text-align: justify;
+        }
+
+        /* 5. ИНЛАЙН-КОД И БЛОКИ КОДА (Розовый, как у тебя) */
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .inline-code {
-            font-family: 'Roboto Mono', monospace;
-            color: var(--code-color);
-            background-color: var(--code-bg);
-            padding: 4px 10px;
+            background-color: rgba(65, 105, 225, 0.1);
+            padding: 4px 8px;
             border-radius: 6px;
-            font-size: 16px;
-            font-weight: 700;
+            color: #c7254e;
             display: inline-block;
+            margin: 5px 0;
         }
 
+        /* Блок кода для нескольких строк */
         .code-block {
-            background-color: var(--code-bg);
-            color: var(--code-color);
-            font-family: 'Roboto Mono', monospace;
-            padding: 20px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 18px;
+            background-color: rgba(65, 105, 225, 0.1);
+            padding: 15px;
             border-radius: 8px;
-            font-size: 16px;
-            line-height: 1.6;
-            overflow-x: auto;
-            margin-bottom: 20px;
+            color: #c7254e;
+            margin: 15px 0;
             white-space: pre-wrap;
-        }
-
-        .console-output {
-            background: #f8f9fa;
-            border-left: 4px solid var(--primary-blue);
-            padding: 15px 20px;
-            font-family: 'Roboto Mono', monospace;
-            font-size: 15px;
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* Кнопка в самом конце */
-        .btn-start {
+            line-height: 1.4;
             display: block;
             width: 100%;
-            max-width: 450px;
-            margin: 40px auto 20px auto;
-            padding: 18px 20px;
-            background: #eef3ff;
-            border: 2px solid var(--primary-blue);
-            border-radius: 12px;
-            color: var(--primary-blue);
-            font-family: 'Merriweather', serif;
-            font-size: 20px;
-            font-weight: 700;
+            box-sizing: border-box;
+        }
+
+        /* 6. КНОПКИ (Как в твоем квесте) */
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 12px 20px;
+            background-color: #F4F9FF;
+            border: 2px solid #4169E1;
+            border-radius: 10px;
+            color: #4169E1;
+            font-size: 18px;
+            font-weight: bold;
             text-align: center;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(28, 78, 216, 0.1);
         }
 
-        .btn-start:hover {
-            background: var(--primary-blue);
-            color: #fff;
+        .btn:hover {
+            background-color: #4169E1;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(65, 105, 225, 0.3);
         }
 
-        @media (max-width: 600px) {
-            .card {
-                padding: 25px 20px;
-            }
-            h2 { font-size: 24px; }
-            p { font-size: 16px; }
+        /* 7. БЛОК С КВЕСТОМ (В самом конце) */
+        #quest-iframe {
+            margin-top: 40px;
+            width: 100%;
+            height: 750px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background: #FFFFFF;
         }
     </style>
 </head>
 <body>
 
-    <div class="quest-wrapper">
+    <div class="theory-container">
+        <h2>Создание списка</h2>
+        <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные: числа, строки, и даже другие списки.</p>
+        <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']
+empty_list = list()</div>
 
-        <!-- 1. Создание -->
-        <div class="card">
-            <h2>Создание списка</h2>
-            <div class="blue-line"></div>
-            
-            <p>Списки в Python создаются с помощью квадратных скобок <span class="inline-code">[]</span> или функции <span class="inline-code">list()</span>. Внутри могут храниться любые данные: числа, строки, и даже другие списки.</p>
-            
-            <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']<br>empty_list = list()</div>
-        </div>
+        <h2>Индексация</h2>
+        <p>Каждый элемент списка имеет свой индекс, начиная с <code>0</code>. Вы можете получать элементы по индексу, менять их или использовать отрицательные индексы (например, <code>-1</code> для последнего элемента).</p>
+        <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']
+print(car_models[0])  # Lada Granta
+car_models[1] = 'Niva Travel'  # Замена KIA
+print(car_models[-1])  # Lada Vesta</div>
 
-        <!-- 2. Индексация -->
-        <div class="card">
-            <h2>Индексация</h2>
-            <div class="blue-line"></div>
-            
-            <p>Каждый элемент списка имеет свой индекс, начиная с <span class="inline-code">0</span>. Вы можете получать элементы по индексу, менять их или использовать отрицательные индексы (например, <span class="inline-code">-1</span> для последнего элемента).</p>
-            
-            <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']<br>print(car_models[0]) <span style="color:#6a9955;"># Lada Granta</span><br>car_models[1] = 'Niva Travel' <span style="color:#6a9955;"># Замена KIA</span><br>print(car_models[-1]) <span style="color:#6a9955;"># Lada Vesta</span></div>
+        <h2>Добавление элементов</h2>
+        <p>Чтобы добавить элемент в конец списка, используется метод <code>append()</code>. Если нужно вставить элемент на конкретную позицию — применяется <code>insert()</code>.</p>
+        <div class="code-block">garage = ['Lada Granta', 'Niva Travel']
+garage.append('Aurus Senat')
+print(garage)  # ['Lada Granta', 'Niva Travel', 'Aurus Senat']
 
-            <div class="console-output">
-                Lada Granta<br>
-                Lada Vesta
-            </div>
-        </div>
+garage.insert(1, 'УАЗ Патриот')
+print(garage)  # ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']</div>
 
-        <!-- 3. Добавление -->
-        <div class="card">
-            <h2>Добавление элементов</h2>
-            <div class="blue-line"></div>
-            
-            <p>Чтобы добавить элемент в конец списка, используется метод <span class="inline-code">append()</span>. Если нужно вставить элемент на конкретную позицию — применяется <span class="inline-code">insert()</span>.</p>
-            
-            <div class="code-block">garage = ['Lada Granta', 'Niva Travel']<br>garage.append('Aurus Senat')<br>print(garage)<br><br>garage.insert(1, 'УАЗ Патриот')<br>print(garage)</div>
+        <h2>Удаление элементов</h2>
+        <p>Метод <code>remove()</code> удаляет первый элемент по его значению. Метод <code>pop()</code> или оператор <code>del</code> удаляют элемент по индексу (если индекс не указан, <code>pop()</code> удаляет последний).</p>
+        <div class="code-block">garage = [10, 'Python', 3.14, 'Python']
 
-            <div class="console-output">
-                ['Lada Granta', 'Niva Travel', 'Aurus Senat']<br>
-                ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']
-            </div>
-        </div>
+garage.remove('Python')  # Удалит первый 'Python'
+print(garage)  # [10, 3.14, 'Python']
 
-        <!-- 4. Удаление -->
-        <div class="card">
-            <h2>Удаление элементов</h2>
-            <div class="blue-line"></div>
-            
-            <p>Метод <span class="inline-code">remove()</span> удаляет первый элемент по его значению. Метод <span class="inline-code">pop()</span> или оператор <span class="inline-code">del</span> удаляют элемент по индексу (если индекс не указан, <span class="inline-code">pop()</span> удаляет последний).</p>
-            
-            <div class="code-block">garage = [10, 'Python', 3.14, 'Python']<br><br>garage.remove('Python') <span style="color:#6a9955;"># Удалит первый 'Python'</span><br>print(garage) <span style="color:#6a9955;"># [10, 3.14, 'Python']</span><br><br>garage.pop(0) <span style="color:#6a9955;"># Удалит 10</span><br>print(garage) <span style="color:#6a9955;"># [3.14, 'Python']</span></div>
-        </div>
+garage.pop(0)  # Удалит 10
+print(garage)  # [3.14, 'Python']</div>
 
-        <!-- 5. Срезы -->
-        <div class="card">
-            <h2>Срезы списка</h2>
-            <div class="blue-line"></div>
-            
-            <p>Срез позволяет получить подпоследовательность элементов. Синтаксис: <span class="inline-code">[начало:конец:шаг]</span>. Конечный индекс не включается в результат.</p>
-            
-            <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']<br><br>print(cars[:3]) <span style="color:#6a9955;"># Первые три</span><br>print(cars[1:3]) <span style="color:#6a9955;"># Со второй по третью</span><br>print(cars[4:2:-1]) <span style="color:#6a9955;"># В обратном порядке</span></div>
+        <h2>Срезы списка</h2>
+        <p>Срез позволяет получить подпоследовательность элементов. Синтаксис: <code>[начало:конец:шаг]</code>. Конечный индекс не включается в результат.</p>
+        <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
 
-            <div class="console-output">
-                ['Lada', 'Niva', 'Vesta']<br>
-                ['Niva', 'Vesta']<br>
-                ['УАЗ', 'Vesta']
-            </div>
-        </div>
+print(cars[:3])  # Первые три
+print(cars[1:3])  # Со второй по третью
+print(cars[4:2:-1])  # В обратном порядке</div>
 
-        <!-- 6. Полезные функции -->
-        <div class="card">
-            <h2>Полезные функции</h2>
-            <div class="blue-line"></div>
-            
-            <p>Для работы со списками часто используются встроенные функции: <span class="inline-code">len()</span> (длина), <span class="inline-code">sum()</span> (сумма), <span class="inline-code">max()</span> (максимум) и <span class="inline-code">min()</span> (минимум), а также методы <span class="inline-code">sort()</span> для сортировки и <span class="inline-code">reverse()</span> для переворота.</p>
-            
-            <div class="code-block">numbers = [10, 2, 11, 9]<br>print(len(numbers)) <span style="color:#6a9955;"># 4</span><br>print(sum(numbers)) <span style="color:#6a9955;"># 32</span><br>print(max(numbers)) <span style="color:#6a9955;"># 11</span><br><br>numbers.sort()<br>print(numbers) <span style="color:#6a9955;"># [2, 9, 10, 11]</span></div>
-        </div>
+        <h2>Полезные функции</h2>
+        <p>Для работы со списками часто используются встроенные функции: <code>len()</code> (длина), <code>sum()</code> (сумма), <code>max()</code> (максимум) и <code>min()</code> (минимум), а также методы <code>sort()</code> для сортировки и <code>reverse()</code> для переворота.</p>
+        <div class="code-block">numbers = [10, 2, 11, 9]
+print(len(numbers))  # 4
+print(sum(numbers))  # 32
+print(max(numbers))  # 11
 
-        <!-- Блок перехода к квесту (в самом конце) -->
-        <div class="card" style="text-align: center;">
-            <h2>Теория пройдена!</h2>
-            <div class="blue-line"></div>
-            <p>Теперь вы знаете, как создавать, изменять и удалять элементы списков. Время проверить знания на практике.</p>
-            
-            <a href="#quest-iframe" class="btn-start">Перейти к вопросам</a>
-        </div>
+numbers.sort()
+print(numbers)  # [2, 9, 10, 11]</div>
 
-        <!-- Твой iframe с квестом -->
-        <div id="quest-iframe" style="display: flex; justify-content: center; width: 100%; margin: 20px 0; scroll-margin-top: 20px;">
-            <iframe
-                src="https://tsehoshsofia.github.io/my-project-tsekhosh_s_i/"
-                width="100%"
-                height="750"
-                style="border: none; max-width: 900px; min-height: 750px; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); background: #fff;"
-                title="Мастер списков Python"
-                loading="lazy">
-            </iframe>
-        </div>
+        <!-- Блок перехода к квесту -->
+        <h2>Теория пройдена!</h2>
+        <p>Теперь вы знаете, как создавать, изменять и удалять элементы списков. Время проверить знания на практике.</p>
+        
+        <a href="#quest-section" class="btn">Перейти к вопросам</a>
+    </div>
 
+    <!-- Твой квест в самом низу -->
+    <div id="quest-section" style="width: 100%; display: flex; justify-content: center; margin-bottom: 40px;">
+        <iframe
+            src="https://tsehoshsofia.github.io/my-project-tsekhosh_s_i/"
+            width="100%"
+            height="750"
+            style="border: none; max-width: 900px; min-height: 750px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); background: #fff;"
+            title="Мастер списков Python"
+            loading="lazy">
+        </iframe>
     </div>
 
 </body>
