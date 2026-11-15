@@ -12,7 +12,7 @@
             width: 100%;
             height: 100%;
             font-family: "Times New Roman", Times, serif;
-            overflow: hidden; /* Убираем общую прокрутку страницы */
+            overflow: hidden; /* Убираем скролл у самого body */
         }
 
         /* 2. ФОН (Как в твоем квесте) */
@@ -29,39 +29,43 @@
             z-index: -1;
         }
 
-        /* 3. КАРТОЧКА С ТЕКСТОМ (В точности как в Twine) */
-        .quest-card {
+        /* 3. КОНТЕЙНЕР ДЛЯ КАРТОЧЕК (Прокручивается, прижат к низу) */
+        .quest-container {
             position: fixed;
-            bottom: 5vh; /* Прижимаем к низу */
+            bottom: 5vh;
             left: 50%;
-            transform: translateX(-50%); /* Центрируем по горизонтали */
+            transform: translateX(-50%);
             
             width: 750px;
             max-width: calc(100% - 40px);
-            max-height: 80vh; /* Если текста много, будет прокрутка внутри */
-            overflow-y: auto;
+            max-height: 80vh; /* Занимает 80% высоты экрана */
+            overflow-y: auto; /* Включаем прокрутку */
             
-            /* Настройки стекла из твоего Twine */
-            background-color: rgba(255, 255, 255, 0.95);
+            /* Отступы между карточками */
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        /* 4. ОТДЕЛЬНАЯ ПЛАШКА ДЛЯ КАЖДОЙ ТЕМЫ */
+        .theory-card {
+            background-color: rgba(255, 255, 255, 0.95); /* Почти непрозрачный белый */
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             
-            /* Тени и рамки */
             box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.5);
             
-            /* Внутренние отступы */
             padding: 30px 35px;
-            
-            /* Настройки текста */
+            box-sizing: border-box;
             font-size: 20px;
             line-height: 1.5;
             color: #111111;
-            box-sizing: border-box;
         }
 
-        /* 4. ЗАГОЛОВКИ */
+        /* 5. ЗАГОЛОВКИ */
         h2 {
             font-size: 28px;
             font-weight: bold;
@@ -72,13 +76,13 @@
             padding-bottom: 10px;
         }
 
-        /* 5. ТЕКСТ */
+        /* 6. ТЕКСТ */
         p {
             margin: 10px 0;
             text-align: justify;
         }
 
-        /* 6. КОД (Розовый, как у тебя) */
+        /* 7. КОД (Розовый) */
         code {
             font-family: 'Consolas', 'Courier New', monospace;
             font-size: 18px;
@@ -105,12 +109,12 @@
             box-sizing: border-box;
         }
 
-        /* 7. КНОПКА (Как в твоем квесте) */
+        /* 8. КНОПКА */
         .btn {
             display: block;
             width: 100%;
             max-width: 500px;
-            margin: 30px auto 0 auto;
+            margin: 20px auto 0 auto;
             padding: 12px 20px;
             background-color: #F4F9FF;
             border: 2px solid #4169E1;
@@ -133,10 +137,17 @@
             box-shadow: 0 5px 12px rgba(65, 105, 225, 0.3);
         }
         
-        /* Красивый скроллбар внутри карточки, если текст не помещается */
-        .quest-card::-webkit-scrollbar { width: 8px; }
-        .quest-card::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
-        .quest-card::-webkit-scrollbar-thumb { background: #4169E1; border-radius: 10px; }
+        /* Красивый скроллбар для контейнера */
+        .quest-container::-webkit-scrollbar { width: 8px; }
+        .quest-container::-webkit-scrollbar-track { background: transparent; }
+        .quest-container::-webkit-scrollbar-thumb { background: #4169E1; border-radius: 10px; }
+
+        /* Адаптив для телефонов */
+        @media (max-width: 600px) {
+            .theory-card { padding: 20px; }
+            h2 { font-size: 24px; }
+            p, code, .code-block { font-size: 16px; }
+        }
     </style>
 </head>
 <body>
@@ -144,45 +155,63 @@
     <!-- Фоновое изображение -->
     <div class="background-layer"></div>
 
-    <!-- Карточка с теорией -->
-    <div class="quest-card">
-        <h2>Создание списка</h2>
-        <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные: числа, строки, и даже другие списки.</p>
-        <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']
+    <!-- Контейнер, внутри которого лежат отдельные карточки -->
+    <div class="quest-container">
+        
+        <!-- Карточка 1 -->
+        <div class="theory-card">
+            <h2>Создание списка</h2>
+            <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные: числа, строки, и даже другие списки.</p>
+            <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']
 empty_list = list()</div>
+        </div>
 
-        <h2>Индексация</h2>
-        <p>Каждый элемент списка имеет свой индекс, начиная с <code>0</code>. Вы можете получать элементы по индексу, менять их или использовать отрицательные индексы (например, <code>-1</code> для последнего элемента).</p>
-        <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']
+        <!-- Карточка 2 -->
+        <div class="theory-card">
+            <h2>Индексация</h2>
+            <p>Каждый элемент списка имеет свой индекс, начиная с <code>0</code>. Вы можете получать элементы по индексу, менять их или использовать отрицательные индексы (например, <code>-1</code> для последнего элемента).</p>
+            <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']
 print(car_models[0])  # Lada Granta
 car_models[1] = 'Niva Travel'  # Замена KIA
 print(car_models[-1])  # Lada Vesta</div>
+        </div>
 
-        <h2>Добавление элементов</h2>
-        <p>Чтобы добавить элемент в конец списка, используется метод <code>append()</code>. Если нужно вставить элемент на конкретную позицию — применяется <code>insert()</code>.</p>
-        <div class="code-block">garage = ['Lada Granta', 'Niva Travel']
+        <!-- Карточка 3 -->
+        <div class="theory-card">
+            <h2>Добавление элементов</h2>
+            <p>Чтобы добавить элемент в конец списка, используется метод <code>append()</code>. Если нужно вставить элемент на конкретную позицию — применяется <code>insert()</code>.</p>
+            <div class="code-block">garage = ['Lada Granta', 'Niva Travel']
 garage.append('Aurus Senat')
 print(garage)  # ['Lada Granta', 'Niva Travel', 'Aurus Senat']
 
 garage.insert(1, 'УАЗ Патриот')
 print(garage)</div>
+        </div>
 
-        <h2>Удаление элементов</h2>
-        <p>Метод <code>remove()</code> удаляет первый элемент по его значению. Метод <code>pop()</code> или оператор <code>del</code> удаляют элемент по индексу.</p>
-        <div class="code-block">garage = [10, 'Python', 3.14, 'Python']
+        <!-- Карточка 4 -->
+        <div class="theory-card">
+            <h2>Удаление элементов</h2>
+            <p>Метод <code>remove()</code> удаляет первый элемент по его значению. Метод <code>pop()</code> или оператор <code>del</code> удаляют элемент по индексу.</p>
+            <div class="code-block">garage = [10, 'Python', 3.14, 'Python']
 garage.remove('Python')  # Удалит первый 'Python'
 garage.pop(0)  # Удалит 10</div>
+        </div>
 
-        <h2>Срезы и функции</h2>
-        <p>Срез позволяет получить часть списка: <code>[начало:конец:шаг]</code>. Для работы со списками также часто используются <code>len()</code> (длина), <code>sum()</code> (сумма) и <code>sort()</code> (сортировка).</p>
-        <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
+        <!-- Карточка 5 -->
+        <div class="theory-card">
+            <h2>Срезы и функции</h2>
+            <p>Срез позволяет получить часть списка: <code>[начало:конец:шаг]</code>. Для работы со списками также часто используются <code>len()</code> (длина), <code>sum()</code> (сумма) и <code>sort()</code> (сортировка).</p>
+            <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
 print(cars[:3])  # Первые три
 print(cars[4:2:-1])  # В обратном порядке</div>
+        </div>
 
-        <p style="text-align: center; margin-top: 30px; font-weight: bold;">Теория пройдена! Время проверить знания на практике.</p>
-        
-        <!-- Кнопка перехода -->
-        <a href="https://project12909115.tilda.ws/page358355909.html" class="btn">Перейти к вопросам</a>
+        <!-- Карточка 6 (Финальная с кнопкой) -->
+        <div class="theory-card" style="text-align: center;">
+            <p style="font-weight: bold; font-size: 22px; margin-bottom: 20px;">Теория пройдена!<br>Время проверить знания на практике.</p>
+            <a href="https://project12909115.tilda.ws/page358355909.html" class="btn">Перейти к вопросам</a>
+        </div>
+
     </div>
 
 </body>
