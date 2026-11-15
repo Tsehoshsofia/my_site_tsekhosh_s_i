@@ -100,36 +100,60 @@
             font-size: 14px; margin-bottom: 5px; color: #4169E1;
         }
 
-        /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
-        .interactive-box {
-            background-color: #F4F9FF; border: 2px dashed #4169E1;
-            border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
-        }
+      /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
+.interactive-box {
+    background-color: #F4F9FF; border: 2px dashed #4169E1;
+    border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
+}
 
-        .interactive-box input, .interactive-box select {
-            font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
-            margin: 5px 2px; border: 2px solid #ccc; border-radius: 6px;
-            outline: none; box-sizing: border-box; color: #000; font-weight: bold;
-        }
+.interactive-box input, .interactive-box select {
+    font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
+    margin: 5px 2px; border: 2px solid #ccc; border-radius: 6px;
+    outline: none; box-sizing: border-box; color: #000; font-weight: bold;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
 
-        .interactive-box input:focus, .interactive-box select:focus { border-color: #4169E1; }
+.interactive-box input:focus, .interactive-box select:focus { 
+    border-color: #4169E1; 
+    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2); /* Легкое свечение при фокусе */
+}
 
-        .interactive-box button {
-            font-family: "Times New Roman", Times, serif; font-size: 16px;
-            font-weight: bold; background-color: #4169E1; color: white;
-            border: none; border-radius: 6px; padding: 9px 15px;
-            margin: 5px 2px; cursor: pointer; transition: background 0.2s;
-        }
+/* ОБЪЕМНЫЕ КНОПКИ */
+.interactive-box button {
+    font-family: "Times New Roman", Times, serif; 
+    font-size: 16px;
+    font-weight: bold; 
+    color: white;
+    background: linear-gradient(180deg, #5A7BFF 0%, #4169E1 100%);
+    border: none; 
+    border-radius: 6px; 
+    padding: 9px 15px;
+    margin: 5px 2px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 0 #2b4eb5, 0 4px 6px rgba(0,0,0,0.15);
+    transition: all 0.1s ease; 
+    position: relative;
+    top: 0;
+}
 
-        .interactive-box button:hover { background-color: #2b4eb5; }
+/* Эффект при наведении */
+.interactive-box button:hover { 
+    background: linear-gradient(180deg, #6B88FF 0%, #5279E1 100%);
+    box-shadow: 0 4px 0 #2b4eb5, 0 6px 10px rgba(0,0,0,0.2);
+}
 
-        .result-box {
-            margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
-            text-align: left; background-color: #fff; padding: 10px;
-            border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
-            font-weight: bold;
-        }
+/* Эффект при нажатии (кнопка вдавливается) */
+.interactive-box button:active { 
+    top: 4px; /* Сдвиг вниз */
+    box-shadow: 0 0 0 #2b4eb5, 0 1px 2px rgba(0,0,0,0.2); /* Тень исчезает */
+}
 
+.result-box {
+    margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
+    text-align: left; background-color: #fff; padding: 10px;
+    border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
+    font-weight: bold;
+}
         /* 10. КНОПКА ПЕРЕХОДА */
         .btn {
             display: block; width: 100%; max-width: 500px;
