@@ -516,7 +516,42 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             </div>
         </div>
 
-        <!-- 15. ФИНАЛЬНАЯ КАРТОЧКА -->
+        <!-- 15. ЗАДАЧА: ИСПРАВЬ КОД -->
+        <div class="theory-card">
+            <h2>🧑‍💻 Задача: Исправь код!</h2>
+            <p>Вам нужно дописать код, чтобы он заработал правильно. Впишите нужный метод или значение в пропуски.</p>
+            
+            <!-- Задача 1 (append) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 1.</b> Добавь 'Aurus Senat' в конец списка <code>garage</code>.</p>
+                <div class="code-block">garage = ['Lada', 'Niva']
+garage.<input type="text" id="task1Input" class="blank-input" placeholder="метод">('Aurus Senat')
+print(garage)</div>
+                <button onclick="checkTask1()">Проверить код</button>
+                <div class="result-box" id="resTask1"></div>
+            </div>
+
+            <!-- Задача 2 (insert) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 2.</b> Вставь 'УАЗ' на 1-ю позицию (индекс 1).</p>
+                <div class="code-block">garage = ['Lada', 'Niva', 'Aurus']
+garage.<input type="text" id="task2InputMethod" class="blank-input" placeholder="метод">(<input type="number" id="task2InputIndex" class="blank-input" placeholder="индекс", style="width: 60px;">, 'УАЗ')</div>
+                <button onclick="checkTask2()">Проверить код</button>
+                <div class="result-box" id="resTask2"></div>
+            </div>
+
+            <!-- Задача 3 (del/pop) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px;">
+                <p><b>Задача 3.</b> Удали элемент 'Хлеб' по его индексу, используя команду <code>del</code>.</p>
+                <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
+del cart[<input type="number" id="task3Input" class="blank-input" placeholder="индекс", style="width: 60px;">]
+print(cart)</div>
+                <button onclick="checkTask3()">Проверить код</button>
+                <div class="result-box" id="resTask3"></div>
+            </div>
+        </div>
+
+        <!-- 16. ФИНАЛЬНАЯ КАРТОЧКА -->
         <div class="theory-card" style="text-align: center;">
             <h2 style="justify-content: center; border-bottom: none; font-size: 24px;">🎉 Теория пройдена!</h2>
             <p style="font-weight: bold; font-size: 22px; margin-bottom: 20px;">Время проверить знания на практике.</p>
@@ -525,7 +560,7 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
 
     </div>
 
-    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА -->
+    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
     <script>
         function scrollToCard() {
             const container = document.getElementById('main-container');
@@ -533,13 +568,47 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             container.scrollTo({ top: firstCard.offsetTop - 20, behavior: 'smooth' });
         }
 
-        function showResult(id, text) {
+        function showResult(id, text, isError = false) {
             const el = document.getElementById(id);
             el.style.display = 'block';
-            el.innerHTML = text;
+            el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : text;
         }
 
-        // 1. Создание
+        // --- ИНТЕРАКТИВНЫЕ ЗАДАЧИ ---
+
+        function checkTask1() {
+            const val = document.getElementById('task1Input').value.trim().toLowerCase();
+            if (val === 'append') {
+                showResult('resTask1', `>>> <b>Верно!</b> ['Lada', 'Niva', 'Aurus Senat']`);
+            } else {
+                showResult('resTask1', `Ошибка: метод <b>${val}</b> не подходит. Вспомни, какой метод добавляет в конец.`, true);
+            }
+        }
+
+        function checkTask2() {
+            const method = document.getElementById('task2InputMethod').value.trim().toLowerCase();
+            const index = document.getElementById('task2InputIndex').value;
+            
+            if (method === 'insert' && index === '1') {
+                showResult('resTask2', `>>> <b>Верно!</b> ['Lada', 'УАЗ', 'Niva', 'Aurus']`);
+            } else if (method === 'insert' && index !== '1') {
+                showResult('resTask2', `Метод правильный, но индекс не тот. Нужен индекс 1.`, true);
+            } else {
+                showResult('resTask2', `Ошибка: проверь метод и индекс.`, true);
+            }
+        }
+
+        function checkTask3() {
+            const index = document.getElementById('task3Input').value;
+            if (index === '1') {
+                showResult('resTask3', `>>> <b>Верно!</b> ['Молоко', 'Сметана']`);
+            } else {
+                showResult('resTask3', `Ошибка: 'Хлеб' находится под индексом 1.`, true);
+            }
+        }
+
+        // --- ОБЫЧНЫЙ ИНТЕРАКТИВ (ТЕОРИЯ) ---
+
         function runCreate() {
             const input = document.getElementById('createInput').value;
             if (!input.trim()) return;
@@ -547,20 +616,18 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             showResult('resCreate', `>>> ['${arr.join("', '")}']`);
         }
 
-        // 2. Индексация
         function runIndex() {
             const list = ['Lada', 'KIA', 'Vesta', 'УАЗ'];
             const index = parseInt(document.getElementById('indexInput').value);
             if (isNaN(index)) return;
             if (index >= list.length || index < -list.length) {
-                showResult('resIndex', `<span style="color:red;">IndexError: list index out of range</span>`);
+                showResult('resIndex', `IndexError: list index out of range`, true);
             } else {
                 const realIndex = index < 0 ? list.length + index : index;
                 showResult('resIndex', `>>> ${list[realIndex]}`);
             }
         }
 
-        // 3. Срезы
         function runSlice() {
             const list = ['Lada', 'Niva', 'Vesta', 'УАЗ'];
             const start = parseInt(document.getElementById('sliceStart').value) || 0;
@@ -570,7 +637,6 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             showResult('resSlice', `>>> [${sliced.map(s => `'${s}'`).join(', ')}]`);
         }
 
-        // 4. Append
         function runAppend() {
             const list = ['Lada', 'Niva'];
             const val = document.getElementById('appendInput').value;
@@ -579,7 +645,6 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             showResult('resAppend', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
         }
 
-        // 5. Insert
         function runInsert() {
             const list = ['Lada', 'Niva', 'Aurus'];
             const index = parseInt(document.getElementById('insertIndex').value);
@@ -589,7 +654,6 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             showResult('resInsert', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
         }
 
-        // 6. Remove
         function runRemove() {
             const list = ['Молоко', 'Хлеб', 'Сметана'];
             const val = document.getElementById('removeInput').value;
@@ -599,17 +663,16 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
                 list.splice(idx, 1);
                 showResult('resRemove', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
             } else {
-                showResult('resRemove', `<span style="color:red;">ValueError: list.remove(x): x not in list</span>`);
+                showResult('resRemove', `ValueError: list.remove(x): x not in list`, true);
             }
         }
 
-        // 7. Del и Pop
         function runDel() {
             const list = ['Молоко', 'Хлеб', 'Сметана'];
             const index = parseInt(document.getElementById('popIndex').value);
             if (isNaN(index)) return;
             if (index >= list.length || index < -list.length) {
-                showResult('resPop', `<span style="color:red;">IndexError: list assignment index out of range</span>`);
+                showResult('resPop', `IndexError: list assignment index out of range`, true);
                 return;
             }
             const realIndex = index < 0 ? list.length + index : index;
@@ -622,7 +685,7 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             const index = parseInt(document.getElementById('popIndex').value);
             if (isNaN(index)) return;
             if (index >= list.length || index < -list.length) {
-                showResult('resPop', `<span style="color:red;">IndexError: pop index out of range</span>`);
+                showResult('resPop', `IndexError: pop index out of range`, true);
                 return;
             }
             const realIndex = index < 0 ? list.length + index : index;
@@ -630,12 +693,11 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             showResult('resPop', `Удалено: '${popped}'<br>(pop) >>> [${list.map(s => `'${s}'`).join(', ')}]`);
         }
 
-        // 8. Clear
         function runClear() {
             showResult('resClear', `>>> []`);
         }
 
-        // ЧЕК
+        // --- ЧЕК ---
         let cartProducts = [];
         let cartPrices = [];
 
