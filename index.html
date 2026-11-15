@@ -25,13 +25,14 @@
         }
 
         /* 3. КОНТЕЙНЕР */
+        
         .quest-container {
             position: fixed; bottom: 2vh; left: 50%; transform: translateX(-50%);
-            width: 750px; max-width: calc(100% - 40px); max-height: 85vh; 
+            width: 750px; max-width: calc(100% - 40px); 
+            max-height: 80vh; /* Изменено с 85vh на 80vh, чтобы финальная карточка не обрезалась */
             overflow-y: auto; display: flex; flex-direction: column; gap: 25px; 
             padding-bottom: 20px; padding-right: 5px;
         }
-
         /* 4. ПЛАШКА */
         .theory-card {
             background-color: rgba(255, 255, 255, 0.98); 
@@ -461,7 +462,7 @@ catalog_prices = [65, 99, 85, 150]
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
                 <p><b>Задача 5.</b> Создайте список <code>colors</code> из строк 'red', 'green', 'blue'.</p>
                 <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask5()">Проверить код</button>
+                <button onclick="checkTask5()" class="btn" style="width: auto; margin: 10px 0 0 0; padding: 8px 16px; font-size: 16px;">Проверить код</button>
                 <div class="result-box" id="resTask5"></div>
             </div>
 
@@ -556,8 +557,8 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
             </div>
         </div> <!-- Закрытие блока "Большая проверка" -->
 
-                     <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
-        <div class="theory-card" style="text-align: center; padding-bottom: 30px; overflow: hidden;">
+                        <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
+        <div class="theory-card" style="text-align: center; padding-bottom: 20px; margin-bottom: 20px;">
             <h2 style="justify-content: center; border-bottom: none; font-size: 28px; margin-bottom: 15px;">Теория пройдена!</h2>
             
             <p style="font-weight: bold; font-size: 20px; margin-bottom: 10px; text-align: center;">
@@ -566,12 +567,9 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
             
             <!-- Нарисованная SVG-стрелка -->
             <div style="display: flex; justify-content: center; margin-top: -10px;">
-                <svg width="140" height="140" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Основная синяя форма стрелки -->
+                <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M 20 20 C 50 10, 80 30, 75 65 L 90 65 L 65 95 L 50 65 L 62 65 C 65 40, 45 25, 20 35 Z" fill="#4A90E2" />
-                    <!-- Блик (объем) -->
                     <path d="M 22 25 C 48 18, 72 35, 68 60 L 75 60 C 78 32, 48 15, 22 25 Z" fill="#90C5FF" opacity="0.8" />
-                    <!-- Внутренняя тень для объема -->
                     <path d="M 65 95 L 50 65 L 62 65 C 65 40, 45 25, 20 35 C 15 36, 15 35, 20 32 C 50 18, 73 35, 67 62 L 80 62 L 60 88 Z" fill="#2B6CB0" opacity="0.4" />
                 </svg>
             </div>
