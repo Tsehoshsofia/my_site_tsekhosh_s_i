@@ -108,14 +108,29 @@
 
 .interactive-box input, .interactive-box select {
     font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
-    margin: 5px 2px; border: 2px solid #ccc; border-radius: 6px;
+    margin: 5px 2px; 
+    /* Рамка темнее сверху, светлее снизу */
+    border: 2px solid #b0b0b0; 
+    border-top-color: #888; /* Верхняя грань темнее для объема */
+    border-radius: 6px;
     outline: none; box-sizing: border-box; color: #000; font-weight: bold;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    
+    /* Внутренняя тень создает эффект углубления */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+    
+    /* Мягкий фон, чтобы не сливалось с белым */
+    background-color: #fcfcfc; 
+    transition: all 0.2s ease;
 }
 
+/* Эффект при клике (фокусе) */
 .interactive-box input:focus, .interactive-box select:focus { 
     border-color: #4169E1; 
-    box-shadow: 0 0 0 3px rgba(65, 105, 225, 0.2); /* Легкое свечение при фокусе */
+    border-top-color: #2b4eb5; /* Верхняя грань тоже синеет */
+    background-color: #fff; /* Фон становится чисто белым */
+    
+    /* Усиливаем внутреннюю тень + добавляем легкое свечение вокруг */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(65, 105, 225, 0.2);
 }
 
 /* ОБЪЕМНЫЕ КНОПКИ */
