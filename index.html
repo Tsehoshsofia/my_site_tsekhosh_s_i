@@ -180,7 +180,6 @@
                 Для закрепления материала предусмотрены практические задания.
             </p>
             <div class="author">Разработчик: <b>Цехош София Ивановна</b></div>
-            <a href="#card-1" class="btn" onclick="scrollToCard()">Перейти к изучению</a>
         </div>
 
         <!-- 1. СОЗДАНИЕ -->
@@ -567,12 +566,8 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="...", 
 
     <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
     <script>
-        // Прокрутка
-        function scrollToCard() {
-            const container = document.getElementById('main-container');
-            const firstCard = document.getElementById('card-1');
-            container.scrollTo({ top: firstCard.offsetTop - 20, behavior: 'smooth' });
-        }
+       
+     
 
         // Утилита для вывода
         function showResult(id, text, isError = false) {
