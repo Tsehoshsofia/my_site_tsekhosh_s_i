@@ -15,6 +15,7 @@
             overflow: hidden; 
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth; /* Плавная прокрутка */
         }
 
         /* 2. ФОН */
@@ -195,7 +196,7 @@
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #ccc;
-            display: none; /* Скрыто до первого клика */
+            display: none; 
         }
 
         /* 10. КНОПКА ПЕРЕХОДА */
@@ -225,7 +226,47 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(65, 105, 225, 0.3);
         }
-        
+
+        /* 11. ТИТУЛЬНЫЙ СЛАЙД (НОВЫЙ) */
+        .start-screen {
+            text-align: center;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .start-screen h1 {
+            font-size: 42px;
+            color: #000000;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+
+        .start-screen .subtitle {
+            font-size: 24px;
+            color: #4169E1;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .start-screen .description {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 40px;
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .start-screen .author {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
         /* Скроллбар */
         .quest-container::-webkit-scrollbar { width: 8px; }
         .quest-container::-webkit-scrollbar-track { background: transparent; }
@@ -237,6 +278,9 @@
             h2 { font-size: 24px; }
             p, code, .code-block { font-size: 16px; }
             .interactive-box input { width: 100%; margin: 5px 0; }
+            .start-screen { padding: 40px 20px; }
+            .start-screen h1 { font-size: 32px; }
+            .start-screen .subtitle { font-size: 18px; }
         }
     </style>
 </head>
@@ -244,10 +288,27 @@
 
     <div class="background-layer"></div>
 
-    <div class="quest-container">
+    <div class="quest-container" id="main-container">
         
+        <!-- ТИТУЛЬНЫЙ СЛАЙД -->
+        <div class="theory-card start-screen" id="start-screen">
+            <h1>Мастер списков Python</h1>
+            <div class="subtitle">Интерактивный конспект</div>
+            
+            <p class="description">
+                В этом модуле вы изучите одну из самых важных структур данных в Python — списки. 
+                Вы научитесь создавать их, изменять, добавлять и удалять элементы, а также решать практические задачи.
+            </p>
+            
+            <div class="author">
+                Разработчик: <b>Цехош София Ивановна</b>
+            </div>
+            
+            <a href="#card-1" class="btn" onclick="scrollToCard()">Начать обучение</a>
+        </div>
+
         <!-- 1 -->
-        <div class="theory-card">
+        <div class="theory-card" id="card-1">
             <h2>📝 Создание списка</h2>
             <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные.</p>
             <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Lada Vesta']
@@ -597,8 +658,20 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
 
     </div>
 
-    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА -->
+    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОКРУТКИ -->
     <script>
+        // Логика для кнопки "Начать обучение"
+        function scrollToCard() {
+            const container = document.getElementById('main-container');
+            const firstCard = document.getElementById('card-1');
+            // Прокручиваем контейнер до первой карточки
+            container.scrollTo({
+                top: firstCard.offsetTop - 20,
+                behavior: 'smooth'
+            });
+        }
+
+        // Логика для интерактивного чека
         let cartProducts = [];
         let cartPrices = [];
 
@@ -614,15 +687,12 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
                 return;
             }
 
-            // Добавляем в "списки"
             cartProducts.push(name);
             cartPrices.push(price);
 
-            // Очищаем поля ввода
             nameInput.value = '';
             priceInput.value = '';
 
-            // Обновляем вывод
             updateReceipt();
         }
 
@@ -638,24 +708,23 @@ print("\nСрез цен (первые 3):", catalog_prices[:3])</div>
             const cartTotal = document.getElementById('cartTotal');
 
             resultBox.style.display = 'block';
-            cartItems.innerHTML = ''; // Очищаем предыдущий список
+            cartItems.innerHTML = '';
 
             let total = 0;
 
             for (let i = 0; i < cartProducts.length; i++) {
-                // Имитируем :g (убираем .0, если число целое)
                 let displayPrice = cartPrices[i];
+                // Имитация :g
                 if (displayPrice % 1 === 0) {
                     displayPrice = displayPrice.toFixed(0);
                 } else {
-                    displayPrice = displayPrice.toFixed(2).replace(/\.?0+$/, ""); // Убираем лишние нули после запятой
+                    displayPrice = displayPrice.toFixed(2).replace(/\.?0+$/, "");
                 }
                 
                 cartItems.innerHTML += `${cartProducts[i]} — ${displayPrice} руб.<br>`;
                 total += cartPrices[i];
             }
 
-            // Имитируем :g для итога
             let displayTotal = total;
             if (displayTotal % 1 === 0) {
                 displayTotal = displayTotal.toFixed(0);
