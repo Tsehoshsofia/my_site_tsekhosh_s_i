@@ -52,17 +52,16 @@
             font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 20px;
             color: #000000; border-bottom: 3px solid #4169E1; padding-bottom: 10px;
             display: flex; align-items: center; gap: 12px; 
-            letter-spacing: 0.5px; /* Чуть шире буквы для четкости */
+            letter-spacing: 0.5px;
         }
 
-        /* 6. ТЕКСТ (Делаем плотнее и добавляем микро-тень) */
+        /* 6. ТЕКСТ */
         p { 
             margin: 10px 0; 
             text-align: justify; 
             color: #000000; 
-            font-weight: 500; /* Более плотный шрифт */
-            letter-spacing: 0.2px; /* Микро-разрядка для читаемости */
-            /* Легкая белая тень вокруг букв создает контраст */
+            font-weight: 500; 
+            letter-spacing: 0.2px; 
             text-shadow: 0px 0px 1px rgba(255,255,255,0.8); 
         }
         
@@ -474,6 +473,51 @@ catalog_prices = [65, 99, 85, 150]
             <h2>🏆 Большая проверка: Пишем код</h2>
             <p>Теперь давайте проверим, как вы усвоили материал. Впишите недостающий код в каждой задаче.</p>
 
+            <!-- Задача 5: Создание -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 5.</b> Создайте список <code>colors</code> из строк 'red', 'green', 'blue'.</p>
+                <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask5()">Проверить код</button>
+                <div class="result-box" id="resTask5"></div>
+            </div>
+
+            <!-- Задача 6: Срез -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 6.</b> Выведите первые два элемента списка <code>nums</code> с помощью среза.</p>
+                <div class="code-block">nums = [10, 20, 30, 40]
+print(nums[<input type="text" id="task6Input" class="blank-input" placeholder="...", style="width: 100px;">])</div>
+                <button onclick="checkTask6()">Проверить код</button>
+                <div class="result-box" id="resTask6"></div>
+            </div>
+
+            <!-- Задача 7: Изменение -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 7.</b> Замените второй элемент списка (индекс 1) на 'BMW'.</p>
+                <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
+cars[<input type="text" id="task7Input" class="blank-input" placeholder="...", style="width: 100px;">] = 'BMW'</div>
+                <button onclick="checkTask7()">Проверить код</button>
+                <div class="result-box" id="resTask7"></div>
+            </div>
+
+            <!-- Задача 8: Проверка вхождения -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 8.</b> Проверьте, есть ли слово 'яблоко' в списке <code>fruits</code>.</p>
+                <div class="code-block">fruits = ['банан', 'апельсин']
+if 'яблоко' <input type="text" id="task8Input" class="blank-input" placeholder="...", style="width: 80px;"> fruits:
+    print("Есть!")</div>
+                <button onclick="checkTask8()">Проверить код</button>
+                <div class="result-box" id="resTask8"></div>
+            </div>
+
+            <!-- Задача 9: Комбинированная (поиск и удаление) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 9.</b> Удалите 'KIA' из списка <code>cars</code> по значению.</p>
+                <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
+cars.<input type="text" id="task9Input" class="blank-input" placeholder="...">('KIA')</div>
+                <button onclick="checkTask9()">Проверить код</button>
+                <div class="result-box" id="resTask9"></div>
+            </div>
+
             <!-- Задача 10 -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
                 <p><b>Задача 10.</b> Создайте <b>пустой</b> список с именем <code>my_list</code>.</p>
@@ -551,6 +595,52 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="...", 
             const el = document.getElementById(id);
             el.style.display = 'block';
             el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : `<span style="color:green;">${text}</span>`;
+        }
+
+        // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (5-9) ---
+        function checkTask5() {
+            const val = document.getElementById('task5Input').value.replace(/\s/g, '').toLowerCase();
+            if (val.includes("'red'") && val.includes("'green'") && val.includes("'blue'") && val.startsWith('[') && val.endsWith(']')) {
+                showResult('resTask5', `>>> Верно! colors = ['red', 'green', 'blue']`);
+            } else {
+                showResult('resTask5', `Ошибка. Попробуй формат: ['red', 'green', 'blue']`, true);
+            }
+        }
+
+        function checkTask6() {
+            const val = document.getElementById('task6Input').value.trim();
+            if (val === ':2' || val === '0:2') {
+                showResult('resTask6', `>>> Верно! [10, 20]`);
+            } else {
+                showResult('resTask6', `Ошибка. Для первых двух элементов нужен срез :2`, true);
+            }
+        }
+
+        function checkTask7() {
+            const val = document.getElementById('task7Input').value.trim();
+            if (val === '1') {
+                showResult('resTask7', `>>> Верно! ['Lada', 'BMW', 'Vesta']`);
+            } else {
+                showResult('resTask7', `Ошибка. Второй элемент имеет индекс 1.`, true);
+            }
+        }
+
+        function checkTask8() {
+            const val = document.getElementById('task8Input').value.trim().toLowerCase();
+            if (val === 'in') {
+                showResult('resTask8', `>>> Верно! Оператор in проверяет вхождение.`);
+            } else {
+                showResult('resTask8', `Ошибка. Для проверки вхождения используется оператор in.`, true);
+            }
+        }
+
+        function checkTask9() {
+            const val = document.getElementById('task9Input').value.trim().toLowerCase();
+            if (val === 'remove') {
+                showResult('resTask9', `>>> Верно! ['Lada', 'Vesta']`);
+            } else {
+                showResult('resTask9', `Ошибка. Для удаления по значению используется метод remove.`, true);
+            }
         }
 
         // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (10-15) ---
