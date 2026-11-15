@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конспект: Списки в Python</title>
+    <style>
+        :root {
+            --bg-color: #f5f7fa;
+            --text-color: #333;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+            --console-bg: #f1f8ff;
+            --console-border: #c8e1ff;
+            --accent-color: #306998; /* Цвет Python */
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 40px;
+        }
+
+        /* Стили для карточек */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: var(--accent-color);
+            font-size: 1.4rem;
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Стили для кода Python */
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            background-color: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #e83e8c;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Стили для консоли вывода */
+        .console {
+            background-color: var(--console-bg);
+            border-left: 4px solid var(--console-border);
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            color: #24292e;
+            margin-top: 10px;
+        }
+
+        .console::before {
+            content: "Вывод:";
+            display: block;
+            font-weight: bold;
+            color: #6a737d;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        /* Комментарии в коде */
+        .comment {
+            color: #6a9955;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Введение в списки Python</h1>
+
+        <!-- Раздел 1 -->
+        <div class="card">
+            <h2>1. Создание списка</h2>
+            <p>Списки в Python создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Каждый элемент списка может быть любым типом данных.</p>
+            <pre><code>my_list = [] <span class="comment"># пустой список</span>
+my_list = list() <span class="comment"># пустой список</span>
+
+numbers_list = [40, 20, 90, 11, 5]
+car_models_list = ['Lada Granta', 'Lada Vesta', 'Niva Travel']
+mixed_list = [3.14, 10, 'Hello world!', False, 'Python is the best']</code></pre>
+        </div>
+
+        <!-- Раздел 2 -->
+        <div class="card">
+            <h2>2. Индексация</h2>
+            <p>Списки индексируются, начиная с <code>0</code>. Вы можете обращаться к элементам по индексам, чтобы получать, изменять или заменять их.</p>
+            <pre><code>car_models = ['Lada Granta', 'Niva Travel', 'Lada Vesta', 'УАЗ Патриот', 'Aurus Senat']
+print(car_models[0])
+print(car_models[1])</code></pre>
+            <div class="console">
+Lada Granta<br>
+Niva Travel
+            </div>
+            <p>Индексирование работает и в обратную сторону. Индекс <code>-1</code> дает доступ к последнему элементу, <code>-2</code> к предпоследнему и т.д.</p>
+            <pre><code>print(car_models[-1])
+print(car_models[-2])</code></pre>
+            <div class="console">
+Aurus Senat<br>
+УАЗ Патриот
+            </div>
+        </div>
+
+        <!-- Раздел 3 -->
+        <div class="card">
+            <h2>3. Срезы списка</h2>
+            <p>Срезом называется подпоследовательность. Синтаксис среза: <code>переменная[начальный_индекс:конечный_индекс_минус_1:шаг]</code>.</p>
+            <pre><code>car_models = ['Lada Granta', 'Niva Travel', 'Lada Vesta', 'УАЗ Патриот']
+print(car_models[:3])  <span class="comment"># с 0 по 2 индекс</span>
+print(car_models[1:3]) <span class="comment"># с 1 по 2 индекс</span>
+print(car_models[1:])  <span class="comment"># с 1 до конца</span></code></pre>
+            <div class="console">
+['Lada Granta', 'Niva Travel', 'Lada Vesta']<br>
+['Niva Travel', 'Lada Vesta']<br>
+['Niva Travel', 'Lada Vesta', 'УАЗ Патриот']
+            </div>
+        </div>
+
+        <!-- Раздел 4 -->
+        <div class="card">
+            <h2>4. Добавление элементов</h2>
+            <p>Метод <code>append()</code> добавляет элемент в конец списка. Метод <code>insert()</code> добавляет элемент на заданную позицию.</p>
+            <pre><code>my_list = [1, 2, 3]
+my_list.append(4)
+print(my_list)
+
+my_list.insert(1, 9) <span class="comment"># вставить 9 на индекс 1</span>
+print(my_list)</code></pre>
+            <div class="console">
+[1, 2, 3, 4]<br>
+[1, 9, 2, 3, 4]
+            </div>
+        </div>
+
+        <!-- Раздел 5 -->
+        <div class="card">
+            <h2>5. Удаление элементов</h2>
+            <p>Метод <code>remove()</code> удаляет первый элемент по указанному значению. Метод <code>pop()</code> удаляет элемент по индексу (или последний, если индекс не указан). Оператор <code>del</code> также удаляет по индексу.</p>
+            <pre><code>variables_list = [10, True, 'Python', 3.14, 'Python']
+variables_list.remove('Python') 
+print(variables_list)
+
+car_models = ['Lada Granta', 'Lada Vesta', 'Niva Travel']
+car_models.pop()
+print(car_models)
+
+del variables_list[0]
+print(variables_list)</code></pre>
+            <div class="console">
+[10, True, 3.14, 'Python']<br>
+['Lada Granta', 'Lada Vesta']<br>
+[True, 3.14, 'Python']
+            </div>
+        </div>
+
+        <!-- Раздел 6 -->
+        <div class="card">
+            <h2>6. Полезные функции и методы</h2>
+            <p>В Python есть встроенные функции для работы со списками, такие как <code>len()</code>, <code>sum()</code>, <code>min()</code>, <code>max()</code>, а также методы <code>sort()</code>, <code>reverse()</code> и <code>count()</code>.</p>
+            <pre><code>numbers = [10, 2, 11, 9, 3, 24, 57, 78]
+print(len(numbers))     <span class="comment"># Длина списка</span>
+print(sum(numbers))     <span class="comment"># Сумма элементов</span>
+print(max(numbers))     <span class="comment"># Максимум</span>
+print(min(numbers))     <span class="comment"># Минимум</span>
+
+numbers.sort()          <span class="comment"># Сортировка</span>
+print(numbers)
+
+numbers.reverse()       <span class="comment"># Разворот списка</span>
+print(numbers.count(11))<span class="comment"># Количество вхождений</span></code></pre>
+            <div class="console">
+8<br>
+194<br>
+78<br>
+2<br>
+[2, 3, 9, 10, 11, 24, 57, 78]<br>
+1
+            </div>
+        </div>
+
+        <!-- Раздел 7 -->
+        <div class="card">
+            <h2>7. Оператор in и цикл for</h2>
+            <p>Оператор <code>in</code> проверяет наличие элемента в списке (возвращает <code>True</code> или <code>False</code>). Цикл <code>for</code> позволяет перебирать элементы списка.</p>
+            <pre><code>fruits = ['яблоко', 'апельсин', 'груша', 'ананас']
+
+if 'яблоко' in fruits:
+    print("Яблоко есть в списке!")
+
+for fruit in fruits:
+    print(fruit)</code></pre>
+            <div class="console">
+Яблоко есть в списке!<br>
+яблоко<br>
+апельсин<br>
+груша<br>
+ананас
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
