@@ -295,6 +295,7 @@ print(cart) # []</div>
         <div class="theory-card">
             <h2>⌨️ Задача 1: Добавление товаров в конец</h2>
             <p>Давайте напишем мини-программу, которая просит ввести товар и цену, а затем спрашивает: «Добавить еще?». Если пользователь отвечает «да», цикл повторяется. Если «нет» — выводится итоговый чек.</p>
+            <p><i>Обратите внимание на форматирование <code>:g</code> при выводе цены. Оно убирает лишние нули у целых чисел (например, 50.0 превращает в 50), но сохраняет копейки (например, 99.50 останется 99.5).</i></p>
             
             <div class="code-block">shopping_list = []
 price_list = []
@@ -313,7 +314,7 @@ while True:
     if answer != 'да':
         break
 
-# Красивый вывод
+# Красивый вывод (с :g)
 print("\n--- ВАШ ЧЕК ---")
 for i in range(len(shopping_list)):
     print(f"{shopping_list[i]} — {price_list[i]:g} руб.")
@@ -368,7 +369,7 @@ index = min(user_place - 1, len(shopping_list))
 shopping_list.insert(index, urgent_product)
 price_list.insert(index, urgent_price)
 
-# Проверяем результат
+# Проверяем результат (с :g)
 print("\n--- ОБНОВЛЕННЫЙ СПИСОК ---")
 for i in range(len(shopping_list)):
     print(f"{shopping_list[i]} — {price_list[i]:g} руб.")</div>
