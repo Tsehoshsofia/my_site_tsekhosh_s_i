@@ -199,7 +199,7 @@ print(cars[1:3])  # с 1 по 2 индекс
 print(cars[4:2:-1]) # в обратном порядке</div>
         </div>
 
-        <!-- 4 (Введение в добавление) -->
+        <!-- 4 -->
         <div class="theory-card">
             <h2>➕ Добавление элементов</h2>
             <p>Чтобы расширить список, в Python есть два основных метода:</p>
@@ -209,7 +209,7 @@ print(cars[4:2:-1]) # в обратном порядке</div>
             </ul>
         </div>
 
-        <!-- 5 (Метод append) -->
+        <!-- 5 -->
         <div class="theory-card">
             <h2>➕ Добавление: метод append()</h2>
             <p>Метод <code>append()</code> добавляет новый элемент <b>строго в конец списка</b>.</p>
@@ -219,9 +219,9 @@ print(garage)
 # Результат: ['Lada Granta', 'Niva Travel', 'Aurus Senat']</div>
         </div>
 
-        <!-- 6 (Метод insert) -->
+        <!-- 6 -->
         <div class="theory-card">
-            <h2>➕ Добавление: метод insert()</h2>
+            <h2>📍 Добавление: метод insert()</h2>
             <p>Метод <code>insert(index, value)</code> вставляет элемент на <b>конкретную позицию</b>. Все элементы, которые были после указанного индекса, сдвигаются вправо.</p>
             <div class="code-block">garage = ['Lada Granta', 'Niva Travel', 'Aurus Senat']
 garage.insert(1, 'УАЗ Патриот')
@@ -229,7 +229,7 @@ print(garage)
 # Результат: ['Lada Granta', 'УАЗ Патриот', 'Niva Travel', 'Aurus Senat']</div>
         </div>
 
-        <!-- 7 (Введение в удаление) -->
+        <!-- 7 -->
         <div class="theory-card">
             <h2>🗑️ Удаление элементов</h2>
             <p>В Python есть несколько способов удалить элемент из списка, в зависимости от задачи:</p>
@@ -241,7 +241,7 @@ print(garage)
             </ul>
         </div>
 
-        <!-- 8 (Метод remove) -->
+        <!-- 8 -->
         <div class="theory-card">
             <h2>🗑️ Удаление: метод remove()</h2>
             <p>Метод <code>remove(x)</code> ищет элемент по значению и удаляет <b>первое</b> совпадение.</p>
@@ -252,7 +252,7 @@ print(variables)
 # Результат: [10, 3.14, 'Python']</div>
         </div>
 
-        <!-- 9 (Метод pop) -->
+        <!-- 9 -->
         <div class="theory-card">
             <h2>🗑️ Удаление: метод pop()</h2>
             <p>Метод <code>pop(index)</code> удаляет элемент по индексу и <b>возвращает</b> его. Если индекс не указан, удаляется последний элемент.</p>
@@ -262,7 +262,7 @@ print(car_models)
 # Результат: ['Lada Granta', 'Aurus Senat']</div>
         </div>
 
-        <!-- 10 (Оператор del) -->
+        <!-- 10 -->
         <div class="theory-card">
             <h2>🗑️ Удаление: оператор del</h2>
             <p>Оператор <code>del</code> удаляет элемент по индексу или целый срез. В отличие от <code>pop()</code>, он ничего не возвращает.</p>
@@ -272,7 +272,7 @@ print(cars)
 # Результат: ['Lada', 'Vesta', 'УАЗ']</div>
         </div>
 
-        <!-- 11 (Метод clear) -->
+        <!-- 11 -->
         <div class="theory-card">
             <h2>🗑️ Удаление: метод clear()</h2>
             <p>Метод <code>clear()</code> удаляет <b>все</b> элементы из списка, оставляя его пустым.</p>
@@ -343,6 +343,42 @@ text = "-".join(['a', 'b', 'c'])
 list2 = list1.copy()
 list1.clear() 
 # list1 = [], list2 = [1, 2, 3]</div>
+        </div>
+
+        <!-- 18 (Твой пример с корзиной, но без меню) -->
+        <div class="theory-card">
+            <h2>🛒 Практический пример: Корзина покупок</h2>
+            <p>Давайте посмотрим, как работают списки в реальной задаче. У нас есть два списка: для названий товаров и для их цен.</p>
+            
+            <div class="code-block">shopping_list = []
+price_list = []
+
+# 1. Добавляем товары
+shopping_list.append('Хлеб')
+price_list.append(50.0)
+
+shopping_list.append('Молоко')
+price_list.append(80.5)
+
+# 2. Выводим список с ценами
+for index, product in enumerate(shopping_list):
+    print(f"Товар: {product}, Цена: {price_list[index]} руб.")
+
+# 3. Удаляем товар
+product_delete = 'Хлеб'
+try:
+    index_delete = shopping_list.index(product_delete)
+    del shopping_list[index_delete]
+    del price_list[index_delete]
+    print(f"Товар '{product_delete}' успешно удален.")
+except ValueError:
+    print(f"Товара '{product_delete}' нет в списке.")</div>
+            
+            <div class="console-output" style="background-color: rgba(0,0,0,0.05); border-left: 4px solid #4169E1; padding: 15px; font-family: 'Consolas', monospace; font-size: 16px; border-radius: 0 8px 8px 0; margin-top: 15px; color: #333;">
+                Товар: Хлеб, Цена: 50.0 руб.<br>
+                Товар: Молоко, Цена: 80.5 руб.<br>
+                Товар 'Хлеб' успешно удален.
+            </div>
         </div>
 
         <!-- Финальная карточка -->
