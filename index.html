@@ -603,6 +603,41 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
                 <button onclick="checkTask15()">Проверить код</button>
                 <div class="result-box" id="resTask15"></div>
             </div>
+
+            <!-- Задача 16 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 16.</b> Пользователь ввёл ФИО <code>'иванов иван'</code>. Напишите метод, который сделает первую букву каждого слова заглавной.</p>
+                <div class="code-block">user_name = 'иванов иван'
+print(user_name.<input type="text" id="task16Input" class="blank-input" placeholder="..." style="width: 120px;">())</div>
+                <button onclick="checkTask16()">Проверить код</button>
+                <div class="result-box" id="resTask16"></div>
+            </div>
+
+            <!-- Задача 17 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 17.</b> Статус пользователя хранится как <code>'гость'</code>. Нужно вывести его в верхнем регистре: <code>'ГОСТЬ'</code>. Впишите нужный метод.</p>
+                <div class="code-block">status = 'гость'
+print(status.<input type="text" id="task17Input" class="blank-input" placeholder="..." style="width: 120px;">())</div>
+                <button onclick="checkTask17()">Проверить код</button>
+                <div class="result-box" id="resTask17"></div>
+            </div>
+
+            <!-- Задача 18 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 18.</b> Поиск не находит товар, потому что пользователь ввёл <code>'ноутбук'</code>, а в каталоге он записан как <code>'Ноутбук'</code>. Впишите метод, который приведёт запрос к нижнему регистру.</p>
+                <div class="code-block">products = ['Смартфон', 'Ноутбук', 'Наушники']
+search_query = 'ноутбук'
+
+normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="..." style="width: 120px;">()
+normalized_products = [p.lower() for p in products]
+
+if normalized_query in normalized_products:
+    print('Товар найден')
+else:
+    print('Товар не найден')</div>
+                <button onclick="checkTask18()">Проверить код</button>
+                <div class="result-box" id="resTask18"></div>
+            </div>
         </div> <!-- Закрытие блока "Большая проверка" -->
 
                   <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
@@ -753,6 +788,34 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
                 showResult('resTask15', `>>> Верно! []`);
             } else {
                 showResult('resTask15', `Ошибка. Для полной очистки используется метод clear().`, true);
+            }
+        }
+
+        // --- НОВЫЕ ЗАДАЧИ (16-18) ---
+        function checkTask16() {
+            const val = document.getElementById('task16Input').value.trim().toLowerCase();
+            if (val === 'title') {
+                showResult('resTask16', `>>> Верно! 'Иванов Иван'`);
+            } else {
+                showResult('resTask16', `Ошибка. Для заглавной первой буквы каждого слова используется title().`, true);
+            }
+        }
+
+        function checkTask17() {
+            const val = document.getElementById('task17Input').value.trim().toLowerCase();
+            if (val === 'upper') {
+                showResult('resTask17', `>>> Верно! 'ГОСТЬ'`);
+            } else {
+                showResult('resTask17', `Ошибка. Для перевода всей строки в верхний регистр используется upper().`, true);
+            }
+        }
+
+        function checkTask18() {
+            const val = document.getElementById('task18Input').value.trim().toLowerCase();
+            if (val === 'lower') {
+                showResult('resTask18', `>>> Верно! Товар найден`);
+            } else {
+                showResult('resTask18', `Ошибка. Для приведения к нижнему регистру используется lower().`, true);
             }
         }
 
