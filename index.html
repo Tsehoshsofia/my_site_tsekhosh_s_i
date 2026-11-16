@@ -1240,7 +1240,7 @@ plt.show()</div>
             updateVizDisplay();
         }
 
-          function drawChart(type) {
+             function drawChart(type) {
         if (vizNames.length === 0) {
             alert("Сначала добавьте хотя бы один товар!");
             return;
@@ -1281,26 +1281,10 @@ plt.show()</div>
                 animation: { duration: 500 },
                 plugins: {
                     datalabels: {
-                        display: true,
-                        align: 'top',
-                        anchor: 'end',
-                        color: '#000000',
-                        backgroundColor: 'rgba(255, 255, 255, 0.85)', 
-                        borderRadius: 4,
-                        padding: 4,
-                        font: { 
-                            family: 'Times New Roman', 
-                            size: 15,
-                            weight: 'bold' 
-                        },
-                        // ИЗМЕНЕНИЕ 1: Убрали название товара, оставили только цену над столбцом
-                        formatter: function(value) {
-                            return value + ' руб.';
-                        }
+                        display: false // <--- ОТКЛЮЧАЕМ ПОДПИСИ НАД СТОЛБЦАМИ
                     },
                     title: {
                         display: true,
-                        // ИЗМЕНЕНИЕ 2: Поменяли "странную" подпись
                         text: 'Стоимость товаров',
                         color: '#000000',
                         font: { family: 'Times New Roman', size: 22, weight: 'bold' },
@@ -1336,7 +1320,6 @@ plt.show()</div>
                             font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
                         },
                         ticks: {
-                            // ИЗМЕНЕНИЕ 3: Возвращаем названия товаров на ось X
                             display: true,
                             maxRotation: 0, 
                             minRotation: 0,
