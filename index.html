@@ -606,25 +606,25 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
 
             <!-- Задача 16 (ОБНОВЛЕННАЯ) -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первую букву имени заглавной и посчитать количество клиентов.</p>
+                <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первые буквы имен заглавными и посчитать общее количество клиентов.</p>
                 
                 <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px; font-weight: bold;">Введите ФИО клиента:</label>
-                    <input type="text" id="task16NameInput" class="blank-input" placeholder="напр. иванов иван" style="width: 250px; font-size: 16px; padding: 5px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите клиентов (через запятую):</label>
+                    <input type="text" id="task16NamesInput" class="blank-input" placeholder="напр. иванов иван, петрова мария" style="width: 350px; font-size: 16px; padding: 5px;">
                 </div>
 
-                <!-- Блок кода -->
-                <div class="code-block">clients = []
-clients.append('<span id="task16NameDisplay" style="color: #4169E1;">иванов иван</span>')
+                <div class="code-block"># Ввод клиентов (каждое имя через запятую)
+raw_input = '<span id="task16NamesDisplay" style="color: #4169E1;">иванов иван, петрова мария</span>'
+clients = [name.strip() for name in raw_input.split(',')]
 
-# Делаем первую букву заглавной
-formatted_name = clients[0].<input type="text" id="task16InputMethod" class="blank-input" placeholder="метод" style="width: 100px;">()
+# Делаем первую букву заглавной для всех
+formatted_names = [c.<input type="text" id="task16InputMethod" class="blank-input" placeholder="метод" style="width: 80px;">() for c in clients]
 
-# Считаем количество клиентов
-count = <input type="text" id="task16InputCount" class="blank-input" placeholder="функция" style="width: 100px;">(clients)
+# Считаем количество
+count = <input type="text" id="task16InputCount" class="blank-input" placeholder="функция" style="width: 80px;">(clients)
 
-print(f"Клиент: {formatted_name}")
-print(f"Всего клиентов: {count}")</div>
+print("Клиенты:", formatted_names)
+print("Всего клиентов:", count)</div>
                 
                 <button onclick="checkTask16()">Проверить код</button>
                 <div class="result-box" id="resTask16"></div>
@@ -820,28 +820,39 @@ else:
 
         // --- НОВЫЕ ЗАДАЧИ (16-18) ---
         
-        // Живое обновление для задачи 16
-        document.getElementById('task16NameInput').addEventListener('input', function() {
-            const name = this.value.trim() || 'иванов иван';
-            document.getElementById('task16NameDisplay').textContent = name;
+        // Живое обновление для задачи 16 (вывод в коде)
+        document.getElementById('task16NamesInput').addEventListener('input', function() {
+            const names = this.value.trim() || 'иванов иван, петрова мария';
+            document.getElementById('task16NamesDisplay').textContent = names;
         });
 
         function checkTask16() {
             const method = document.getElementById('task16InputMethod').value.trim().toLowerCase();
             const countFunc = document.getElementById('task16InputCount').value.trim().toLowerCase();
-            const nameInput = document.getElementById('task16NameInput').value.trim();
-            const name = nameInput || 'иванов иван';
+            
+            // Получаем введенные имена
+            const rawInput = document.getElementById('task16NamesInput').value.trim() || 'иванов иван, петрова мария';
+            
+            // Разбиваем на массив, обрезаем пробелы и фильтруем пустые строки
+            const clients = rawInput.split(',').map(s => s.trim()).filter(s => s !== '');
             
             let isMethodCorrect = (method === 'title');
             let isCountCorrect = (countFunc === 'len');
             
             if (isMethodCorrect && isCountCorrect) {
-                // Симуляция Python
-                const formattedName = name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-                showResult('resTask16', `>>> Верно!<br>Клиент: ${formattedName}<br>Всего клиентов: 1`);
+                // Симуляция Python: title() для каждого
+                const formattedNames = clients.map(name => 
+                    name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
+                );
+                
+                showResult('resTask16', 
+                    `>>> Верно!<br>
+                    Клиенты: [${formattedNames.map(n => `'${n}'`).join(', ')}]<br>
+                    Всего клиентов: ${clients.length}`
+                );
             } else {
                 let errorMsg = "Ошибка. ";
-                if (!isMethodCorrect) errorMsg += "Для заглавной первой буквы используется title(). ";
+                if (!isMethodCorrect) errorMsg += "Для заглавных букв используется title(). ";
                 if (!isCountCorrect) errorMsg += "Для подсчета количества используется len().";
                 showResult('resTask16', errorMsg, true);
             }
