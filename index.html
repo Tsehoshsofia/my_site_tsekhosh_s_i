@@ -606,7 +606,7 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
 
             <!-- Задача 16 (ОБНОВЛЕННАЯ) -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первые буквы имен заглавными и посчитать общее количество клиентов.</p>
+                <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первые буквы имен заглавными и посчитать <b>общее количество</b> клиентов (для этого используется функция <code>len()</code>).</p>
                 
                 <div style="margin-bottom: 10px;">
                     <label style="font-size: 16px; font-weight: bold;">Введите клиентов (через запятую):</label>
@@ -848,7 +848,7 @@ else:
             } else {
                 let errorMsg = "Ошибка. ";
                 if (!isMethodCorrect) errorMsg += "Для заглавных букв используется title(). ";
-                if (!isCountCorrect) errorMsg += "Для подсчета количества используется len().";
+                if (!isCountCorrect) errorMsg += "Для подсчета ОБЩЕГО количества используется len().";
                 showResult('resTask16', errorMsg, true);
             }
         }
