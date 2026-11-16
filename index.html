@@ -6,6 +6,8 @@
     <title>Теория: Списки в Python</title>
     <!-- ПОДКЛЮЧАЕМ БИБЛИОТЕКУ ДЛЯ ГРАФИКОВ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- ПОДКЛЮЧАЕМ ПЛАГИН ДЛЯ ПОДПИСЕЙ НА ГРАФИКЕ -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
     <style>
         /* 1. БАЗОВЫЕ НАСТРОЙКИ */
         body, html {
@@ -1219,8 +1221,14 @@ plt.show()</div>
                 return;
             }
 
-            vizNames.push(name);
-            vizPrices.push(price);
+            // Проверка на дубликаты: если товар уже есть, обновляем цену
+            const existingIndex = vizNames.indexOf(name);
+            if (existingIndex !== -1) {
+                vizPrices[existingIndex] = price; 
+            } else {
+                vizNames.push(name);
+                vizPrices.push(price);
+            }
             
             nameInput.value = '';
             priceInput.value = '';
@@ -1238,7 +1246,7 @@ plt.show()</div>
             }
         }
 
-               function drawChart(type) {
+        function drawChart(type) {
             if (vizNames.length === 0) {
                 alert("Сначала добавьте хотя бы один товар!");
                 return;
@@ -1252,7 +1260,6 @@ plt.show()</div>
                 myChartInstance.destroy();
             }
 
-            // Настройка цветов
             const isLine = type === 'line';
             
             myChartInstance = new Chart(ctx, {
@@ -1262,29 +1269,54 @@ plt.show()</div>
                     datasets: [{
                         label: 'Цена (руб.)',
                         data: vizPrices,
-                        borderColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.9)', 
-                        backgroundColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.9)', 
-                        borderWidth: isLine ? 2.5 : 1,
-                        pointBackgroundColor: '#1f77b4',
-                        pointRadius: isLine ? 6 : 0, 
+                        borderColor: '#104E8B', // Темно-синий контур
+                        backgroundColor: isLine ? '#104E8B' : '#1E90FF', // Сплошной яркий цвет
+                        borderWidth: isLine ? 3 : 2, 
+                        pointBackgroundColor: '#104E8B',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: isLine ? 7 : 0, 
+                        pointHoverRadius: 9,
                         tension: 0,
                         fill: false
                     }]
                 },
+                plugins: [ChartDataLabels], // Подключаем плагин подписей
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    animation: { duration: 500 },
                     plugins: {
+                        // НАСТРОЙКА ПОДПИСЕЙ ПРЯМО НА СТОЛБЦАХ/ТОЧКАХ
+                        datalabels: {
+                            display: true,
+                            align: 'top',
+                            anchor: 'end',
+                            color: '#000000',
+                            backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                            borderRadius: 4,
+                            padding: 4,
+                            font: { 
+                                family: 'Times New Roman', 
+                                size: 14, 
+                                weight: 'bold' 
+                            },
+                            formatter: function(value, context) {
+                                return context.chart.data.labels[context.dataIndex] + '\n' + value + ' руб.';
+                            }
+                        },
                         title: {
                             display: true,
                             text: 'Цены товаров',
-                            color: '#000000', // Контрастный черный цвет заголовка
-                            font: { family: 'Times New Roman', size: 20, weight: 'bold' }
+                            color: '#000000',
+                            font: { family: 'Times New Roman', size: 22, weight: 'bold' },
+                            padding: { bottom: 15 }
                         },
                         legend: { display: false },
                         tooltip: {
-                            titleFont: { family: 'Times New Roman', size: 14, weight: 'bold' },
-                            bodyFont: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                            backgroundColor: '#333',
+                            titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
+                            bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
                         }
                     },
                     scales: {
@@ -1293,27 +1325,27 @@ plt.show()</div>
                             title: { 
                                 display: true, 
                                 text: 'Цена (руб.)', 
-                                color: '#000000', // Контрастный цвет
-                                font: { family: 'Times New Roman', size: 16, weight: 'bold' } 
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
                             },
                             ticks: {
-                                color: '#000000', // Контрастный цвет цифр
-                                font: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 16, weight: 'bold' }
                             },
-                            grid: { color: '#b0b0b0' } // Сделали сетку темнее и заметнее
+                            grid: { color: '#a0a0a0', lineWidth: 1.5 }
                         },
                         x: {
                             title: { 
                                 display: true, 
                                 text: 'Товары', 
-                                color: '#000000', // Контрастный цвет
-                                font: { family: 'Times New Roman', size: 16, weight: 'bold' } 
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
                             },
                             ticks: {
-                                maxRotation: 45,
-                                minRotation: 45,
-                                color: '#000000', // Контрастный цвет названий товаров
-                                font: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                                maxRotation: 0, // Выравнивание по горизонтали
+                                minRotation: 0,
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 16, weight: 'bold' }
                             },
                             grid: { display: false }
                         }
