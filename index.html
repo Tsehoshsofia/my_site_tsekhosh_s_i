@@ -4,6 +4,8 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Теория: Списки в Python</title>
+    <!-- ПОДКЛЮЧАЕМ БИБЛИОТЕКУ ДЛЯ ГРАФИКОВ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* 1. БАЗОВЫЕ НАСТРОЙКИ */
         body, html {
@@ -25,24 +27,24 @@
         }
 
         /* 3. КОНТЕЙНЕР */
+        .quest-container {
+            position: fixed; 
+            top: 0.5cm; /* Отступ от верхнего края 0.5 см */
+            bottom: 2vh; /* Оставляем небольшой отступ снизу */
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 750px; 
+            max-width: calc(100% - 40px); 
+            max-height: calc(100vh - 0.5cm - 2vh); /* Высота = весь экран минус отступы */
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 25px; 
+            padding-bottom: 20px; 
+            padding-right: 5px;
+        }
         
-    .quest-container {
-        position: fixed; 
-        top: 0.5cm; /* Отступ от верхнего края 0.5 см */
-        bottom: 2vh; /* Оставляем небольшой отступ снизу */
-        left: 50%; 
-        transform: translateX(-50%);
-        width: 750px; 
-        max-width: calc(100% - 40px); 
-        max-height: calc(100vh - 0.5cm - 2vh); /* Высота = весь экран минус отступы */
-        overflow-y: auto; 
-        display: flex; 
-        flex-direction: column; 
-        gap: 25px; 
-        padding-bottom: 20px; 
-        padding-right: 5px;
-    }
-            /* 4. ПЛАШКА */
+        /* 4. ПЛАШКА */
         .theory-card {
             background-color: rgba(255, 255, 255, 0.98); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
@@ -70,7 +72,7 @@
             font-weight: 500; letter-spacing: 0.2px;
         }
 
-     /* 7. КОД */
+        /* 7. КОД */
         code {
             font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
             background-color: rgba(65, 105, 225, 0.12); padding: 4px 8px;
@@ -100,75 +102,76 @@
             font-size: 14px; margin-bottom: 5px; color: #4169E1;
         }
 
-      /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
-.interactive-box {
-    background-color: #F4F9FF; border: 2px dashed #4169E1;
-    border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
-}
+        /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
+        .interactive-box {
+            background-color: #F4F9FF; border: 2px dashed #4169E1;
+            border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
+        }
 
-.interactive-box input, .interactive-box select {
-    font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
-    margin: 5px 2px; 
-    /* Рамка темнее сверху, светлее снизу */
-    border: 2px solid #b0b0b0; 
-    border-top-color: #888; /* Верхняя грань темнее для объема */
-    border-radius: 6px;
-    outline: none; box-sizing: border-box; color: #000; font-weight: bold;
-    
-    /* Внутренняя тень создает эффект углубления */
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
-    
-    /* Мягкий фон, чтобы не сливалось с белым */
-    background-color: #fcfcfc; 
-    transition: all 0.2s ease;
-}
+        .interactive-box input, .interactive-box select {
+            font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
+            margin: 5px 2px; 
+            /* Рамка темнее сверху, светлее снизу */
+            border: 2px solid #b0b0b0; 
+            border-top-color: #888; /* Верхняя грань темнее для объема */
+            border-radius: 6px;
+            outline: none; box-sizing: border-box; color: #000; font-weight: bold;
+            
+            /* Внутренняя тень создает эффект углубления */
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+            
+            /* Мягкий фон, чтобы не сливалось с белым */
+            background-color: #fcfcfc; 
+            transition: all 0.2s ease;
+        }
 
-/* Эффект при клике (фокусе) */
-.interactive-box input:focus, .interactive-box select:focus { 
-    border-color: #4169E1; 
-    border-top-color: #2b4eb5; /* Верхняя грань тоже синеет */
-    background-color: #fff; /* Фон становится чисто белым */
-    
-    /* Усиливаем внутреннюю тень + добавляем легкое свечение вокруг */
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(65, 105, 225, 0.2);
-}
+        /* Эффект при клике (фокусе) */
+        .interactive-box input:focus, .interactive-box select:focus { 
+            border-color: #4169E1; 
+            border-top-color: #2b4eb5; /* Верхняя грань тоже синеет */
+            background-color: #fff; /* Фон становится чисто белым */
+            
+            /* Усиливаем внутреннюю тень + добавляем легкое свечение вокруг */
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(65, 105, 225, 0.2);
+        }
 
-/* ОБЪЕМНЫЕ КНОПКИ */
-.interactive-box button {
-    font-family: "Times New Roman", Times, serif; 
-    font-size: 16px;
-    font-weight: bold; 
-    color: white;
-    background: linear-gradient(180deg, #5A7BFF 0%, #4169E1 100%);
-    border: none; 
-    border-radius: 6px; 
-    padding: 9px 15px;
-    margin: 5px 2px; 
-    cursor: pointer; 
-    box-shadow: 0 4px 0 #2b4eb5, 0 4px 6px rgba(0,0,0,0.15);
-    transition: all 0.1s ease; 
-    position: relative;
-    top: 0;
-}
+        /* ОБЪЕМНЫЕ КНОПКИ */
+        .interactive-box button {
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 16px;
+            font-weight: bold; 
+            color: white;
+            background: linear-gradient(180deg, #5A7BFF 0%, #4169E1 100%);
+            border: none; 
+            border-radius: 6px; 
+            padding: 9px 15px;
+            margin: 5px 2px; 
+            cursor: pointer; 
+            box-shadow: 0 4px 0 #2b4eb5, 0 4px 6px rgba(0,0,0,0.15);
+            transition: all 0.1s ease; 
+            position: relative;
+            top: 0;
+        }
 
-/* Эффект при наведении */
-.interactive-box button:hover { 
-    background: linear-gradient(180deg, #6B88FF 0%, #5279E1 100%);
-    box-shadow: 0 4px 0 #2b4eb5, 0 6px 10px rgba(0,0,0,0.2);
-}
+        /* Эффект при наведении */
+        .interactive-box button:hover { 
+            background: linear-gradient(180deg, #6B88FF 0%, #5279E1 100%);
+            box-shadow: 0 4px 0 #2b4eb5, 0 6px 10px rgba(0,0,0,0.2);
+        }
 
-/* Эффект при нажатии (кнопка вдавливается) */
-.interactive-box button:active { 
-    top: 4px; /* Сдвиг вниз */
-    box-shadow: 0 0 0 #2b4eb5, 0 1px 2px rgba(0,0,0,0.2); /* Тень исчезает */
-}
+        /* Эффект при нажатии (кнопка вдавливается) */
+        .interactive-box button:active { 
+            top: 4px; /* Сдвиг вниз */
+            box-shadow: 0 0 0 #2b4eb5, 0 1px 2px rgba(0,0,0,0.2); /* Тень исчезает */
+        }
 
-.result-box {
-    margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
-    text-align: left; background-color: #fff; padding: 10px;
-    border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
-    font-weight: bold;
-}
+        .result-box {
+            margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
+            text-align: left; background-color: #fff; padding: 10px;
+            border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
+            font-weight: bold;
+        }
+        
         /* 10. КНОПКА ПЕРЕХОДА */
         .btn {
             display: block; width: 100%; max-width: 500px;
@@ -681,7 +684,7 @@ else:
             </div>
         </div> <!-- Закрытие блока "Большая проверка" -->
 
-                  <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
+        <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
         <div class="theory-card" style="text-align: center; padding-bottom: 30px; margin-bottom: 20px; position: relative; overflow: visible;">
             <h2 style="justify-content: center; border-bottom: none; font-size: 28px; margin-bottom: 15px; z-index: 2; position: relative;">Теория пройдена!</h2>
             
@@ -717,6 +720,53 @@ else:
                 </svg>
             </div>
         </div>
+
+        <!-- НОВАЯ КАРТОЧКА: ВИЗУАЛИЗАЦИЯ (ГРАФИКИ) -->
+        <div class="theory-card">
+            <h2>📊 Зачем нужны списки? Визуализация!</h2>
+            <p>Представьте, что вы собрали данные о покупках в два списка: названия и цены. С помощью библиотеки <code>matplotlib</code> в Python можно наглядно показать эти данные. Давайте попробуем!</p>
+            
+            <div class="code-block"># Пример кода в Python
+import matplotlib.pyplot as plt
+
+shopping_list = ['молоко', 'соль', 'кефир']
+price_list = [88, 23, 78]
+
+# Построение линейного графика
+plt.plot(shopping_list, price_list, marker='o', linewidth=2)
+plt.title("Цены товаров")
+plt.xlabel("Товары")
+plt.ylabel("Цена (руб.)")
+plt.show()
+
+# Построение гистограммы (столбцов)
+plt.bar(shopping_list, price_list)
+plt.show()</div>
+
+            <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (заполните списки и постройте графики):</p>
+            <div class="interactive-box">
+                <input type="text" id="vizProdName" placeholder="Название товара (напр. Хлеб)">
+                <input type="number" step="0.01" id="vizProdPrice" placeholder="Цена (напр. 50)">
+                <button onclick="addVizItem()">Добавить товар</button>
+                <button onclick="clearViz()" style="background-color: #ccc; color: #333;">Очистить</button>
+                
+                <div class="result-box" id="vizResultBox" style="margin-bottom: 15px;">
+                    <strong>Список товаров (shopping_list):</strong> <span id="vizListDisplay">[]</span><br>
+                    <strong>Список цен (price_list):</strong> <span id="vizPriceDisplay">[]</span>
+                </div>
+
+                <div style="margin: 10px 0;">
+                    <button onclick="drawChart('line')" style="background: #4169E1;">Построить линейный график (plt.plot)</button>
+                    <button onclick="drawChart('bar')" style="background: #4169E1;">Построить гистограмму (plt.bar)</button>
+                </div>
+
+                <!-- Контейнер для графика -->
+                <div style="position: relative; height: 400px; width: 100%; background: white; border-radius: 8px; padding: 10px; box-sizing: border-box; display: none; border: 1px solid #ddd;" id="chartContainer">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+
     </div> 
     <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
     <script>
@@ -1141,6 +1191,115 @@ else:
             if (displayTotal % 1 === 0) displayTotal = displayTotal.toFixed(0);
             else displayTotal = displayTotal.toFixed(2).replace(/\.?0+$/, "");
             cartTotal.innerHTML = `Итого: ${displayTotal} руб.`;
+        }
+
+        // --- ВИЗУАЛИЗАЦИЯ ДАННЫХ (ГРАФИКИ) ---
+        let vizNames = [];
+        let vizPrices = [];
+        let myChartInstance = null;
+
+        function updateVizDisplay() {
+            const listDisplay = document.getElementById('vizListDisplay');
+            const priceDisplay = document.getElementById('vizPriceDisplay');
+            const resBox = document.getElementById('vizResultBox');
+            
+            resBox.style.display = 'block';
+            listDisplay.textContent = `[${vizNames.map(n => `'${n}'`).join(', ')}]`;
+            priceDisplay.textContent = `[${vizPrices.join(', ')}]`;
+        }
+
+        function addVizItem() {
+            const nameInput = document.getElementById('vizProdName');
+            const priceInput = document.getElementById('vizProdPrice');
+            const name = nameInput.value.trim();
+            const price = parseFloat(priceInput.value);
+
+            if (!name || isNaN(price)) {
+                alert("Пожалуйста, введите корректное название и цену!");
+                return;
+            }
+
+            vizNames.push(name);
+            vizPrices.push(price);
+            
+            nameInput.value = '';
+            priceInput.value = '';
+            updateVizDisplay();
+        }
+
+        function clearViz() {
+            vizNames = [];
+            vizPrices = [];
+            document.getElementById('vizResultBox').style.display = 'none';
+            document.getElementById('chartContainer').style.display = 'none';
+            if (myChartInstance) {
+                myChartInstance.destroy();
+                myChartInstance = null;
+            }
+        }
+
+        function drawChart(type) {
+            if (vizNames.length === 0) {
+                alert("Сначала добавьте хотя бы один товар!");
+                return;
+            }
+
+            document.getElementById('chartContainer').style.display = 'block';
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            // Уничтожаем старый график перед созданием нового
+            if (myChartInstance) {
+                myChartInstance.destroy();
+            }
+
+            // Настройка цветов
+            const isLine = type === 'line';
+            
+            myChartInstance = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: vizNames,
+                    datasets: [{
+                        label: 'Цена (руб.)',
+                        data: vizPrices,
+                        borderColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.8)', // Синий как в matplotlib
+                        backgroundColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.8)', // Синий для гистограммы
+                        borderWidth: isLine ? 2 : 1,
+                        pointBackgroundColor: '#1f77b4',
+                        pointRadius: isLine ? 5 : 0, // Точки только для линии
+                        tension: 0, // Прямые линии
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Цены товаров',
+                            font: { family: 'Times New Roman', size: 18, weight: 'bold' }
+                        },
+                        legend: { display: false } // Скрываем легенду для чистоты
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { display: true, text: 'Цена (руб.)', font: { family: 'Times New Roman', size: 14, weight: 'bold' } },
+                            grid: { color: '#e0e0e0' }
+                        },
+                        x: {
+                            title: { display: true, text: 'Товары', font: { family: 'Times New Roman', size: 14, weight: 'bold' } },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45,
+                                font: { family: 'Times New Roman', size: 12 }
+                            },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
         }
     </script>
 </body>
