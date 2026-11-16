@@ -606,15 +606,25 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
 
             <!-- Задача 16 (ОБНОВЛЕННАЯ) -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 16.</b> Напишите метод, который сделает первую букву каждого слова заглавной.</p>
+                <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первую букву имени заглавной и посчитать количество клиентов.</p>
                 
                 <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px; font-weight: bold;">Введите ФИО:</label>
-                    <input type="text" id="task16NameInput" class="blank-input" placeholder="напр. иванов иван" style="width: 200px; font-size: 16px; padding: 5px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите ФИО клиента:</label>
+                    <input type="text" id="task16NameInput" class="blank-input" placeholder="напр. иванов иван" style="width: 250px; font-size: 16px; padding: 5px;">
                 </div>
 
-                <div class="code-block">user_name = '<span id="task16NameDisplay" style="color: #4169E1;">иванов иван</span>'
-print(user_name.<input type="text" id="task16Input" class="blank-input" placeholder="метод" style="width: 100px;">())</div>
+                <!-- Блок кода -->
+                <div class="code-block">clients = []
+clients.append('<span id="task16NameDisplay" style="color: #4169E1;">иванов иван</span>')
+
+# Делаем первую букву заглавной
+formatted_name = clients[0].<input type="text" id="task16InputMethod" class="blank-input" placeholder="метод" style="width: 100px;">()
+
+# Считаем количество клиентов
+count = <input type="text" id="task16InputCount" class="blank-input" placeholder="функция" style="width: 100px;">(clients)
+
+print(f"Клиент: {formatted_name}")
+print(f"Всего клиентов: {count}")</div>
                 
                 <button onclick="checkTask16()">Проверить код</button>
                 <div class="result-box" id="resTask16"></div>
@@ -817,15 +827,23 @@ else:
         });
 
         function checkTask16() {
-            const method = document.getElementById('task16Input').value.trim().toLowerCase();
+            const method = document.getElementById('task16InputMethod').value.trim().toLowerCase();
+            const countFunc = document.getElementById('task16InputCount').value.trim().toLowerCase();
             const nameInput = document.getElementById('task16NameInput').value.trim();
             const name = nameInput || 'иванов иван';
             
-            if (method === 'title') {
-                const result = name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-                showResult('resTask16', `>>> Верно! Результат: '${result}'`);
+            let isMethodCorrect = (method === 'title');
+            let isCountCorrect = (countFunc === 'len');
+            
+            if (isMethodCorrect && isCountCorrect) {
+                // Симуляция Python
+                const formattedName = name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+                showResult('resTask16', `>>> Верно!<br>Клиент: ${formattedName}<br>Всего клиентов: 1`);
             } else {
-                showResult('resTask16', `Ошибка. Для заглавной первой буквы каждого слова используется title().`, true);
+                let errorMsg = "Ошибка. ";
+                if (!isMethodCorrect) errorMsg += "Для заглавной первой буквы используется title(). ";
+                if (!isCountCorrect) errorMsg += "Для подсчета количества используется len().";
+                showResult('resTask16', errorMsg, true);
             }
         }
 
