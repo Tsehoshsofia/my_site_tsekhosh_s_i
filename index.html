@@ -1240,108 +1240,115 @@ plt.show()</div>
             updateVizDisplay();
         }
 
-        function drawChart(type) {
-            if (vizNames.length === 0) {
-                alert("Сначала добавьте хотя бы один товар!");
-                return;
-            }
+          function drawChart(type) {
+        if (vizNames.length === 0) {
+            alert("Сначала добавьте хотя бы один товар!");
+            return;
+        }
 
-            document.getElementById('chartContainer').style.display = 'block';
-            const ctx = document.getElementById('myChart').getContext('2d');
+        document.getElementById('chartContainer').style.display = 'block';
+        const ctx = document.getElementById('myChart').getContext('2d');
 
-            if (myChartInstance) {
-                myChartInstance.destroy();
-            }
+        if (myChartInstance) {
+            myChartInstance.destroy();
+        }
 
-            const isLine = type === 'line';
-            
-            myChartInstance = new Chart(ctx, {
-                type: type,
-                data: {
-                    labels: vizNames,
-                    datasets: [{
-                        label: 'Цена (руб.)',
-                        data: vizPrices,
-                        borderColor: '#104E8B', 
-                        backgroundColor: isLine ? '#104E8B' : '#1E90FF', 
-                        borderWidth: isLine ? 3 : 2, 
-                        pointBackgroundColor: '#104E8B',
-                        pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: isLine ? 7 : 0, 
-                        pointHoverRadius: 9,
-                        tension: 0,
-                        fill: false
-                    }]
-                },
-                plugins: [ChartDataLabels],
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: { duration: 500 },
-                    plugins: {
-                        datalabels: {
-                            display: true,
-                            align: 'top',
-                            anchor: 'end',
-                            color: '#000000',
-                            backgroundColor: 'rgba(255, 255, 255, 0.85)', 
-                            borderRadius: 4,
-                            padding: 4,
-                            font: { 
-                                family: 'Times New Roman', 
-                                size: 15,
-                                weight: 'bold' 
-                            },
-                            formatter: function(value, context) {
-                                return context.chart.data.labels[context.dataIndex] + '\n' + value + ' руб.';
-                            }
+        const isLine = type === 'line';
+        
+        myChartInstance = new Chart(ctx, {
+            type: type,
+            data: {
+                labels: vizNames,
+                datasets: [{
+                    label: 'Цена (руб.)',
+                    data: vizPrices,
+                    borderColor: '#104E8B', 
+                    backgroundColor: isLine ? '#104E8B' : '#1E90FF', 
+                    borderWidth: isLine ? 3 : 2, 
+                    pointBackgroundColor: '#104E8B',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: isLine ? 7 : 0, 
+                    pointHoverRadius: 9,
+                    tension: 0,
+                    fill: false
+                }]
+            },
+            plugins: [ChartDataLabels],
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { duration: 500 },
+                plugins: {
+                    datalabels: {
+                        display: true,
+                        align: 'top',
+                        anchor: 'end',
+                        color: '#000000',
+                        backgroundColor: 'rgba(255, 255, 255, 0.85)', 
+                        borderRadius: 4,
+                        padding: 4,
+                        font: { 
+                            family: 'Times New Roman', 
+                            size: 15,
+                            weight: 'bold' 
                         },
-                        title: {
-                            display: true,
-                            text: 'Цены товаров',
-                            color: '#000000',
-                            font: { family: 'Times New Roman', size: 22, weight: 'bold' },
-                            padding: { bottom: 15 }
-                        },
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#333',
-                            titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
-                            bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                        // ИЗМЕНЕНИЕ 1: Убрали название товара, оставили только цену над столбцом
+                        formatter: function(value) {
+                            return value + ' руб.';
                         }
                     },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: { 
-                                display: true, 
-                                text: 'Цена (руб.)', 
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
-                            },
-                            ticks: {
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 16, weight: 'bold' }
-                            },
-                            grid: { color: '#a0a0a0', lineWidth: 1.5 }
+                    title: {
+                        display: true,
+                        // ИЗМЕНЕНИЕ 2: Поменяли "странную" подпись
+                        text: 'Стоимость товаров',
+                        color: '#000000',
+                        font: { family: 'Times New Roman', size: 22, weight: 'bold' },
+                        padding: { bottom: 15 }
+                    },
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#333',
+                        titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
+                        bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { 
+                            display: true, 
+                            text: 'Цена (руб.)', 
+                            color: '#000000',
+                            font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
                         },
-                        x: {
-                            title: { 
-                                display: true, 
-                                text: 'Товары', 
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
-                            },
-                            ticks: {
-                                display: false // Скрываем названия под столбцами
-                            },
-                            grid: { display: false }
-                        }
+                        ticks: {
+                            color: '#000000',
+                            font: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                        },
+                        grid: { color: '#a0a0a0', lineWidth: 1.5 }
+                    },
+                    x: {
+                        title: { 
+                            display: true, 
+                            text: 'Товары', 
+                            color: '#000000',
+                            font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                        },
+                        ticks: {
+                            // ИЗМЕНЕНИЕ 3: Возвращаем названия товаров на ось X
+                            display: true,
+                            maxRotation: 0, 
+                            minRotation: 0,
+                            color: '#000000',
+                            font: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                        },
+                        grid: { display: false }
                     }
                 }
-            });
-        }
+            }
+        });
+    }
     </script>
 </body>
 </html>
