@@ -1238,7 +1238,7 @@ plt.show()</div>
             }
         }
 
-        function drawChart(type) {
+               function drawChart(type) {
             if (vizNames.length === 0) {
                 alert("Сначала добавьте хотя бы один товар!");
                 return;
@@ -1262,12 +1262,12 @@ plt.show()</div>
                     datasets: [{
                         label: 'Цена (руб.)',
                         data: vizPrices,
-                        borderColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.8)', // Синий как в matplotlib
-                        backgroundColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.8)', // Синий для гистограммы
-                        borderWidth: isLine ? 2 : 1,
+                        borderColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.9)', 
+                        backgroundColor: isLine ? '#1f77b4' : 'rgba(31, 119, 180, 0.9)', 
+                        borderWidth: isLine ? 2.5 : 1,
                         pointBackgroundColor: '#1f77b4',
-                        pointRadius: isLine ? 5 : 0, // Точки только для линии
-                        tension: 0, // Прямые линии
+                        pointRadius: isLine ? 6 : 0, 
+                        tension: 0,
                         fill: false
                     }]
                 },
@@ -1278,22 +1278,42 @@ plt.show()</div>
                         title: {
                             display: true,
                             text: 'Цены товаров',
-                            font: { family: 'Times New Roman', size: 18, weight: 'bold' }
+                            color: '#000000', // Контрастный черный цвет заголовка
+                            font: { family: 'Times New Roman', size: 20, weight: 'bold' }
                         },
-                        legend: { display: false } // Скрываем легенду для чистоты
+                        legend: { display: false },
+                        tooltip: {
+                            titleFont: { family: 'Times New Roman', size: 14, weight: 'bold' },
+                            bodyFont: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                        }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: { display: true, text: 'Цена (руб.)', font: { family: 'Times New Roman', size: 14, weight: 'bold' } },
-                            grid: { color: '#e0e0e0' }
+                            title: { 
+                                display: true, 
+                                text: 'Цена (руб.)', 
+                                color: '#000000', // Контрастный цвет
+                                font: { family: 'Times New Roman', size: 16, weight: 'bold' } 
+                            },
+                            ticks: {
+                                color: '#000000', // Контрастный цвет цифр
+                                font: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                            },
+                            grid: { color: '#b0b0b0' } // Сделали сетку темнее и заметнее
                         },
                         x: {
-                            title: { display: true, text: 'Товары', font: { family: 'Times New Roman', size: 14, weight: 'bold' } },
+                            title: { 
+                                display: true, 
+                                text: 'Товары', 
+                                color: '#000000', // Контрастный цвет
+                                font: { family: 'Times New Roman', size: 16, weight: 'bold' } 
+                            },
                             ticks: {
                                 maxRotation: 45,
                                 minRotation: 45,
-                                font: { family: 'Times New Roman', size: 12 }
+                                color: '#000000', // Контрастный цвет названий товаров
+                                font: { family: 'Times New Roman', size: 14, weight: 'bold' }
                             },
                             grid: { display: false }
                         }
