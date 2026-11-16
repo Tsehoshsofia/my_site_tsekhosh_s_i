@@ -618,7 +618,7 @@ raw_input = '<span id="task16NamesDisplay" style="color: #4169E1;">иванов 
 clients = [name.strip() for name in raw_input.split(',')]
 
 # Делаем первую букву заглавной для всех
-formatted_names = [c.<input type="text" id="task16InputMethod" class="blank-input" placeholder="метод" style="width: 80px;">() for c in clients]
+formatted_names = [client.<input type="text" id="task16InputMethod" class="blank-input" placeholder="метод" style="width: 80px;">() for client in clients]
 
 # Считаем количество
 count = <input type="text" id="task16InputCount" class="blank-input" placeholder="функция" style="width: 80px;">(clients)
@@ -650,15 +650,10 @@ print(status.<input type="text" id="task17Input" class="blank-input" placeholder
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
                 <p><b>Задача 18.</b> Поиск не находит товар, потому что регистр не совпадает. Впишите метод, который приведёт запрос к нижнему регистру.</p>
                 
-                <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px; font-weight: bold;">Введите поисковый запрос:</label>
-                    <input type="text" id="task18QueryInput" class="blank-input" placeholder="напр. ноутбук" style="width: 200px; font-size: 16px; padding: 5px;">
-                </div>
-
                 <div class="code-block">products = ['Смартфон', 'Ноутбук', 'Наушники']
-search_query = '<span id="task18QueryDisplay" style="color: #4169E1;">ноутбук</span>'
+search_query = 'ноутбук'
 
-normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="..." style="width: 120px;">()
+normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="метод" style="width: 100px;">()
 normalized_products = [p.lower() for p in products]
 
 if normalized_query in normalized_products:
@@ -877,26 +872,12 @@ else:
             }
         }
 
-        // Живое обновление для задачи 18
-        document.getElementById('task18QueryInput').addEventListener('input', function() {
-            const query = this.value.trim() || 'ноутбук';
-            document.getElementById('task18QueryDisplay').textContent = query;
-        });
-
+        // Задача 18 (без поля ввода запроса)
         function checkTask18() {
             const method = document.getElementById('task18Input').value.trim().toLowerCase();
-            const queryInput = document.getElementById('task18QueryInput').value.trim();
-            const query = queryInput || 'ноутбук';
-            const products = ['Смартфон', 'Ноутбук', 'Наушники'];
             
             if (method === 'lower') {
-                const normalizedQuery = query.toLowerCase();
-                const normalizedProducts = products.map(p => p.toLowerCase());
-                if (normalizedProducts.includes(normalizedQuery)) {
-                    showResult('resTask18', `>>> Верно! Товар найден`);
-                } else {
-                    showResult('resTask18', `>>> Верно! Но товара '${query}' нет в каталоге.`, false);
-                }
+                showResult('resTask18', `>>> Верно! Товар найден`);
             } else {
                 showResult('resTask18', `Ошибка. Для приведения к нижнему регистру используется lower().`, true);
             }
