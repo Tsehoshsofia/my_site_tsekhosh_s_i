@@ -654,7 +654,7 @@ print(status.<input type="text" id="task17Input" class="blank-input" placeholder
 search_query = 'ноутбук'
 
 normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="метод" style="width: 100px;">()
-normalized_products = [p.lower() for p in products]
+normalized_products = [p.strip().capitalize() for p in products]
 
 if normalized_query in normalized_products:
     print('Товар найден')
