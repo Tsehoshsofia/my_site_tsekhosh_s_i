@@ -604,29 +604,49 @@ cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." s
                 <div class="result-box" id="resTask15"></div>
             </div>
 
-            <!-- Задача 16 -->
+            <!-- Задача 16 (ОБНОВЛЕННАЯ) -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 16.</b> Пользователь ввёл ФИО <code>'иванов иван'</code>. Напишите метод, который сделает первую букву каждого слова заглавной.</p>
-                <div class="code-block">user_name = 'иванов иван'
+                <p><b>Задача 16.</b> Напишите метод, который сделает первую букву каждого слова заглавной.</p>
+                
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите ФИО:</label>
+                    <input type="text" id="task16NameInput" class="blank-input" placeholder="напр. иванов иван" style="width: 200px; font-size: 16px; padding: 5px;">
+                </div>
+
+                <div class="code-block">user_name = '<span id="task16NameDisplay" style="color: #4169E1;">иванов иван</span>'
 print(user_name.<input type="text" id="task16Input" class="blank-input" placeholder="метод" style="width: 100px;">())</div>
+                
                 <button onclick="checkTask16()">Проверить код</button>
                 <div class="result-box" id="resTask16"></div>
             </div>
 
-            <!-- Задача 17 -->
+            <!-- Задача 17 (ОБНОВЛЕННАЯ) -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 17.</b> Статус пользователя хранится как <code>'гость'</code>. Нужно вывести его в верхнем регистре: <code>'ГОСТЬ'</code>. Впишите нужный метод.</p>
-                <div class="code-block">status = 'гость'
+                <p><b>Задача 17.</b> Нужно вывести статус в верхнем регистре.</p>
+                
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите статус:</label>
+                    <input type="text" id="task17StatusInput" class="blank-input" placeholder="напр. гость" style="width: 200px; font-size: 16px; padding: 5px;">
+                </div>
+
+                <div class="code-block">status = '<span id="task17StatusDisplay" style="color: #4169E1;">гость</span>'
 print(status.<input type="text" id="task17Input" class="blank-input" placeholder="..." style="width: 120px;">())</div>
+                
                 <button onclick="checkTask17()">Проверить код</button>
                 <div class="result-box" id="resTask17"></div>
             </div>
 
-            <!-- Задача 18 -->
+            <!-- Задача 18 (ОБНОВЛЕННАЯ) -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 18.</b> Поиск не находит товар, потому что пользователь ввёл <code>'ноутбук'</code>, а в каталоге он записан как <code>'Ноутбук'</code>. Впишите метод, который приведёт запрос к нижнему регистру.</p>
+                <p><b>Задача 18.</b> Поиск не находит товар, потому что регистр не совпадает. Впишите метод, который приведёт запрос к нижнему регистру.</p>
+                
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите поисковый запрос:</label>
+                    <input type="text" id="task18QueryInput" class="blank-input" placeholder="напр. ноутбук" style="width: 200px; font-size: 16px; padding: 5px;">
+                </div>
+
                 <div class="code-block">products = ['Смартфон', 'Ноутбук', 'Наушники']
-search_query = 'ноутбук'
+search_query = '<span id="task18QueryDisplay" style="color: #4169E1;">ноутбук</span>'
 
 normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="..." style="width: 120px;">()
 normalized_products = [p.lower() for p in products]
@@ -635,6 +655,7 @@ if normalized_query in normalized_products:
     print('Товар найден')
 else:
     print('Товар не найден')</div>
+                
                 <button onclick="checkTask18()">Проверить код</button>
                 <div class="result-box" id="resTask18"></div>
             </div>
@@ -648,22 +669,18 @@ else:
                 Готов проверить знания на практике
             </p>
             
-            <!-- Новая цельная SVG-стрелка с градиентом -->
             <div style="display: flex; justify-content: center; margin-top: 5px;">
                 <svg width="90" height="110" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <defs>
-                        <!-- Градиент для создания объема (от светлого к темному) -->
                         <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                             <stop offset="0%" stop-color="#6CB4FF" />
                             <stop offset="100%" stop-color="#2B6CB0" />
                         </linearGradient>
-                        <!-- Легкая тень, чтобы стрелка выделялась на белом фоне -->
                         <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
                             <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.15"/>
                         </filter>
                     </defs>
                     
-                    <!-- Сама стрелка (единый путь, без разрывов) -->
                     <path d="M 30 20 
                              C 30 20, 30 50, 60 60 
                              L 60 40 
@@ -792,28 +809,65 @@ else:
         }
 
         // --- НОВЫЕ ЗАДАЧИ (16-18) ---
+        
+        // Живое обновление для задачи 16
+        document.getElementById('task16NameInput').addEventListener('input', function() {
+            const name = this.value.trim() || 'иванов иван';
+            document.getElementById('task16NameDisplay').textContent = name;
+        });
+
         function checkTask16() {
-            const val = document.getElementById('task16Input').value.trim().toLowerCase();
-            if (val === 'title') {
-                showResult('resTask16', `>>> Верно! 'Иванов Иван'`);
+            const method = document.getElementById('task16Input').value.trim().toLowerCase();
+            const nameInput = document.getElementById('task16NameInput').value.trim();
+            const name = nameInput || 'иванов иван';
+            
+            if (method === 'title') {
+                const result = name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+                showResult('resTask16', `>>> Верно! Результат: '${result}'`);
             } else {
                 showResult('resTask16', `Ошибка. Для заглавной первой буквы каждого слова используется title().`, true);
             }
         }
 
+        // Живое обновление для задачи 17
+        document.getElementById('task17StatusInput').addEventListener('input', function() {
+            const status = this.value.trim() || 'гость';
+            document.getElementById('task17StatusDisplay').textContent = status;
+        });
+
         function checkTask17() {
-            const val = document.getElementById('task17Input').value.trim().toLowerCase();
-            if (val === 'upper') {
-                showResult('resTask17', `>>> Верно! 'ГОСТЬ'`);
+            const method = document.getElementById('task17Input').value.trim().toLowerCase();
+            const statusInput = document.getElementById('task17StatusInput').value.trim();
+            const status = statusInput || 'гость';
+            
+            if (method === 'upper') {
+                const result = status.toUpperCase();
+                showResult('resTask17', `>>> Верно! Результат: '${result}'`);
             } else {
                 showResult('resTask17', `Ошибка. Для перевода всей строки в верхний регистр используется upper().`, true);
             }
         }
 
+        // Живое обновление для задачи 18
+        document.getElementById('task18QueryInput').addEventListener('input', function() {
+            const query = this.value.trim() || 'ноутбук';
+            document.getElementById('task18QueryDisplay').textContent = query;
+        });
+
         function checkTask18() {
-            const val = document.getElementById('task18Input').value.trim().toLowerCase();
-            if (val === 'lower') {
-                showResult('resTask18', `>>> Верно! Товар найден`);
+            const method = document.getElementById('task18Input').value.trim().toLowerCase();
+            const queryInput = document.getElementById('task18QueryInput').value.trim();
+            const query = queryInput || 'ноутбук';
+            const products = ['Смартфон', 'Ноутбук', 'Наушники'];
+            
+            if (method === 'lower') {
+                const normalizedQuery = query.toLowerCase();
+                const normalizedProducts = products.map(p => p.toLowerCase());
+                if (normalizedProducts.includes(normalizedQuery)) {
+                    showResult('resTask18', `>>> Верно! Товар найден`);
+                } else {
+                    showResult('resTask18', `>>> Верно! Но товара '${query}' нет в каталоге.`, false);
+                }
             } else {
                 showResult('resTask18', `Ошибка. Для приведения к нижнему регистру используется lower().`, true);
             }
