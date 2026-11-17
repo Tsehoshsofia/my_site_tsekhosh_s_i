@@ -528,7 +528,7 @@ else:
             <!-- Задача 5: Создание -->
             <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
                 <p><b>Задача 5.</b> Создайте список <code>colors</code> из строк 'red', 'green', 'blue'.</p>
-                <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="..." style="width: 200px;"></div>
+                <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="..." style="width: 200px;">"></div>
                 <button onclick="checkTask5()" class="btn" style="width: auto; margin: 10px 0 0 0; padding: 8px 16px; font-size: 16px;">Проверить код</button>
                 <div class="result-box" id="resTask5"></div>
             </div>
@@ -697,51 +697,6 @@ else:
                 
                 <button onclick="checkTask18()">Проверить код</button>
                 <div class="result-box" id="resTask18"></div>
-            </div>
-
-            <!-- Задача 19: ЗАМЕНА ТЕКСТА -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 19.</b> При заполнении анкеты вместо цифры написали слово. Замените слово <code>'первый'</code> на цифру <code>'1'</code> методом <code>replace()</code>.</p>
-
-                <div class="code-block">text = 'Номер квартиры: первый'
-fixed_text = text.replace('первый', '1')
-print(fixed_text)</div>
-
-                <div class="interactive-box">
-                    <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Введите строку анкеты (со словом "первый"):</p>
-                    <input type="text" id="task19TextInput" placeholder="напр. Этаж: первый" style="width: 60%;">
-                    <button onclick="checkTask19()">Заменить</button>
-                    <div class="result-box" id="resTask19"></div>
-                </div>
-            </div>
-
-            <!-- Задача 20: СРЕЗ С ОШИБКОЙ В АНКЕТЕ -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
-                <p><b>Задача 20.</b> В анкете допущена ошибка, и мы знаем на какой позиции. Выведите ошибочную запись с помощью <b>среза</b>, а затем исправьте её методом <code>replace()</code>.</p>
-
-                <div class="code-block">anketa = ['Номер дома: первый',
-          'Улица: Ленина',
-          'Подъезд: первый',
-          'Квартира: 5']
-
-err_pos = 3  # известная позиция ошибки (счёт с 1)
-
-# Срез показывает только ошибочную строку
-print('Ошибочная запись:', anketa[err_pos - 1:err_pos])
-
-# Исправляем слово через replace
-anketa[err_pos - 1] = anketa[err_pos - 1].replace('первый', '1')
-print('Исправленная анкета:', anketa)</div>
-
-                <div class="interactive-box">
-                    <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">
-                        Анкета: 1. Номер дома: первый, 2. Улица: Ленина, 3. Подъезд: первый, 4. Квартира: 5
-                    </p>
-                    <p style="margin: 0 0 10px 0; font-size: 16px;">Укажите позицию ошибки (число от 1 до 4):</p>
-                    <input type="number" id="task20PosInput" placeholder="Позиция" style="width: 25%;">
-                    <button onclick="checkTask20()">Найти и исправить</button>
-                    <div class="result-box" id="resTask20"></div>
-                </div>
             </div>
         </div> <!-- Закрытие блока "Большая проверка" -->
 
@@ -1037,55 +992,6 @@ plt.show()</div>
             }
         }
 
-        // --- ЗАДАЧА 19: ЗАМЕНА ТЕКСТА ---
-        function checkTask19() {
-            const text = document.getElementById('task19TextInput').value.trim();
-            if (!text) return;
-
-            // Проверяем, что в строке есть слово "первый"
-            if (text.toLowerCase().includes('первый')) {
-                const fixed = text.replace(/первый/gi, '1');
-                showResult('resTask19',
-                    `>>> Было:  '${text}'<br>>> Стало: '${fixed}'`);
-            } else {
-                showResult('resTask19',
-                    `В строке нет слова 'первый' — replace() ничего не заменит и просто вернёт ту же строку.`, true);
-            }
-        }
-
-        // --- ЗАДАЧА 20: СРЕЗ С ОШИБКОЙ В АНКЕТЕ ---
-        function checkTask20() {
-            const posRaw = document.getElementById('task20PosInput').value.trim();
-            const anketa = ['Номер дома: первый', 'Улица: Ленина', 'Подъезд: первый', 'Квартира: 5'];
-
-            // Проверка: число или текст
-            if (!posRaw || !/^\d+$/.test(posRaw)) {
-                showResult('resTask20', `Нужно ввести число (позицию от 1 до 4)!`, true);
-                return;
-            }
-
-            const pos = parseInt(posRaw);
-            if (pos < 1 || pos > anketa.length) {
-                showResult('resTask20', `Ошибка: нет позиции ${pos}. В анкете всего ${anketa.length} записи.`, true);
-                return;
-            }
-
-            const i = pos - 1; // перевод номера в индекс (счёт с 0)
-            const slice = anketa.slice(i, i + 1);        // срез с ошибочной записью
-            const fixedItem = anketa[i].replace('первый', '1');
-
-            // Собираем исправленную анкету
-            const fixedAnketa = anketa.map((item, idx) =>
-                idx === i ? item.replace('первый', '1') : item
-            );
-
-            showResult('resTask20',
-                `>>> Ошибочная запись (срез anketa[${i}:${i + 1}]): ${JSON.stringify(slice)}<br>` +
-                `>>> Исправлено на: '${fixedItem}'<br>` +
-                `>>> Исправленная анкета:<br>` +
-                fixedAnketa.map((s, idx) => `&nbsp;&nbsp;${idx + 1}. ${s}`).join('<br>'));
-        }
-
         // --- ИНТЕРАКТИВ (ТЕОРИЯ) ---
         function runCreate() {
             const input = document.getElementById('createInput').value;
@@ -1226,7 +1132,7 @@ plt.show()</div>
                 const removed = cart.splice(num - 1, 1)[0];
                 showResult('resPopTask', `(pop) Удалено: '${removed}'<br>Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
             } else {
-                showResult('resPopTask', `Ошибка: такого номера нет.`, true);
+                showResult('resPop', `Ошибка: такого номера нет.`, true);
             }
         }
 
