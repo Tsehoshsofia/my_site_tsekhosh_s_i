@@ -358,7 +358,7 @@ while True:
 
 print("\n--- ВАШ ЧЕК ---")
 for i in range(len(shopping_list)):
-    print(f"{shopping_list[i]} — {price_list[i]:g} руб.")
+    print(f"{shopping_list[i]} - {price_list[i]:g} руб.")
 
 total = sum(price_list)
 print(f"Итого: {total:g} руб.")
@@ -404,7 +404,7 @@ price_list.insert(index, urgent_price)
 
 print("\n--- ОБНОВЛЕННЫЙ СПИСОК ---")
 for i in range(len(shopping_list)):
-    print(f"{shopping_list[i]} — {price_list[i]:g} руб.")</div>
+    print(f"{shopping_list[i]} - {price_list[i]:g} руб.")</div>
 
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Текущий список: Хлеб (65), Молоко (99)</p>
@@ -422,15 +422,15 @@ for i in range(len(shopping_list)):
             <p>Представим, что пользователь передумал покупать конкретный товар. Мы спрашиваем его название и удаляем первый найденный элемент через <code>remove()</code>.</p>
             <p><i>Важно: перед удалением нужно проверить, есть ли товар в списке (через <code>in</code>), чтобы программа не выдала ошибку.</i></p>
             
-            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
+            <div class="code-block">shopping_list = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
 
-print("Текущая корзина:", cart)
-product_to_remove = input('Какой товар удалить? ')
+print("Текущая корзина:", shopping_list)
+product = input('Какой товар удалить? ')
 
-if product_to_remove in cart:
-    cart.remove(product_to_remove)
-    print(f"\nТовар '{product_to_remove}' удален.")
-    print("Новая корзина:", cart)
+if product in shopping_list:
+    shopping_list.remove(product)
+    print(f"\nТовар '{product}' удален.")
+    print("Новая корзина:", shopping_list)
 else:
     print("\nТакого товара нет в корзине.")</div>
 
@@ -481,8 +481,33 @@ else:
             <div class="code-block">catalog_products = ['Хлеб', 'Молоко', 'Сметана', 'Сыр']
 catalog_prices = [65, 99, 85, 150]
 
-# (здесь цикл while и проверка ввода)
-# Оформление покупки...</div>
+cart_products = []
+cart_prices = []
+
+while True:
+    choice = input('Что купить? (или "стоп"): ')
+    
+    if choice.lower() == 'стоп':
+        break
+        
+    if choice in catalog_products:
+        idx = catalog_products.index(choice)
+        cart_products.append(catalog_products[idx])
+        cart_prices.append(catalog_prices[idx])
+        print(f"Добавлено: {choice} за {catalog_prices[idx]} руб.")
+    else:
+        print("Такого товара нет.")
+
+# Оформление покупки
+print("\n--- ВАШ ЧЕК ---")
+if len(cart_products) == 0:
+    print("Корзина пуста.")
+else:
+    total = 0
+    for i in range(len(cart_products)):
+        print(f"{cart_products[i]} - {cart_prices[i]} руб.")
+        total += cart_prices[i]
+    print(f"Итого: {total} руб.")</div>
 
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Доступно: Хлеб (65), Молоко (99), Сметана (85), Сыр (150)</p>
@@ -715,35 +740,38 @@ else:
         <!-- НОВАЯ КАРТОЧКА: ВИЗУАЛИЗАЦИЯ (ГРАФИКИ) -->
         <div class="theory-card">
             <h2>📊 Зачем нужны списки? Визуализация!</h2>
-            <p>Представьте, что вы собрали данные о покупках в два списка: названия и цены. С помощью библиотеки <code>matplotlib</code> в Python можно наглядно показать эти данные. Давайте попробуем!</p>
+            <p>Представьте, что вы собрали данные о ценах на автомобили в два списка: названия и цены. С помощью библиотеки <code>matplotlib</code> в Python можно наглядно показать эти данные. Давайте попробуем!</p>
             
-            <!-- ОБНОВЛЕННЫЙ ПРИМЕР КОДА: ЗАМЕНИЛИ СОЛЬ НА ХЛЕБ И ДОБАВИЛИ ТОВАРЫ -->
             <div class="code-block"># Пример кода в Python
 import matplotlib.pyplot as plt
 
-shopping_list = ['хлеб', 'молоко', 'кефир', 'сыр', 'яблоко']
-price_list = [45, 88, 78, 150, 120]
+# Данные по автомобилям
+cars_list = ['Lada Granta', 'Lada Vesta', 'Niva Travel', 'УАЗ Патриот', 'Kia Rio', 'Москвич 3', 'OMODA C5']
+price_list = [1050000, 1750000, 1550000, 2000000, 2250000, 1780000, 2450000]
 
 # Построение линейного графика
-plt.plot(shopping_list, price_list, marker='o', linewidth=2)
-plt.title("Цены товаров")
-plt.xlabel("Товары")
+plt.plot(cars_list, price_list, marker='o', linewidth=2)
+plt.title("Цены на автомобили")
+plt.xlabel("Автомобили")
 plt.ylabel("Цена (руб.)")
+plt.xticks(rotation=15)
 plt.show()
 
 # Построение гистограммы (столбцов)
-plt.bar(shopping_list, price_list)
+plt.bar(cars_list, price_list)
+plt.title("Сравнение цен")
+plt.xticks(rotation=15)
 plt.show()</div>
 
             <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (заполните списки и постройте графики):</p>
             <div class="interactive-box">
-                <input type="text" id="vizProdName" placeholder="Название товара (напр. Хлеб)">
-                <input type="number" step="0.01" id="vizProdPrice" placeholder="Цена (напр. 50)">
-                <button onclick="addVizItem()">Добавить товар</button>
+                <input type="text" id="vizProdName" placeholder="Название авто (напр. Lada)">
+                <input type="number" step="1" id="vizProdPrice" placeholder="Цена (напр. 1500000)">
+                <button onclick="addVizItem()">Добавить авто</button>
                 <button onclick="clearViz()" style="background-color: #ccc; color: #333;">Очистить</button>
                 
                 <div class="result-box" id="vizResultBox" style="margin-bottom: 15px;">
-                    <strong>Список товаров (shopping_list):</strong> <span id="vizListDisplay">[]</span><br>
+                    <strong>Список авто (cars_list):</strong> <span id="vizListDisplay">[]</span><br>
                     <strong>Список цен (price_list):</strong> <span id="vizPriceDisplay">[]</span>
                 </div>
 
@@ -1066,7 +1094,7 @@ plt.show()</div>
             prices.splice(index, 0, price);
             let output = "";
             for (let i = 0; i < products.length; i++) {
-                output += `${products[i]} — ${prices[i]} руб.<br>`;
+                output += `${products[i]} - ${prices[i]} руб.<br>`;
             }
             showResult('resInsertTask', output);
         }
@@ -1121,7 +1149,7 @@ plt.show()</div>
                 listDiv.innerHTML += `<br><b>Оформление:</b><br>`;
                 let total = 0;
                 catalogCart.forEach(item => {
-                    listDiv.innerHTML += `${item.name} — ${item.price} руб.<br>`;
+                    listDiv.innerHTML += `${item.name} - ${item.price} руб.<br>`;
                     total += item.price;
                 });
                 totalDiv.innerHTML = `Итого: ${total} руб.`;
@@ -1171,7 +1199,7 @@ plt.show()</div>
                 let displayPrice = cartPrices[i];
                 if (displayPrice % 1 === 0) displayPrice = displayPrice.toFixed(0);
                 else displayPrice = displayPrice.toFixed(2).replace(/\.?0+$/, "");
-                cartItems.innerHTML += `${cartProducts[i]} — ${displayPrice} руб.<br>`;
+                cartItems.innerHTML += `${cartProducts[i]} - ${displayPrice} руб.<br>`;
                 total += cartPrices[i];
             }
             let displayTotal = total;
@@ -1182,9 +1210,9 @@ plt.show()</div>
 
         // --- ВИЗУАЛИЗАЦИЯ ДАННЫХ (ГРАФИКИ) ---
         
-        // Инициализируем массивы начальными значениями (по вашему запросу)
-        let vizNames = ['хлеб', 'молоко', 'кефир', 'сыр', 'яблоко'];
-        let vizPrices = [45, 88, 78, 150, 120];
+        // Инициализируем массивы начальными значениями (автомобили)
+        let vizNames = ['Lada Granta', 'Lada Vesta', 'Niva Travel', 'УАЗ Патриот', 'Kia Rio', 'Москвич 3', 'OMODA C5'];
+        let vizPrices = [1050000, 1750000, 1550000, 2000000, 2250000, 1780000, 2450000];
         let myChartInstance = null;
 
         // Вызываем отображение данных при загрузке страницы
@@ -1213,7 +1241,7 @@ plt.show()</div>
                 return;
             }
 
-            // Проверка на дубликаты: если товар уже есть, обновляем цену
+            // Проверка на дубликаты: если авто уже есть, обновляем цену
             const existingIndex = vizNames.indexOf(name);
             if (existingIndex !== -1) {
                 vizPrices[existingIndex] = price; 
@@ -1240,98 +1268,98 @@ plt.show()</div>
             updateVizDisplay();
         }
 
-             function drawChart(type) {
-        if (vizNames.length === 0) {
-            alert("Сначала добавьте хотя бы один товар!");
-            return;
-        }
+        function drawChart(type) {
+            if (vizNames.length === 0) {
+                alert("Сначала добавьте хотя бы один товар!");
+                return;
+            }
 
-        document.getElementById('chartContainer').style.display = 'block';
-        const ctx = document.getElementById('myChart').getContext('2d');
+            document.getElementById('chartContainer').style.display = 'block';
+            const ctx = document.getElementById('myChart').getContext('2d');
 
-        if (myChartInstance) {
-            myChartInstance.destroy();
-        }
+            if (myChartInstance) {
+                myChartInstance.destroy();
+            }
 
-        const isLine = type === 'line';
-        
-        myChartInstance = new Chart(ctx, {
-            type: type,
-            data: {
-                labels: vizNames,
-                datasets: [{
-                    label: 'Цена (руб.)',
-                    data: vizPrices,
-                    borderColor: '#104E8B', 
-                    backgroundColor: isLine ? '#104E8B' : '#1E90FF', 
-                    borderWidth: isLine ? 3 : 2, 
-                    pointBackgroundColor: '#104E8B',
-                    pointBorderColor: '#ffffff',
-                    pointBorderWidth: 2,
-                    pointRadius: isLine ? 7 : 0, 
-                    pointHoverRadius: 9,
-                    tension: 0,
-                    fill: false
-                }]
-            },
-            plugins: [ChartDataLabels],
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: { duration: 500 },
-                plugins: {
-                    datalabels: {
-                        display: false // <--- ОТКЛЮЧАЕМ ПОДПИСИ НАД СТОЛБЦАМИ
-                    },
-                    title: {
-                        display: true,
-                        text: 'Стоимость товаров',
-                        color: '#000000',
-                        font: { family: 'Times New Roman', size: 22, weight: 'bold' },
-                        padding: { bottom: 15 }
-                    },
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#333',
-                        titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
-                        bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
-                    }
+            const isLine = type === 'line';
+            
+            myChartInstance = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: vizNames,
+                    datasets: [{
+                        label: 'Цена (руб.)',
+                        data: vizPrices,
+                        borderColor: '#104E8B', 
+                        backgroundColor: isLine ? '#104E8B' : '#1E90FF', 
+                        borderWidth: isLine ? 3 : 2, 
+                        pointBackgroundColor: '#104E8B',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: isLine ? 7 : 0, 
+                        pointHoverRadius: 9,
+                        tension: 0,
+                        fill: false
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: { 
-                            display: true, 
-                            text: 'Цена (руб.)', 
-                            color: '#000000',
-                            font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                plugins: [ChartDataLabels],
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 500 },
+                    plugins: {
+                        datalabels: {
+                            display: false // <--- ОТКЛЮЧАЕМ ПОДПИСИ НАД СТОЛБЦАМИ
                         },
-                        ticks: {
-                            color: '#000000',
-                            font: { family: 'Times New Roman', size: 16, weight: 'bold' }
-                        },
-                        grid: { color: '#a0a0a0', lineWidth: 1.5 }
-                    },
-                    x: {
-                        title: { 
-                            display: true, 
-                            text: 'Товары', 
-                            color: '#000000',
-                            font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
-                        },
-                        ticks: {
+                        title: {
                             display: true,
-                            maxRotation: 0, 
-                            minRotation: 0,
+                            text: 'Стоимость автомобилей',
                             color: '#000000',
-                            font: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                            font: { family: 'Times New Roman', size: 22, weight: 'bold' },
+                            padding: { bottom: 15 }
                         },
-                        grid: { display: false }
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#333',
+                            titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
+                            bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { 
+                                display: true, 
+                                text: 'Цена (руб.)', 
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                            },
+                            ticks: {
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                            },
+                            grid: { color: '#a0a0a0', lineWidth: 1.5 }
+                        },
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: 'Автомобили', 
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                            },
+                            ticks: {
+                                display: true,
+                                maxRotation: 15, 
+                                minRotation: 0,
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                            },
+                            grid: { display: false }
+                        }
                     }
                 }
-            }
-        });
-    }
+            });
+        }
     </script>
 </body>
 </html>
