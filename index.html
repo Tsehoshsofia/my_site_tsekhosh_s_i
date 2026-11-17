@@ -393,14 +393,14 @@ print("Текущий список:")
 for i in range(len(shopping_list)):
     print(f"{i + 1}. {shopping_list[i]}")
 
-urgent_product = input('\nВведите срочный товар: ')
-urgent_price = float(input('Введите его стоимость: '))
+product = input('\nВведите срочный товар: ')
+price = float(input('Введите его стоимость: '))
 user_place = int(input(f'На какое место поставить (от 1 до {len(shopping_list) + 1})? '))
 
 index = min(user_place - 1, len(shopping_list))
 
-shopping_list.insert(index, urgent_product)
-price_list.insert(index, urgent_price)
+shopping_list.insert(index, product)
+price_list.insert(index, price)
 
 print("\n--- ОБНОВЛЕННЫЙ СПИСОК ---")
 for i in range(len(shopping_list)):
@@ -447,20 +447,20 @@ else:
             <h2>🗑️ Задача 4: Удаление по номеру (индексу)</h2>
             <p>Иногда проще удалить товар не по названию, а по его номеру в списке. Пользователь вводит номер (с 1), а мы переводим его в индекс (вычитая 1) и удаляем через <code>del</code> или <code>pop</code>.</p>
             
-            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
+            <div class="code-block">shopping_list = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
 
 print("Ваша корзина:")
-for i in range(len(cart)):
-    print(f"{i + 1}. {cart[i]}")
+for i in range(len(shopping_list)):
+    print(f"{i + 1}. {shopping_list[i]}")
 
-user_num = int(input('\nКакой по счету товар удалить? '))
+number = int(input('\nКакой по счету товар удалить? '))
 
-if 1 <= user_num <= len(cart):
-    index_to_remove = user_num - 1
-    del cart[index_to_remove] 
-    # или: removed_item = cart.pop(index_to_remove)
+if 1 <= number <= len(shopping_list):
+    index = number - 1
+    del shopping_list[index] 
+    # или: removed_item = shopping_list.pop(index)
     print("\nТовар удален.")
-    print("Новая корзина:", cart)
+    print("Новая корзина:", shopping_list)
 else:
     print("\nОшибка: такого номера нет.")</div>
 
@@ -481,8 +481,8 @@ else:
             <div class="code-block">catalog_products = ['Хлеб', 'Молоко', 'Сметана', 'Сыр']
 catalog_prices = [65, 99, 85, 150]
 
-cart_products = []
-cart_prices = []
+shopping_list = []
+prices_list = []
 
 while True:
     choice = input('Что купить? (или "стоп"): ')
@@ -492,21 +492,21 @@ while True:
         
     if choice in catalog_products:
         idx = catalog_products.index(choice)
-        cart_products.append(catalog_products[idx])
-        cart_prices.append(catalog_prices[idx])
+        shopping_list.append(catalog_products[idx])
+        prices_list.append(catalog_prices[idx])
         print(f"Добавлено: {choice} за {catalog_prices[idx]} руб.")
     else:
         print("Такого товара нет.")
 
 # Оформление покупки
 print("\n--- ВАШ ЧЕК ---")
-if len(cart_products) == 0:
+if len(shopping_list) == 0:
     print("Корзина пуста.")
 else:
     total = 0
-    for i in range(len(cart_products)):
-        print(f"{cart_products[i]} - {cart_prices[i]} руб.")
-        total += cart_prices[i]
+    for i in range(len(shopping_list)):
+        print(f"{shopping_list[i]} - {prices_list[i]} руб.")
+        total += prices_list[i]
     print(f"Итого: {total} руб.")</div>
 
             <div class="interactive-box">
@@ -780,8 +780,8 @@ plt.show()</div>
                     <button onclick="drawChart('bar')" style="background: #4169E1;">Построить гистограмму (plt.bar)</button>
                 </div>
 
-                <!-- Контейнер для графика -->
-                <div style="position: relative; height: 400px; width: 100%; background: white; border-radius: 8px; padding: 10px; box-sizing: border-box; display: none; border: 1px solid #ddd;" id="chartContainer">
+                <!-- Контейнер для графика (увеличена высота до 500px) -->
+                <div style="position: relative; height: 500px; width: 100%; background: white; border-radius: 8px; padding: 10px; box-sizing: border-box; display: none; border: 1px solid #ddd;" id="chartContainer">
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
@@ -1336,7 +1336,13 @@ plt.show()</div>
                             },
                             ticks: {
                                 color: '#000000',
-                                font: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                                font: { family: 'Times New Roman', size: 14, weight: 'bold' },
+                                // Красивое отображение миллионов на оси Y
+                                callback: function(value) {
+                                    if (value >= 1000000) return (value / 1000000) + ' млн';
+                                    if (value >= 1000) return (value / 1000) + ' тыс.';
+                                    return value;
+                                }
                             },
                             grid: { color: '#a0a0a0', lineWidth: 1.5 }
                         },
@@ -1349,10 +1355,11 @@ plt.show()</div>
                             },
                             ticks: {
                                 display: true,
-                                maxRotation: 15, 
-                                minRotation: 0,
+                                maxRotation: 45, // Наклоняем текст под 45 градусов
+                                minRotation: 45, // Наклоняем текст под 45 градусов
+                                autoSkip: false, // Показываем ВСЕ названия без пропусков
                                 color: '#000000',
-                                font: { family: 'Times New Roman', size: 14, weight: 'bold' }
+                                font: { family: 'Times New Roman', size: 13, weight: 'bold' } // Чуть уменьшили шрифт
                             },
                             grid: { display: false }
                         }
