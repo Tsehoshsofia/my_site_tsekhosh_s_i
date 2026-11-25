@@ -50,20 +50,20 @@
             -webkit-backdrop-filter: blur(3px);
         }
 
-        /* 3. КОНТЕЙНЕР */
+        /* 3. КОНТЕЙНЕР - СДЕЛАЛИ ШИРЕ */
         .quest-container {
             position: fixed; 
             top: 1.5cm;
             bottom: 2vh;
             left: 50%; 
             transform: translateX(-50%);
-            width: 850px; 
+            width: 1100px; /* Увеличили ширину с 850px до 1100px */
             max-width: calc(100% - 40px); 
             max-height: calc(100vh - 1.5cm - 2vh);
             overflow-y: auto; 
             display: flex; 
             flex-direction: column; 
-            gap: 30px; 
+            gap: 35px; /* Немного увеличили отступ между карточками */
             padding-bottom: 30px; 
             padding-right: 15px;
         }
@@ -77,7 +77,7 @@
                         inset 0px 2px 0px rgba(255, 255, 255, 0.8);
             border-radius: 24px; 
             border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 35px 40px; 
+            padding: 40px 50px; /* Увеличили внутренние отступы для простора */
             box-sizing: border-box;
             font-size: 18px; 
             line-height: 1.7; 
@@ -125,7 +125,8 @@
         .code-block {
             font-family: 'Consolas', 'Courier New', monospace; font-size: 16px;
             background-color: #f8faff;
-            padding: 18px; border-radius: 12px; 
+            padding: 20px; /* Чуть больше отступы внутри кода */
+            border-radius: 12px; 
             color: #8B0000;
             margin: 18px 0; white-space: pre-wrap; line-height: 1.6; 
             display: block; width: 100%; box-sizing: border-box; 
@@ -150,12 +151,12 @@
         /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
         .interactive-box {
             background-color: #F4F9FF; border: 2px dashed var(--primary-color);
-            border-radius: 16px; padding: 20px; margin-top: 25px; text-align: center;
+            border-radius: 16px; padding: 25px; margin-top: 25px; text-align: center;
             box-shadow: inset 0 0 20px rgba(65, 105, 225, 0.05);
         }
 
         .interactive-box input, .interactive-box select {
-            font-family: 'Consolas', monospace; font-size: 16px; padding: 10px 12px;
+            font-family: 'Consolas', monospace; font-size: 16px; padding: 12px 15px;
             margin: 6px 4px; 
             border: 2px solid #b0b0b0; 
             border-top-color: #888;
@@ -182,7 +183,7 @@
             background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary-color) 100%);
             border: none; 
             border-radius: 8px; 
-            padding: 12px 20px;
+            padding: 12px 24px;
             margin: 8px 4px; 
             cursor: pointer; 
             box-shadow: 0 5px 0 var(--primary-dark), 0 8px 15px rgba(0,0,0,0.2);
@@ -247,14 +248,14 @@
 
         /* 11. ТИТУЛЬНЫЙ СЛАЙД */
         .start-screen {
-            text-align: center; padding: 40px 40px;
+            text-align: center; padding: 50px 40px;
             display: flex; flex-direction: column; justify-content: center;
             align-items: center; min-height: 500px;
             background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(244,249,255,0.95) 100%);
         }
-        .start-screen h1 { font-size: 36px; margin: 0 0 15px 0; font-weight: 800; color: #111; letter-spacing: 1.5px; line-height: 1.3; }
+        .start-screen h1 { font-size: 38px; margin: 0 0 15px 0; font-weight: 800; color: #111; letter-spacing: 1.5px; line-height: 1.3; }
         .start-screen .subtitle { font-size: 22px; color: var(--primary-color); margin-bottom: 25px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
-        .start-screen .description { font-size: 18px; color: #333; margin-bottom: 40px; text-align: center; max-width: 650px; font-weight: 500; line-height: 1.8; }
+        .start-screen .description { font-size: 18px; color: #333; margin-bottom: 40px; text-align: center; max-width: 700px; font-weight: 500; line-height: 1.8; }
         .start-screen .author { font-size: 16px; color: #666; margin-bottom: 30px; font-weight: 700; letter-spacing: 1px; }
         .start-screen .author b { color: var(--primary-color); }
 
@@ -274,13 +275,13 @@
         .quest-container::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
         /* Адаптив */
-        @media (max-width: 600px) {
-            .theory-card { padding: 20px; border-radius: 16px; }
+        @media (max-width: 768px) {
+            .theory-card { padding: 25px 20px; border-radius: 16px; }
             h2 { font-size: 22px; }
             p, code, .code-block { font-size: 15px; }
             .interactive-box input { width: 100%; margin: 5px 0; }
             .start-screen h1 { font-size: 28px; }
-            .interactive-box button { width: 100%; margin: 5px 0; }
+            .interactive-box button { width: 100%; margin: 8px 0; }
             .btn { font-size: 16px; }
         }
     </style>
