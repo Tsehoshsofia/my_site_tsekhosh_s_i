@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Теория: Списки в Python</title>
     <!-- ПОДКЛЮЧАЕМ БИБЛИОТЕКУ ДЛЯ ГРАФИКОВ -->
-    <script src="[https://cdn.jsdelivr.net/npm/chart.js](https://cdn.jsdelivr.net/npm/chart.js)"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- ПОДКЛЮЧАЕМ ПЛАГИН ДЛЯ ПОДПИСЕЙ НА ГРАФИКЕ -->
-    <script src="[https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0](https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0)"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
     <style>
         /* 1. БАЗОВЫЕ НАСТРОЙКИ */
         body, html {
@@ -19,232 +19,230 @@
             text-rendering: optimizeLegibility;
             scroll-behavior: smooth;
         }
-Копировать
-    /* 2. ФОН */
-    .background-layer {
-        position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        background-image: url("белый_фон.jpeg"); 
-        background-size: cover; background-position: center; background-repeat: no-repeat;
-        z-index: -1;
-    }
-Копировать
-/* 3. КОНТЕЙНЕР */
-.quest-container {
-    position: fixed; 
-    top: 0.5cm;
-    bottom: 2vh;
-    left: 50%; 
-    transform: translateX(-50%);
-    width: 750px; 
-    max-width: calc(100% - 40px); 
-    max-height: calc(100vh - 0.5cm - 2vh);
-    overflow-y: auto; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 25px; 
-    padding-bottom: 20px; 
-    padding-right: 5px;
-}
 
-/* 4. ПЛАШКА */
-.theory-card {
-    background-color: rgba(255, 255, 255, 0.98); 
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
-    border-radius: 20px; border: 1px solid #e0e0e0;
-    padding: 30px 35px; box-sizing: border-box;
-    font-size: 20px; line-height: 1.6; color: #000000;
-}
+        /* 2. ФОН */
+        .background-layer {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url("белый_фон.jpeg"); 
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: -1;
+        }
 
-/* 5. ЗАГОЛОВКИ */
-h2 {
-    font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 20px;
-    color: #000000; border-bottom: 3px solid #4169E1; padding-bottom: 10px;
-    display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px;
-}
+        /* 3. КОНТЕЙНЕР */
+        .quest-container {
+            position: fixed; 
+            top: 0.5cm;
+            bottom: 2vh;
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 750px; 
+            max-width: calc(100% - 40px); 
+            max-height: calc(100vh - 0.5cm - 2vh);
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 25px; 
+            padding-bottom: 20px; 
+            padding-right: 5px;
+        }
+        
+        /* 4. ПЛАШКА */
+        .theory-card {
+            background-color: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 20px; border: 1px solid #e0e0e0;
+            padding: 30px 35px; box-sizing: border-box;
+            font-size: 20px; line-height: 1.6; color: #000000;
+        }
 
-/* 6. ТЕКСТ */
-p { 
-    margin: 10px 0; text-align: justify; color: #000000; 
-    font-weight: 500; letter-spacing: 0.2px; 
-    text-shadow: 0px 0px 1px rgba(255,255,255,0.8); 
-}
-ul { 
-    margin-left: 20px; line-height: 1.6; color: #000000; 
-    font-weight: 500; letter-spacing: 0.2px;
-}
+        /* 5. ЗАГОЛОВКИ */
+        h2 {
+            font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 20px;
+            color: #000000; border-bottom: 3px solid #4169E1; padding-bottom: 10px;
+            display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px;
+        }
 
-/* 7. КОД */
-code {
-    font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
-    background-color: rgba(65, 105, 225, 0.12); padding: 4px 8px;
-    border-radius: 6px; color: #8B0000;
-    display: inline-block; margin: 5px 0; font-weight: bold;
-}
+        /* 6. ТЕКСТ */
+        p { 
+            margin: 10px 0; text-align: justify; color: #000000; 
+            font-weight: 500; letter-spacing: 0.2px; 
+            text-shadow: 0px 0px 1px rgba(255,255,255,0.8); 
+        }
+        ul { 
+            margin-left: 20px; line-height: 1.6; color: #000000; 
+            font-weight: 500; letter-spacing: 0.2px;
+        }
 
-.code-block {
-    font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
-    background-color: rgba(65, 105, 225, 0.06);
-    padding: 15px; border-radius: 8px; 
-    color: #8B0000;
-    margin: 15px 0; white-space: pre-wrap; line-height: 1.5; 
-    display: block; width: 100%; box-sizing: border-box; 
-    border-left: 4px solid #4169E1; font-weight: bold;
-}
+        /* 7. КОД */
+        code {
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
+            background-color: rgba(65, 105, 225, 0.12); padding: 4px 8px;
+            border-radius: 6px; color: #8B0000;
+            display: inline-block; margin: 5px 0; font-weight: bold;
+        }
 
-/* 8. КОНСОЛЬ */
-.console-output {
-    background-color: #f8f9fa; border-left: 4px solid #4169E1; 
-    padding: 15px; font-family: 'Consolas', monospace; font-size: 16px; 
-    border-radius: 0 8px 8px 0; margin-top: 15px; color: #000000;
-    border: 1px solid #ddd; font-weight: bold;
-}
-.console-title {
-    display: block; font-weight: bold; font-family: 'Times New Roman', Times, serif;
-    font-size: 14px; margin-bottom: 5px; color: #4169E1;
-}
+        .code-block {
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
+            background-color: rgba(65, 105, 225, 0.06);
+            padding: 15px; border-radius: 8px; 
+            color: #8B0000;
+            margin: 15px 0; white-space: pre-wrap; line-height: 1.5; 
+            display: block; width: 100%; box-sizing: border-box; 
+            border-left: 4px solid #4169E1; font-weight: bold;
+        }
 
-/* 9. ИНТЕРАКТИВНЫЙ БЛОК */
-.interactive-box {
-    background-color: #F4F9FF; border: 2px dashed #4169E1;
-    border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
-}
+        /* 8. КОНСОЛЬ */
+        .console-output {
+            background-color: #f8f9fa; border-left: 4px solid #4169E1; 
+            padding: 15px; font-family: 'Consolas', monospace; font-size: 16px; 
+            border-radius: 0 8px 8px 0; margin-top: 15px; color: #000000;
+            border: 1px solid #ddd; font-weight: bold;
+        }
+        .console-title {
+            display: block; font-weight: bold; font-family: 'Times New Roman', Times, serif;
+            font-size: 14px; margin-bottom: 5px; color: #4169E1;
+        }
 
-.interactive-box input, .interactive-box select {
-    font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
-    margin: 5px 2px; 
-    border: 2px solid #b0b0b0; 
-    border-top-color: #888;
-    border-radius: 6px;
-    outline: none; box-sizing: border-box; color: #000; font-weight: bold;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
-    background-color: #fcfcfc; 
-    transition: all 0.2s ease;
-}
+        /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
+        .interactive-box {
+            background-color: #F4F9FF; border: 2px dashed #4169E1;
+            border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
+        }
 
-.interactive-box input:focus, .interactive-box select:focus { 
-    border-color: #4169E1; 
-    border-top-color: #2b4eb5;
-    background-color: #fff; 
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(65, 105, 225, 0.2);
-}
+        .interactive-box input, .interactive-box select {
+            font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
+            margin: 5px 2px; 
+            border: 2px solid #b0b0b0; 
+            border-top-color: #888;
+            border-radius: 6px;
+            outline: none; box-sizing: border-box; color: #000; font-weight: bold;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+            background-color: #fcfcfc; 
+            transition: all 0.2s ease;
+        }
 
-.interactive-box button {
-    font-family: "Times New Roman", Times, serif; 
-    font-size: 16px;
-    font-weight: bold; 
-    color: white;
-    background: linear-gradient(180deg, #5A7BFF 0%, #4169E1 100%);
-    border: none; 
-    border-radius: 6px; 
-    padding: 9px 15px;
-    margin: 5px 2px; 
-    cursor: pointer; 
-    box-shadow: 0 4px 0 #2b4eb5, 0 4px 6px rgba(0,0,0,0.15);
-    transition: all 0.1s ease; 
-    position: relative;
-    top: 0;
-}
+        .interactive-box input:focus, .interactive-box select:focus { 
+            border-color: #4169E1; 
+            border-top-color: #2b4eb5;
+            background-color: #fff; 
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(65, 105, 225, 0.2);
+        }
 
-.interactive-box button:hover { 
-    background: linear-gradient(180deg, #6B88FF 0%, #5279E1 100%);
-    box-shadow: 0 4px 0 #2b4eb5, 0 6px 10px rgba(0,0,0,0.2);
-}
+        .interactive-box button {
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 16px;
+            font-weight: bold; 
+            color: white;
+            background: linear-gradient(180deg, #5A7BFF 0%, #4169E1 100%);
+            border: none; 
+            border-radius: 6px; 
+            padding: 9px 15px;
+            margin: 5px 2px; 
+            cursor: pointer; 
+            box-shadow: 0 4px 0 #2b4eb5, 0 4px 6px rgba(0,0,0,0.15);
+            transition: all 0.1s ease; 
+            position: relative;
+            top: 0;
+        }
 
-.interactive-box button:active { 
-    top: 4px;
-    box-shadow: 0 0 0 #2b4eb5, 0 1px 2px rgba(0,0,0,0.2);
-}
+        .interactive-box button:hover { 
+            background: linear-gradient(180deg, #6B88FF 0%, #5279E1 100%);
+            box-shadow: 0 4px 0 #2b4eb5, 0 6px 10px rgba(0,0,0,0.2);
+        }
 
-.result-box {
-    margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
-    text-align: left; background-color: #fff; padding: 10px;
-    border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
-    font-weight: bold;
-}
+        .interactive-box button:active { 
+            top: 4px;
+            box-shadow: 0 0 0 #2b4eb5, 0 1px 2px rgba(0,0,0,0.2);
+        }
 
-/* 10. КНОПКА ПЕРЕХОДА */
-.btn {
-    display: block; width: 100%; max-width: 500px;
-    margin: 20px auto 0 auto; padding: 14px 20px;
-    background-color: #F4F9FF; border: 2px solid #4169E1;
-    border-radius: 10px; color: #4169E1; font-size: 18px;
-    font-weight: bold; text-align: center; text-decoration: none;
-    transition: all 0.2s ease-in-out; cursor: pointer; box-sizing: border-box;
-}
+        .result-box {
+            margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
+            text-align: left; background-color: #fff; padding: 10px;
+            border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
+            font-weight: bold;
+        }
+        
+        /* 10. КНОПКА ПЕРЕХОДА */
+        .btn {
+            display: block; width: 100%; max-width: 500px;
+            margin: 20px auto 0 auto; padding: 14px 20px;
+            background-color: #F4F9FF; border: 2px solid #4169E1;
+            border-radius: 10px; color: #4169E1; font-size: 18px;
+            font-weight: bold; text-align: center; text-decoration: none;
+            transition: all 0.2s ease-in-out; cursor: pointer; box-sizing: border-box;
+        }
 
-.btn:hover { background-color: #4169E1; color: #FFFFFF; transform: translateY(-2px); }
+        .btn:hover { background-color: #4169E1; color: #FFFFFF; transform: translateY(-2px); }
 
-/* 11. ТИТУЛЬНЫЙ СЛАЙД */
-.start-screen {
-    text-align: center; padding: 30px 30px;
-    display: flex; flex-direction: column; justify-content: center;
-    align-items: center; min-height: 400px;
-}
-.start-screen h1 { font-size: 34px; margin: 0 0 10px 0; font-weight: bold; color: #000; letter-spacing: 1px; }
-.start-screen .subtitle { font-size: 24px; color: #4169E1; margin-bottom: 30px; font-weight: bold; }
-.start-screen .description { font-size: 20px; color: #000; margin-bottom: 40px; text-align: center; max-width: 600px; font-weight: 500; }
-.start-screen .author { font-size: 18px; color: #333; margin-bottom: 40px; font-style: italic; font-weight: bold; }
+        /* 11. ТИТУЛЬНЫЙ СЛАЙД */
+        .start-screen {
+            text-align: center; padding: 30px 30px;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; min-height: 400px;
+        }
+        .start-screen h1 { font-size: 34px; margin: 0 0 10px 0; font-weight: bold; color: #000; letter-spacing: 1px; }
+        .start-screen .subtitle { font-size: 24px; color: #4169E1; margin-bottom: 30px; font-weight: bold; }
+        .start-screen .description { font-size: 20px; color: #000; margin-bottom: 40px; text-align: center; max-width: 600px; font-weight: 500; }
+        .start-screen .author { font-size: 18px; color: #333; margin-bottom: 40px; font-style: italic; font-weight: bold; }
 
-/* 12. ЗАДАЧИ НА ВВОД */
-.blank-input {
-    font-family: 'Consolas', monospace; font-size: 18px;
-    font-weight: bold; color: #4169E1; background-color: #fff;
-    border: 2px solid #999; border-radius: 4px; padding: 2px 5px;
-    width: 120px; text-align: center;
-}
+        /* 12. ЗАДАЧИ НА ВВОД */
+        .blank-input {
+            font-family: 'Consolas', monospace; font-size: 18px;
+            font-weight: bold; color: #4169E1; background-color: #fff;
+            border: 2px solid #999; border-radius: 4px; padding: 2px 5px;
+            width: 120px; text-align: center;
+        }
 
-/* Скроллбар */
-.quest-container::-webkit-scrollbar { width: 8px; }
-.quest-container::-webkit-scrollbar-track { background: transparent; }
-.quest-container::-webkit-scrollbar-thumb { background: #4169E1; border-radius: 10px; }
+        /* Скроллбар */
+        .quest-container::-webkit-scrollbar { width: 8px; }
+        .quest-container::-webkit-scrollbar-track { background: transparent; }
+        .quest-container::-webkit-scrollbar-thumb { background: #4169E1; border-radius: 10px; }
 
-/* Адаптив */
-@media (max-width: 600px) {
-    .theory-card { padding: 20px; }
-    h2 { font-size: 24px; }
-    p, code, .code-block { font-size: 16px; }
-    .interactive-box input { width: 100%; margin: 5px 0; }
-    .start-screen h1 { font-size: 32px; }
-}
-
-
-</style>
-
+        /* Адаптив */
+        @media (max-width: 600px) {
+            .theory-card { padding: 20px; }
+            h2 { font-size: 24px; }
+            p, code, .code-block { font-size: 16px; }
+            .interactive-box input { width: 100%; margin: 5px 0; }
+            .start-screen h1 { font-size: 32px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="background-layer"></div><div class="quest-container" id="main-container">
+    <div class="background-layer"></div>
 
-  <!-- ТИТУЛЬНЫЙ СЛАЙД -->
-<div class="theory-card start-screen" id="start-screen">
-    <h1>Основы работы со списками в Python</h1>
-    <div class="subtitle">Учебные материалы</div>
-    <p class="description">
-        В данном модуле рассматриваются базовые операции со списками: создание, индексация, срезы, а также добавление и удаление элементов.
-        Для закрепления материала предусмотрены практические задания.
-    </p>
-    <div class="author">Разработчик: <b>Цехош София Ивановна</b></div>
-</div>
+    <div class="quest-container" id="main-container">
+        
+          <!-- ТИТУЛЬНЫЙ СЛАЙД -->
+        <div class="theory-card start-screen" id="start-screen">
+            <h1>Основы работы со списками в Python</h1>
+            <div class="subtitle">Учебные материалы</div>
+            <p class="description">
+                В данном модуле рассматриваются базовые операции со списками: создание, индексация, срезы, а также добавление и удаление элементов.
+                Для закрепления материала предусмотрены практические задания.
+            </p>
+            <div class="author">Разработчик: <b>Цехош София Ивановна</b></div>
+        </div>
 
-<!-- 1. СОЗДАНИЕ -->
-<div class="theory-card" id="card-1">
-    <h2>📝 Создание списка</h2>
-    <p>Списки создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные.</p>
-    <div class="code-block">garage = ['Lada Granta', 'Niva Travel']</div>
-    <div class="interactive-box">
-        <input type="text" id="createInput" placeholder="Введите элементы через запятую" style="width: 60%;">
-        <button onclick="runCreate()">Запустить</button>
-        <div class="result-box" id="resCreate"></div>
-    </div>
-</div>
+        <!-- 1. СОЗДАНИЕ -->
+        <div class="theory-card" id="card-1">
+            <h2>📝 Создание списка</h2>
+            <p>Списки создаются с помощью квадратных скобок <code>[]</code> или функции <code>list()</code>. Внутри могут храниться любые данные.</p>
+            <div class="code-block">garage = ['Lada Granta', 'Niva Travel']</div>
+            <div class="interactive-box">
+                <input type="text" id="createInput" placeholder="Введите элементы через запятую" style="width: 60%;">
+                <button onclick="runCreate()">Запустить</button>
+                <div class="result-box" id="resCreate"></div>
+            </div>
+        </div>
 
-<!-- 2. ИНДЕКСАЦИЯ -->
-<div class="theory-card">
-    <h2>🔢 Индексация</h2>
-    <p>Индексы начинаются с <code>0</code>. Отрицательные индексы идут с конца: <code>-1</code> - последний.</p>
-    <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']
-
+        <!-- 2. ИНДЕКСАЦИЯ -->
+        <div class="theory-card">
+            <h2>🔢 Индексация</h2>
+            <p>Индексы начинаются с <code>0</code>. Отрицательные индексы идут с конца: <code>-1</code> - последний.</p>
+            <div class="code-block">car_models = ['Lada Granta', 'KIA', 'Lada Vesta']
 print(car_models[0])</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'KIA', 'Vesta', 'УАЗ']</code></p>
@@ -254,13 +252,11 @@ print(car_models[0])</div>
             </div>
         </div>
 
-
-    <!-- 3. СРЕЗЫ -->
-    <div class="theory-card">
-        <h2>✂️ Срезы списка</h2>
-        <p>Срез: <code>[начало:конец:шаг]</code>. Конечный индекс не включается.</p>
-        <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
-
+        <!-- 3. СРЕЗЫ -->
+        <div class="theory-card">
+            <h2>✂️ Срезы списка</h2>
+            <p>Срез: <code>[начало:конец:шаг]</code>. Конечный индекс не включается.</p>
+            <div class="code-block">cars = ['Lada', 'Niva', 'Vesta', 'УАЗ']
 print(cars[1:3])</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'Niva', 'Vesta', 'УАЗ']</code></p>
@@ -271,13 +267,11 @@ print(cars[1:3])</div>
             </div>
         </div>
 
-
-    <!-- 4. APPEND -->
-    <div class="theory-card">
-        <h2>➕ Добавление: append()</h2>
-        <p>Метод <code>append(x)</code> добавляет элемент <b>строго в конец списка</b>.</p>
-        <div class="code-block">garage = ['Lada', 'Niva']
-
+        <!-- 4. APPEND -->
+        <div class="theory-card">
+            <h2>➕ Добавление: append()</h2>
+            <p>Метод <code>append(x)</code> добавляет элемент <b>строго в конец списка</b>.</p>
+            <div class="code-block">garage = ['Lada', 'Niva']
 garage.append('Aurus')</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'Niva']</code></p>
@@ -287,13 +281,11 @@ garage.append('Aurus')</div>
             </div>
         </div>
 
-
-    <!-- 5. INSERT -->
-    <div class="theory-card">
-        <h2>📍 Добавление: insert()</h2>
-        <p>Метод <code>insert(index, value)</code> вставляет элемент на конкретную позицию.</p>
-        <div class="code-block">garage = ['Lada', 'Niva', 'Aurus']
-
+        <!-- 5. INSERT -->
+        <div class="theory-card">
+            <h2>📍 Добавление: insert()</h2>
+            <p>Метод <code>insert(index, value)</code> вставляет элемент на конкретную позицию.</p>
+            <div class="code-block">garage = ['Lada', 'Niva', 'Aurus']
 garage.insert(1, 'УАЗ')</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Lada', 'Niva', 'Aurus']</code></p>
@@ -304,13 +296,11 @@ garage.insert(1, 'УАЗ')</div>
             </div>
         </div>
 
-
-    <!-- 6. REMOVE -->
-    <div class="theory-card">
-        <h2>🗑️ Удаление: remove()</h2>
-        <p>Метод <code>remove(x)</code> удаляет первый элемент по значению.</p>
-        <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
-
+        <!-- 6. REMOVE -->
+        <div class="theory-card">
+            <h2>🗑️ Удаление: remove()</h2>
+            <p>Метод <code>remove(x)</code> удаляет первый элемент по значению.</p>
+            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
 cart.remove('Хлеб')</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
@@ -320,13 +310,11 @@ cart.remove('Хлеб')</div>
             </div>
         </div>
 
-
-    <!-- 7. POP и DEL -->
-    <div class="theory-card">
-        <h2>🗑️ Удаление: pop() и del</h2>
-        <p>Удаляют по индексу. <code>del</code> просто удаляет, а <code>pop()</code> удаляет и возвращает значение.</p>
-        <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
-
+        <!-- 7. POP и DEL -->
+        <div class="theory-card">
+            <h2>🗑️ Удаление: pop() и del</h2>
+            <p>Удаляют по индексу. <code>del</code> просто удаляет, а <code>pop()</code> удаляет и возвращает значение.</p>
+            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
 del cart[1] # или cart.pop(1)</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
@@ -337,13 +325,11 @@ del cart[1] # или cart.pop(1)</div>
             </div>
         </div>
 
-
-    <!-- 8. CLEAR -->
-    <div class="theory-card">
-        <h2>🗑️ Удаление: clear()</h2>
-        <p>Метод <code>clear()</code> полностью очищает список.</p>
-        <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
-
+        <!-- 8. CLEAR -->
+        <div class="theory-card">
+            <h2>🗑️ Удаление: clear()</h2>
+            <p>Метод <code>clear()</code> полностью очищает список.</p>
+            <div class="code-block">cart = ['Молоко', 'Хлеб', 'Сметана']
 cart.clear()</div>
             <div class="interactive-box">
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
@@ -352,16 +338,13 @@ cart.clear()</div>
             </div>
         </div>
 
-
-    <!-- ЗАДАЧА 1: ЧЕК (ИНТЕРАКТИВ) -->
-    <div class="theory-card">
-        <h2>⌨️ Задача 1: Добавление товаров в конец</h2>
-        <p>Давайте напишем мини-программу, которая просит ввести товар и цену. Пользователь может добавлять товары сколько угодно раз.</p>
-        <p><i>Обратите внимание на форматирование <code>:g</code> при выводе цены. Оно убирает лишние нули у целых чисел (например, 50.0 превращает в 50), но сохраняет копейки (например, 99.50 останется 99.5).</i></p>
-
-
-    <div class="code-block">shopping_list = []
-
+        <!-- ЗАДАЧА 1: ЧЕК (ИНТЕРАКТИВ) -->
+        <div class="theory-card">
+            <h2>⌨️ Задача 1: Добавление товаров в конец</h2>
+            <p>Давайте напишем мини-программу, которая просит ввести товар и цену. Пользователь может добавлять товары сколько угодно раз.</p>
+            <p><i>Обратите внимание на форматирование <code>:g</code> при выводе цены. Оно убирает лишние нули у целых чисел (например, 50.0 превращает в 50), но сохраняет копейки (например, 99.50 останется 99.5).</i></p>
+            
+            <div class="code-block">shopping_list = []
 price_list = []
 
 while True:
@@ -380,631 +363,1010 @@ for i in range(len(shopping_list)):
 total = sum(price_list)
 print(f"Итого: {total:g} руб.")
 print("---------------")</div>
+            
+            <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (интерактив):</p>
+            <div class="interactive-box">
+                <input type="text" id="prodName" placeholder="Название товара (напр. Молоко)">
+                <input type="number" step="0.01" id="prodPrice" placeholder="Цена (напр. 99 или 99.5)">
+                <button onclick="addItem()">Добавить в чек</button>
+                <button onclick="resetCart()" style="background-color: #ccc; color: #333;">Очистить</button>
+                
+                <div class="result-box" id="resultBox">
+                    <strong>--- ВАШ ЧЕК ---</strong><br>
+                    <div id="cartItems"></div>
+                    <strong id="cartTotal"></strong><br>
+                    ---------------
+                </div>
+            </div>
+        </div>
 
+        <!-- ЗАДАЧА 2: ВСТАВКА ПО ИНДЕКСУ (ИНТЕРАКТИВ) -->
+        <div class="theory-card">
+            <h2>📍 Задача 2: Вставка товара по индексу</h2>
+            <p>А что, если нам нужно вставить срочный товар не в конец, а на <b>определенное место</b>?</p>
+            <p>Пользователи привыкли считать с единицы. Чтобы программа поняла, что "место 1" - это нулевой индекс в Python, мы вычтем 1 из введенного числа (<code>index - 1</code>). А чтобы программа не сломалась от слишком большого числа, применим <code>min()</code>.</p>
+            
+            <div class="code-block">shopping_list = ['Хлеб', 'Молоко']
+price_list = [65, 99]
 
-               <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (заполните списки и постройте графики):</p>
-    <div class="interactive-box">
-        <input type="text" id="vizProdName" placeholder="Название авто (напр. Lada)">
-        <input type="number" step="1" id="vizProdPrice" placeholder="Цена (напр. 1500000)">
-        <button onclick="addVizItem()">Добавить авто</button>
-        <button onclick="clearViz()" style="background-color: #ccc; color: #333;">Очистить</button>
+print("Текущий список:")
+for i in range(len(shopping_list)):
+    print(f"{i + 1}. {shopping_list[i]}")
 
-Копировать
-    <div class="result-box" id="vizResultBox" style="margin-bottom: 15px;">
-        <strong>Список авто (cars_list):</strong> <span id="vizListDisplay">[]</span><br>
-        <strong>Список цен (price_list):</strong> <span id="vizPriceDisplay">[]</span>
-    </div>
+product = input('\nВведите срочный товар: ')
+price = float(input('Введите его стоимость: '))
+user_place = int(input(f'На какое место поставить (от 1 до {len(shopping_list) + 1})? '))
 
-    <div style="margin: 10px 0;">
-        <button onclick="drawChart('line')" style="background: #4169E1;">Построить линейный график (plt.plot)</button>
-        <button onclick="drawChart('bar')" style="background: #4169E1;">Построить гистограмму (plt.bar)</button>
-    </div>
+index = min(user_place - 1, len(shopping_list))
 
-    <!-- Контейнер для графика (увеличена высота до 500px) -->
-    <div style="position: relative; height: 500px; width: 100%; background: white; border-radius: 8px; padding: 10px; box-sizing: border-box; display: none; border: 1px solid #ddd;" id="chartContainer">
-        <canvas id="myChart"></canvas>
-    </div>
-</div>
+shopping_list.insert(index, product)
+price_list.insert(index, price)
 
-</div>
-</div> 
-<!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
-<script>
-    // Утилита для вывода
-    function showResult(id, text, isError = false) {
-        const el = document.getElementById(id);
-        el.style.display = 'block';
-        el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : `<span style="color:green;">${text}</span>`;
-    }
-Копировать
-// --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (5-9) ---
-function checkTask5() {
-    const val = document.getElementById('task5Input').value.replace(/\s/g, '').toLowerCase();
-    if (val.includes("'red'") && val.includes("'green'") && val.includes("'blue'") && val.startsWith('[') && val.endsWith(']')) {
-        showResult('resTask5', `>>> Верно! colors = ['red', 'green', 'blue']`);
-    } else {
-        showResult('resTask5', `Ошибка. Попробуй формат: ['red', 'green', 'blue']`, true);
-    }
-}
+print("\n--- ОБНОВЛЕННЫЙ СПИСОК ---")
+for i in range(len(shopping_list)):
+    print(f"{shopping_list[i]} - {price_list[i]:g} руб.")</div>
 
-function checkTask6() {
-    const val = document.getElementById('task6Input').value.trim();
-    if (val === ':2' || val === '0:2') {
-        showResult('resTask6', >>> Верно! [10, 20]);
-    } else {
-        showResult('resTask6', Ошибка. Для первых двух элементов нужен срез :2, true);
-    }
-}
+            <div class="interactive-box">
+                <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Текущий список: Хлеб (65), Молоко (99)</p>
+                <input type="text" id="urgentName" placeholder="Срочный товар" style="width: 35%;">
+                <input type="number" id="urgentPrice" placeholder="Цена" style="width: 25%;">
+                <input type="number" id="urgentPlace" placeholder="Место (1, 2, 3...)" style="width: 25%;">
+                <button onclick="runInsertTask()">Вставить</button>
+                <div class="result-box" id="resInsertTask"></div>
+            </div>
+        </div>
 
-function checkTask7() {
-    const val = document.getElementById('task7Input').value.trim();
-    if (val === '1') {
-        showResult('resTask7', >>> Верно! ['Lada', 'BMW', 'Vesta']);
-    } else {
-        showResult('resTask7', Ошибка. Второй элемент имеет индекс 1., true);
-    }
-}
+        <!-- ЗАДАЧА 3: УДАЛЕНИЕ ПО НАЗВАНИЮ (ИНТЕРАКТИВ) -->
+        <div class="theory-card">
+            <h2>🗑️ Задача 3: Удаление товара по названию</h2>
+            <p>Представим, что пользователь передумал покупать конкретный товар. Мы спрашиваем его название и удаляем первый найденный элемент через <code>remove()</code>.</p>
+            <p><i>Важно: перед удалением нужно проверить, есть ли товар в списке (через <code>in</code>), чтобы программа не выдала ошибку.</i></p>
+            
+            <div class="code-block">shopping_list = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
 
-function checkTask8() {
-    const val = document.getElementById('task8Input').value.trim().toLowerCase();
-    if (val === 'in') {
-        showResult('resTask8', >>> Верно! Оператор in проверяет вхождение.);
-    } else {
-        showResult('resTask8', Ошибка. Для проверки вхождения используется оператор in., true);
-    }
-}
+print("Текущая корзина:", shopping_list)
+product = input('Какой товар удалить? ')
 
-function checkTask9() {
-    const val = document.getElementById('task9Input').value.trim().toLowerCase();
-    if (val === 'remove') {
-        showResult('resTask9', >>> Верно! ['Lada', 'Vesta']);
-    } else {
-        showResult('resTask9', Ошибка. Для удаления по значению используется метод remove., true);
-    }
-}
+if product in shopping_list:
+    shopping_list.remove(product)
+    print(f"\nТовар '{product}' удален.")
+    print("Новая корзина:", shopping_list)
+else:
+    print("\nТакого товара нет в корзине.")</div>
 
-// --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (10-15) ---
-function checkTask10() {
-    const val = document.getElementById('task10Input').value.replace(/\s/g, '');
-    if (val === '[]') {
-        showResult('resTask10', >>> Верно! my_list = []);
-    } else {
-        showResult('resTask10', Ошибка. Пустой список создается с помощью []., true);
-    }
-}
+            <div class="interactive-box">
+                <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Текущая корзина: ['Молоко', 'Хлеб', 'Сметана', 'Сыр']</p>
+                <input type="text" id="removeTaskName" placeholder="Что удалить?" style="width: 50%;">
+                <button onclick="runRemoveTask()">Удалить по названию</button>
+                <div class="result-box" id="resRemoveTask"></div>
+            </div>
+        </div>
 
-function checkTask11() {
-    const val = document.getElementById('task11Input').value.replace(/\s/g, '').toLowerCase();
-    if (val === "append('яблоко')" || val === 'append("яблоко")') {
-        showResult('resTask11', >>> Верно! ['Банан', 'Апельсин', 'Яблоко']);
-    } else {
-        showResult('resTask11', Ошибка. Используй метод append() и не забудь кавычки., true);
-    }
-}
+        <!-- ЗАДАЧА 4: УДАЛЕНИЕ ПО ИНДЕКСУ (ИНТЕРАКТИВ) -->
+        <div class="theory-card">
+            <h2>🗑️ Задача 4: Удаление по номеру (индексу)</h2>
+            <p>Иногда проще удалить товар не по названию, а по его номеру в списке. Пользователь вводит номер (с 1), а мы переводим его в индекс (вычитая 1) и удаляем через <code>del</code> или <code>pop</code>.</p>
+            
+            <div class="code-block">shopping_list = ['Молоко', 'Хлеб', 'Сметана', 'Сыр']
 
-function checkTask12() {
-    const val = document.getElementById('task12Input').value.replace(/\s/g, '').toLowerCase();
-    if (val === "insert(1,'груша')" || val === 'insert(1,"груша")') {
-        showResult('resTask12', >>> Верно! ['Банан', 'Груша', 'Апельсин']);
-    } else {
-        showResult('resTask12', Ошибка. Используй insert(1, 'Груша')., true);
-    }
-}
+print("Ваша корзина:")
+for i in range(len(shopping_list)):
+    print(f"{i + 1}. {shopping_list[i]}")
 
-function checkTask13() {
-    const val = document.getElementById('task13Input').value.replace(/\s/g, '').toLowerCase();
-    if (val === "remove('банан')" || val === 'remove("банан")') {
-        showResult('resTask13', >>> Верно! ['Апельсин', 'Яблоко']);
-    } else {
-        showResult('resTask13', Ошибка. Используй метод remove('Банан')., true);
-    }
-}
+number = int(input('\nКакой по счету товар удалить? '))
 
-function checkTask14() {
-    const val = document.getElementById('task14Input').value.trim().toLowerCase();
-    if (val === 'del') {
-        showResult('resTask14', >>> Верно! ['Банан', 'Яблоко']);
-    } else {
-        showResult('resTask14', Ошибка. Для удаления по индексу используется оператор del., true);
-    }
-}
+if 1 <= number <= len(shopping_list):
+    index = number - 1
+    del shopping_list[index] 
+    # или: removed_item = shopping_list.pop(index)
+    print("\nТовар удален.")
+    print("Новая корзина:", shopping_list)
+else:
+    print("\nОшибка: такого номера нет.")</div>
 
-function checkTask15() {
-    const val = document.getElementById('task15Input').value.replace(/\s/g, '').toLowerCase();
-    if (val === 'clear()') {
-        showResult('resTask15', >>> Верно! []);
-    } else {
-        showResult('resTask15', Ошибка. Для полной очистки используется метод clear()., true);
-    }
-}
+            <div class="interactive-box">
+                <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Корзина: 1. Молоко, 2. Хлеб, 3. Сметана, 4. Сыр</p>
+                <input type="number" id="popTaskNum" placeholder="Номер (с 1)" style="width: 30%;">
+                <button onclick="runDelTask()">Удалить через del</button>
+                <button onclick="runPopTask()" style="background-color: #5cb85c;">Удалить через pop</button>
+                <div class="result-box" id="resPopTask"></div>
+            </div>
+        </div>
 
-// --- НОВЫЕ ЗАДАЧИ (16-18) ---
+        <!-- ПРАКТИКА: ВЫБОР ИЗ КАТАЛОГА (ИНТЕРАКТИВ) -->
+        <div class="theory-card">
+            <h2>🛍️ Практика: Каталог товаров</h2>
+            <p>У нас есть каталог. Пользователь вводит название товара, а программа добавляет его в корзину. Введите "стоп", чтобы завершить.</p>
+            
+            <div class="code-block">catalog_products = ['Хлеб', 'Молоко', 'Сметана', 'Сыр']
+catalog_prices = [65, 99, 85, 150]
 
-// Живое обновление для задачи 16
-document.getElementById('task16NamesInput').addEventListener('input', function() {
-    const names = this.value.trim() || 'иванов иван, петрова мария, иванов иван';
-    document.getElementById('task16NamesDisplay').textContent = names;
-});
+shopping_list = []
+prices_list = []
 
-document.getElementById('task16TargetInput').addEventListener('input', function() {
-    const target = this.value.trim() || 'иванов иван';
-    document.getElementById('task16TargetDisplay').textContent = target;
-});
-
-function checkTask16() {
-    const method = document.getElementById('task16InputMethod').value.trim().toLowerCase();
-    const countFunc = document.getElementById('task16InputCount').value.trim().toLowerCase();
-    const sameCountFunc = document.getElementById('task16InputSameCount').value.trim().toLowerCase();
-
-const rawInput = document.getElementById('task16NamesInput').value.trim() || 'иванов иван, петрова мария, иванов иван';
-const targetInput = document.getElementById('task16TargetInput').value.trim() || 'иванов иван';
-
-const clients = rawInput.split(',').map(s => s.trim()).filter(s => s !== '');
-
-let isMethodCorrect = (method === 'title');
-let isCountCorrect = (countFunc === 'len');
-let isSameCountCorrect = (sameCountFunc === 'count');
-
-if (isMethodCorrect && isCountCorrect && isSameCountCorrect) {
-    const formattedNames = clients.map(name => 
-        name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
-    );
+while True:
+    choice = input('Что купить? (или "стоп"): ')
     
-    const targetName = targetInput.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
-    
-    const sameCount = formattedNames.filter(name => name === targetName).length;
-    
-    showResult('resTask16', 
-        `>>> Верно!<br>
-        Клиенты: [${formattedNames.map(n => `'${n}'`).join(', ')}]<br>
-        Всего клиентов: ${clients.length}<br>
-        Клиент ${targetName} встречается ${sameCount} раз(а)`
-    );
-} else {
-    let errorMsg = "Ошибка. ";
-    if (!isMethodCorrect) errorMsg += "Для заглавных букв используется title(). ";
-    if (!isCountCorrect) errorMsg += "Для подсчета общего количества используется len(). ";
-    if (!isSameCountCorrect) errorMsg += "Для подсчета повторений используется count().";
-    showResult('resTask16', errorMsg, true);
-}
+    if choice.lower() == 'стоп':
+        break
+        
+    if choice in catalog_products:
+        idx = catalog_products.index(choice)
+        shopping_list.append(catalog_products[idx])
+        prices_list.append(catalog_prices[idx])
+        print(f"Добавлено: {choice} за {catalog_prices[idx]} руб.")
+    else:
+        print("Такого товара нет.")
 
+# Оформление покупки
+print("\n--- ВАШ ЧЕК ---")
+if len(shopping_list) == 0:
+    print("Корзина пуста.")
+else:
+    total = 0
+    for i in range(len(shopping_list)):
+        print(f"{shopping_list[i]} - {prices_list[i]} руб.")
+        total += prices_list[i]
+    print(f"Итого: {total} руб.")</div>
 
-}
+            <div class="interactive-box">
+                <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Доступно: Хлеб (65), Молоко (99), Сметана (85), Сыр (150)</p>
+                <input type="text" id="catalogChoice" placeholder="Что купить? (или 'стоп')" style="width: 50%;">
+                <button onclick="runCatalogTask()">Купить</button>
+                <div class="result-box" id="resCatalogTask">
+                    <div id="catalogCartList"></div>
+                    <strong id="catalogCartTotal"></strong>
+                </div>
+            </div>
+        </div>
 
-// Живое обновление для задачи 17
-document.getElementById('task17StatusInput').addEventListener('input', function() {
-    const status = this.value.trim() || 'гость';
-    document.getElementById('task17StatusDisplay').textContent = status;
-});
+        <!-- БОЛЬШАЯ ПРОВЕРКА: ПИШЕМ КОД САМИ -->
+        <div class="theory-card">
+            <h2>🏆 Большая проверка: Пишем код</h2>
+            <p>Теперь давайте проверим, как вы усвоили материал. Впишите недостающий код в каждой задаче.</p>
 
-function checkTask17() {
-    const method = document.getElementById('task17Input').value.trim().toLowerCase();
-    const statusInput = document.getElementById('task17StatusInput').value.trim();
-    const status = statusInput || 'гость';
+            <!-- Задача 5: Создание -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 5.</b> Создайте список <code>colors</code> из строк 'red', 'green', 'blue'.</p>
+                <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="..." style="width: 200px;">"></div>
+                <button onclick="checkTask5()" class="btn" style="width: auto; margin: 10px 0 0 0; padding: 8px 16px; font-size: 16px;">Проверить код</button>
+                <div class="result-box" id="resTask5"></div>
+            </div>
 
+            <!-- Задача 6: Срез -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 6.</b> Выведите первые два элемента списка <code>nums</code> с помощью среза.</p>
+                <div class="code-block">nums = [10, 20, 30, 40]
+print(nums[<input type="text" id="task6Input" class="blank-input" placeholder="...", style="width: 100px;">])</div>
+                <button onclick="checkTask6()">Проверить код</button>
+                <div class="result-box" id="resTask6"></div>
+            </div>
 
-if (method === 'upper') {
-    const result = status.toUpperCase();
-    showResult('resTask17', `>>> Верно! Результат: '${result}'`);
-} else {
-    showResult('resTask17', `Ошибка. Для перевода всей строки в верхний регистр используется upper().`, true);
-}
+            <!-- Задача 7: Изменение -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 7.</b> Замените второй элемент списка (индекс 1) на 'Aurus'.</p>
+                <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
+cars[<input type="text" id="task7Input" class="blank-input" placeholder="...", style="width: 100px;">] = 'Aurus'</div>
+                <button onclick="checkTask7()">Проверить код</button>
+                <div class="result-box" id="resTask7"></div>
+            </div>
 
+            <!-- Задача 8: Проверка вхождения -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 8.</b> Проверьте, есть ли слово 'яблоко' в списке <code>fruits</code>.</p>
+                <div class="code-block">fruits = ['банан', 'апельсин']
+if 'яблоко' <input type="text" id="task8Input" class="blank-input" placeholder="...", style="width: 80px;"> fruits:
+    print("Есть!")</div>
+                <button onclick="checkTask8()">Проверить код</button>
+                <div class="result-box" id="resTask8"></div>
+            </div>
 
-}
+            <!-- Задача 9: Комбинированная (поиск и удаление) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 9.</b> Удалите 'KIA' из списка <code>cars</code> по значению.</p>
+                <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
+cars.<input type="text" id="task9Input" class="blank-input" placeholder="...">('KIA')</div>
+                <button onclick="checkTask9()">Проверить код</button>
+                <div class="result-box" id="resTask9"></div>
+            </div>
 
-// Живое обновление для задачи 18
-document.getElementById('task18QueryInput').addEventListener('input', function() {
-    const query = this.value.trim() || 'Ноутбук';
-    document.getElementById('task18QueryDisplay').textContent = query;
-});
+            <!-- Задача 10 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 10.</b> Создайте <b>пустой</b> список с именем <code>my_list</code>.</p>
+                <div class="code-block">my_list = <input type="text" id="task10Input" class="blank-input" placeholder="...", style="width: 100px;"></div>
+                <button onclick="checkTask10()">Проверить код</button>
+                <div class="result-box" id="resTask10"></div>
+            </div>
 
-function checkTask18() {
-    const method = document.getElementById('task18Input').value.trim().toLowerCase();
-    const queryInput = document.getElementById('task18QueryInput').value.trim();
-    const query = queryInput || 'Ноутбук';
-    const products = ['смартфон', 'ноутбук', 'наушники'];
+            <!-- Задача 11 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 11.</b> Добавьте слово <code>'Яблоко'</code> в конец готового списка <code>fruits</code>.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин']
+fruits.<input type="text" id="task11Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask11()">Проверить код</button>
+                <div class="result-box" id="resTask11"></div>
+            </div>
 
+            <!-- Задача 12 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 12.</b> Вставьте слово <code>'Груша'</code> на <b>второе место</b> (то есть под <b>индекс 1</b>).</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин']
+fruits.<input type="text" id="task12Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask12()">Проверить код</button>
+                <div class="result-box" id="resTask12"></div>
+            </div>
 
-if (method === 'lower') {
-    const normalizedQuery = query.toLowerCase();
-    if (products.includes(normalizedQuery)) {
-        showResult('resTask18', `>>> Верно!<br>Товар '${query}' найден`);
-    } else {
-        showResult('resTask18', `>>> Верно!<br>Но товара '${query}' нет в каталоге.`, false);
-    }
-} else {
-    showResult('resTask18', `Ошибка. Для приведения к нижнему регистру используется lower().`, true);
-}
+            <!-- Задача 13 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 13.</b> Удалите слово <code>'Банан'</code> из списка по его <b>названию</b>.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
+fruits.<input type="text" id="task13Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
+                <button onclick="checkTask13()">Проверить код</button>
+                <div class="result-box" id="resTask13"></div>
+            </div>
 
+            <!-- Задача 14 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 14.</b> Удалите второй элемент (индекс 1) из списка с помощью оператора <code>del</code>.</p>
+                <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
+<input type="text" id="task14Input" class="blank-input" placeholder="..." style="width: 80px;"> fruits[1]</div>
+                <button onclick="checkTask14()">Проверить код</button>
+                <div class="result-box" id="resTask14"></div>
+            </div>
 
-}
+               <!-- Задача 15 -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 15.</b> Полностью очистите список <code>cart</code>, оставив его пустым.</p>
+                <div class="code-block">cart = ['Хлеб', 'Молоко', 'Сыр']
+cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." style="width: 100px;"></div>
+                <button onclick="checkTask15()">Проверить код</button>
+                <div class="result-box" id="resTask15"></div>
+            </div>
 
-// --- ИНТЕРАКТИВ (ТЕОРИЯ) ---
-function runCreate() {
-    const input = document.getElementById('createInput').value;
-    if (!input.trim()) return;
-    const arr = input.split(',').map(s => s.trim());
-    showResult('resCreate', >>> ['${arr.join("', '")}']);
-}
+            <!-- Задача 16 (ОБНОВЛЕННАЯ) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первые буквы имен заглавными, посчитать <b>общее количество</b> клиентов и узнать, <b>сколько раз встречается конкретный клиент</b>.</p>
+                
+                <div style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+                    <div>
+                        <label style="font-size: 16px; font-weight: bold;">Введите клиентов (через запятую):</label>
+                        <input type="text" id="task16NamesInput" class="blank-input" placeholder="напр. иванов иван, петрова мария, иванов иван" style="width: 350px; font-size: 16px; padding: 5px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 16px; font-weight: bold;">Кого ищем?</label>
+                        <input type="text" id="task16TargetInput" class="blank-input" placeholder="напр. иванов иван" style="width: 150px; font-size: 16px; padding: 5px;">
+                    </div>
+                </div>
 
-function runIndex() {
-    const list = ['Lada', 'KIA', 'Vesta', 'УАЗ'];
-    const index = parseInt(document.getElementById('indexInput').value);
-    if (isNaN(index)) return;
-    if (index >= list.length || index < -list.length) {
-        showResult('resIndex', IndexError: list index out of range, true);
-    } else {
-        const realIndex = index < 0 ? list.length + index : index;
-        showResult('resIndex', >>> ${list[realIndex]});
-    }
-}
+                <div class="code-block"># Ввод клиентов (каждое имя через запятую)
+raw_input = '<span id="task16NamesDisplay" style="color: #4169E1;">иванов иван, петрова мария, иванов иван</span>'
+clients = [name.strip() for name in raw_input.split(',')]
 
-function runSlice() {
-    const list = ['Lada', 'Niva', 'Vesta', 'УАЗ'];
-    const start = parseInt(document.getElementById('sliceStart').value) || 0;
-    const end = parseInt(document.getElementById('sliceEnd').value);
-    if (isNaN(end)) return;
-    const sliced = list.slice(start, end);
-    showResult('resSlice', >>> [${sliced.map(s => '${s}').join(', ')}]);
-}
+# Делаем первую букву заглавной для всех
+formatted_names = [client.<input type="text" id="task16InputMethod" class="blank-input" placeholder="метод" style="width: 80px;">() for client in clients]
 
-function runAppend() {
-    const list = ['Lada', 'Niva'];
-    const val = document.getElementById('appendInput').value;
-    if (!val.trim()) return;
-    list.push(val);
-    showResult('resAppend', >>> [${list.map(s => '${s}').join(', ')}]);
-}
+# Считаем общее количество клиентов
+count = <input type="text" id="task16InputCount" class="blank-input" placeholder="функция" style="width: 80px;">(clients)
 
-function runInsert() {
-    const list = ['Lada', 'Niva', 'Aurus'];
-    const index = parseInt(document.getElementById('insertIndex').value);
-    const val = document.getElementById('insertValue').value;
-    if (isNaN(index) || !val.trim()) return;
-    list.splice(index, 0, val);
-    showResult('resInsert', >>> [${list.map(s => '${s}').join(', ')}]);
-}
+# Считаем, сколько раз встречается конкретный клиент
+target_name = '<span id="task16TargetDisplay" style="color: #4169E1;">иванов иван</span>'.title()
+same_count = clients.<input type="text" id="task16InputSameCount" class="blank-input" placeholder="метод" style="width: 80px;">(target_name)
 
-function runRemove() {
-    const list = ['Молоко', 'Хлеб', 'Сметана'];
-    const val = document.getElementById('removeInput').value;
-    if (!val.trim()) return;
-    const idx = list.indexOf(val);
-    if (idx !== -1) {
-        list.splice(idx, 1);
-        showResult('resRemove', >>> [${list.map(s => '${s}').join(', ')}]);
-    } else {
-        showResult('resRemove', ValueError: list.remove(x): x not in list, true);
-    }
-}
+print("Клиенты:", formatted_names)
+print("Всего клиентов:", count)
+print(f"Клиент {target_name} встречается {same_count} раз(а)")</div>
+                
+                <button onclick="checkTask16()">Проверить код</button>
+                <div class="result-box" id="resTask16"></div>
+            </div>
 
-function runDel() {
-    const list = ['Молоко', 'Хлеб', 'Сметана'];
-    const index = parseInt(document.getElementById('popIndex').value);
-    if (isNaN(index)) return;
-    if (index >= list.length || index < -list.length) {
-        showResult('resPop', IndexError: list assignment index out of range, true);
-        return;
-    }
-    const realIndex = index < 0 ? list.length + index : index;
-    list.splice(realIndex, 1);
-    showResult('resPop', (del) >>> [${list.map(s => '${s}').join(', ')}]);
-}
+            <!-- Задача 17 (ОБНОВЛЕННАЯ) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 17.</b> Нужно вывести статус в верхнем регистре.</p>
+                
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите статус:</label>
+                    <input type="text" id="task17StatusInput" class="blank-input" placeholder="напр. гость" style="width: 200px; font-size: 16px; padding: 5px;">
+                </div>
 
-function runPop() {
-    const list = ['Молоко', 'Хлеб', 'Сметана'];
-    const index = parseInt(document.getElementById('popIndex').value);
-    if (isNaN(index)) return;
-    if (index >= list.length || index < -list.length) {
-        showResult('resPop', IndexError: pop index out of range, true);
-        return;
-    }
-    const realIndex = index < 0 ? list.length + index : index;
-    const popped = list.splice(realIndex, 1)[0];
-    showResult('resPop', Удалено: '${popped}'<br>(pop) >>> [${list.map(s => '${s}').join(', ')}]);
-}
+                <div class="code-block">status = '<span id="task17StatusDisplay" style="color: #4169E1;">гость</span>'
+print(status.<input type="text" id="task17Input" class="blank-input" placeholder="..." style="width: 120px;">())</div>
+                
+                <button onclick="checkTask17()">Проверить код</button>
+                <div class="result-box" id="resTask17"></div>
+            </div>
 
-function runClear() {
-    showResult('resClear', >>> []);
-}
+            <!-- Задача 18 (ОБНОВЛЕННАЯ) -->
+            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                <p><b>Задача 18.</b> Поиск не находит товар, потому что регистр не совпадает. Впишите метод, который приведёт запрос к нижнему регистру.</p>
+                
+                <div style="margin-bottom: 10px;">
+                    <label style="font-size: 16px; font-weight: bold;">Введите поисковый запрос:</label>
+                    <input type="text" id="task18QueryInput" class="blank-input" placeholder="напр. Ноутбук" style="width: 200px; font-size: 16px; padding: 5px;">
+                </div>
 
-// --- ИНТЕРАКТИВНЫЕ ЗАДАЧИ ---
-function runInsertTask() {
-    const name = document.getElementById('urgentName').value.trim();
-    const price = parseFloat(document.getElementById('urgentPrice').value);
-    const place = parseInt(document.getElementById('urgentPlace').value);
-    if (!name || isNaN(price) || isNaN(place)) { alert("Заполните все поля!"); return; }
-    const products = ['Хлеб', 'Молоко'];
-    const prices = [65, 99];
-    const index = Math.min(place - 1, products.length);
-    products.splice(index, 0, name);
-    prices.splice(index, 0, price);
-    let output = "";
-    for (let i = 0; i < products.length; i++) {
-        output += ${products[i]} - ${prices[i]} руб.<br>;
-    }
-    showResult('resInsertTask', output);
-}
+                <div class="code-block">products = ['смартфон', 'ноутбук', 'наушники']
+search_query = '<span id="task18QueryDisplay" style="color: #4169E1;">Ноутбук</span>'
 
-function runRemoveTask() {
-    const val = document.getElementById('removeTaskName').value.trim();
-    if (!val) return;
-    const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
-    const idx = cart.indexOf(val);
-    if (idx !== -1) {
-        cart.splice(idx, 1);
-        showResult('resRemoveTask', Товар '${val}' удален.<br>Новая корзина: [${cart.map(s => '${s}').join(', ')}]);
-    } else {
-        showResult('resRemoveTask', Такого товара нет в корзине., true);
-    }
-}
+normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="метод" style="width: 100px;">()
 
-function runDelTask() {
-    const num = parseInt(document.getElementById('popTaskNum').value);
-    if (isNaN(num)) return;
-    const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
-    if (num >= 1 && num <= cart.length) {
-        cart.splice(num - 1, 1);
-        showResult('resPopTask', (del) Новая корзина: [${cart.map(s => '${s}').join(', ')}]);
-    } else {
-        showResult('resPopTask', Ошибка: такого номера нет., true);
-    }
-}
+if normalized_query in products:
+    print('Товар найден')
+else:
+    print('Товар не найден')</div>
+                
+                <button onclick="checkTask18()">Проверить код</button>
+                <div class="result-box" id="resTask18"></div>
+            </div>
+        </div> <!-- Закрытие блока "Большая проверка" -->
 
-function runPopTask() {
-    const num = parseInt(document.getElementById('popTaskNum').value);
-    if (isNaN(num)) return;
-    const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
-    if (num >= 1 && num <= cart.length) {
-        const removed = cart.splice(num - 1, 1)[0];
-        showResult('resPopTask', (pop) Удалено: '${removed}'<br>Новая корзина: [${cart.map(s => '${s}').join(', ')}]);
-    } else {
-        showResult('resPop', Ошибка: такого номера нет., true);
-    }
-}
+        <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
+        <div class="theory-card" style="text-align: center; padding-bottom: 30px; margin-bottom: 20px; position: relative; overflow: visible;">
+            <h2 style="justify-content: center; border-bottom: none; font-size: 28px; margin-bottom: 15px; z-index: 2; position: relative;">Теория пройдена!</h2>
+            
+            <p style="font-weight: bold; font-size: 20px; margin-bottom: 15px; text-align: center; z-index: 2; position: relative;">
+                Готов проверить знания на практике
+            </p>
+            
+            <div style="display: flex; justify-content: center; margin-top: 5px;">
+                <svg width="90" height="110" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#6CB4FF" />
+                            <stop offset="100%" stop-color="#2B6CB0" />
+                        </linearGradient>
+                        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+                            <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.15"/>
+                        </filter>
+                    </defs>
+                    
+                    <path d="M 30 20 
+                             C 30 20, 30 50, 60 60 
+                             L 60 40 
+                             L 90 75 
+                             L 50 105 
+                             L 50 80 
+                             C 10 70, 10 30, 10 30 
+                             Z" 
+                          fill="url(#arrowGrad)" 
+                          filter="url(#shadow)"
+                          stroke="white" 
+                          stroke-width="2" 
+                          stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </div>
 
-// --- КАТАЛОГ ---
-let catalogCart = [];
-function runCatalogTask() {
-    const choice = document.getElementById('catalogChoice').value.trim();
-    const resultBox = document.getElementById('resCatalogTask');
-    const listDiv = document.getElementById('catalogCartList');
-    const totalDiv = document.getElementById('catalogCartTotal');
-    if (!choice) return;
-    resultBox.style.display = 'block';
-    if (choice.toLowerCase() === 'стоп') {
-        listDiv.innerHTML += <br><b>Оформление:</b><br>;
-        let total = 0;
-        catalogCart.forEach(item => {
-            listDiv.innerHTML += ${item.name} - ${item.price} руб.<br>;
-            total += item.price;
-        });
-        totalDiv.innerHTML = Итого: ${total} руб.;
-        return;
-    }
-    const catalog = [
-        { name: 'Хлеб', price: 65 },
-        { name: 'Молоко', price: 99 },
-        { name: 'Сметана', price: 85 },
-        { name: 'Сыр', price: 150 }
-    ];
-    const found = catalog.find(item => item.name.toLowerCase() === choice.toLowerCase());
-    if (found) {
-        catalogCart.push(found);
-        listDiv.innerHTML += Добавлено: ${found.name} за ${found.price} руб.<br>;
-    } else {
-        listDiv.innerHTML += <span style="color:red;">Такого товара нет.</span><br>;
-    }
-}
+        <!-- НОВАЯ КАРТОЧКА: ВИЗУАЛИЗАЦИЯ (ГРАФИКИ) -->
+        <div class="theory-card">
+            <h2>📊 Зачем нужны списки? Визуализация!</h2>
+            <p>Представьте, что вы собрали данные о ценах на автомобили в два списка: названия и цены. С помощью библиотеки <code>matplotlib</code> в Python можно наглядно показать эти данные. Давайте попробуем!</p>
+            
+            <div class="code-block"># Пример кода в Python
+import matplotlib.pyplot as plt
 
-// --- ЧЕК ---
-let cartProducts = [];
-let cartPrices = [];
-function addItem() {
-    const nameInput = document.getElementById('prodName');
-    const priceInput = document.getElementById('prodPrice');
-    const name = nameInput.value.trim();
-    const price = parseFloat(priceInput.value);
-    if (name === "" || isNaN(price) || price < 0) { alert("Введите корректные данные!"); return; }
-    cartProducts.push(name);
-    cartPrices.push(price);
-    nameInput.value = ''; priceInput.value = '';
-    updateReceipt();
-}
-function resetCart() {
-    cartProducts = []; cartPrices = [];
-    document.getElementById('resultBox').style.display = 'none';
-}
-function updateReceipt() {
-    const resultBox = document.getElementById('resultBox');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    resultBox.style.display = 'block';
-    cartItems.innerHTML = '';
-    let total = 0;
-    for (let i = 0; i < cartProducts.length; i++) {
-        let displayPrice = cartPrices[i];
-        if (displayPrice % 1 === 0) displayPrice = displayPrice.toFixed(0);
-        else displayPrice = displayPrice.toFixed(2).replace(/.?0+$/, "");
-        cartItems.innerHTML += `${cartProducts[i]} - ${displayPrice} руб.<br>`;
-        total += cartPrices[i];
-    }
-    let displayTotal = total;
-    if (displayTotal % 1 === 0) displayTotal = displayTotal.toFixed(0);
-    else displayTotal = displayTotal.toFixed(2).replace(/\.?0+$/, "");
-    cartTotal.innerHTML = Итого: ${displayTotal} руб.;
-}
+# Данные по автомобилям
+cars_list = ['Lada Granta', 'Lada Vesta', 'Niva Travel', 'УАЗ Патриот', 'Kia Rio', 'Москвич 3', 'OMODA C5']
+price_list = [1050000, 1750000, 1550000, 2000000, 2250000, 1780000, 2450000]
 
-// --- ВИЗУАЛИЗАЦИЯ ДАННЫХ (ГРАФИКИ) ---
+# Построение линейного графика
+plt.plot(cars_list, price_list, marker='o', linewidth=2)
+plt.title("Цены на автомобили")
+plt.xlabel("Автомобили")
+plt.ylabel("Цена (руб.)")
+plt.xticks(rotation=15)
+plt.show()
 
-// Инициализируем массивы начальными значениями (автомобили)
-let vizNames = ['Lada Granta', 'Lada Vesta', 'Niva Travel', 'УАЗ Патриот', 'Kia Rio', 'Москвич 3', 'OMODA C5'];
-let vizPrices = [1050000, 1750000, 1550000, 2000000, 2250000, 1780000, 2450000];
-let myChartInstance = null;
+# Построение гистограммы (столбцов)
+plt.bar(cars_list, price_list)
+plt.title("Сравнение цен")
+plt.xticks(rotation=15)
+plt.show()</div>
 
-// Вызываем отображение данных при загрузке страницы
-window.onload = function() {
-    updateVizDisplay();
-};
+            <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (заполните списки и постройте графики):</p>
+            <div class="interactive-box">
+                <input type="text" id="vizProdName" placeholder="Название авто (напр. Lada)">
+                <input type="number" step="1" id="vizProdPrice" placeholder="Цена (напр. 1500000)">
+                <button onclick="addVizItem()">Добавить авто</button>
+                <button onclick="clearViz()" style="background-color: #ccc; color: #333;">Очистить</button>
+                
+                <div class="result-box" id="vizResultBox" style="margin-bottom: 15px;">
+                    <strong>Список авто (cars_list):</strong> <span id="vizListDisplay">[]</span><br>
+                    <strong>Список цен (price_list):</strong> <span id="vizPriceDisplay">[]</span>
+                </div>
 
-function updateVizDisplay() {
-    const listDisplay = document.getElementById('vizListDisplay');
-    const priceDisplay = document.getElementById('vizPriceDisplay');
-    const resBox = document.getElementById('vizResultBox');
+                <div style="margin: 10px 0;">
+                    <button onclick="drawChart('line')" style="background: #4169E1;">Построить линейный график (plt.plot)</button>
+                    <button onclick="drawChart('bar')" style="background: #4169E1;">Построить гистограмму (plt.bar)</button>
+                </div>
 
-resBox.style.display = 'block';
-listDisplay.textContent = `[${vizNames.map(n => `'${n}'`).join(', ')}]`;
-priceDisplay.textContent = `[${vizPrices.join(', ')}]`;
+                <!-- Контейнер для графика (увеличена высота до 500px) -->
+                <div style="position: relative; height: 500px; width: 100%; background: white; border-radius: 8px; padding: 10px; box-sizing: border-box; display: none; border: 1px solid #ddd;" id="chartContainer">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
 
-
-}
-
-function addVizItem() {
-    const nameInput = document.getElementById('vizProdName');
-    const priceInput = document.getElementById('vizProdPrice');
-    const name = nameInput.value.trim();
-    const price = parseFloat(priceInput.value);
-
-
-if (!name || isNaN(price)) {
-    alert("Пожалуйста, введите корректное название и цену!");
-    return;
-}
-
-// Проверка на дубликаты: если авто уже есть, обновляем цену
-const existingIndex = vizNames.indexOf(name);
-if (existingIndex !== -1) {
-    vizPrices[existingIndex] = price; 
-} else {
-    vizNames.push(name);
-    vizPrices.push(price);
-}
-
-nameInput.value = '';
-priceInput.value = '';
-updateVizDisplay();
-
-
-}
-
-function clearViz() {
-    vizNames = [];
-    vizPrices = [];
-    document.getElementById('vizResultBox').style.display = 'none';
-    document.getElementById('chartContainer').style.display = 'none';
-    if (myChartInstance) {
-        myChartInstance.destroy();
-        myChartInstance = null;
-    }
-    // После очистки обновляем экран (пустые списки)
-    updateVizDisplay();
-}
-
-function drawChart(type) {
-    if (vizNames.length === 0) {
-        alert("Сначала добавьте хотя бы один товар!");
-        return;
-    }
-
-
-document.getElementById('chartContainer').style.display = 'block';
-const ctx = document.getElementById('myChart').getContext('2d');
-
-if (myChartInstance) {
-    myChartInstance.destroy();
-}
-
-const isLine = type === 'line';
-
-myChartInstance = new Chart(ctx, {
-    type: type,
-    data: {
-        labels: vizNames,
-        datasets: [{
-            label: 'Цена (руб.)',
-            data: vizPrices,
-            borderColor: '#104E8B', 
-            backgroundColor: isLine ? '#104E8B' : '#1E90FF', 
-            borderWidth: isLine ? 3 : 2, 
-            pointBackgroundColor: '#104E8B',
-            pointBorderColor: '#ffffff',
-            pointBorderWidth: 2,
-            pointRadius: isLine ? 7 : 0, 
-            pointHoverRadius: 9,
-            tension: 0,
-            fill: false
-        }]
-    },
-    plugins: [ChartDataLabels],
-    options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: { duration: 500 },
-        plugins: {
-            datalabels: {
-                display: false // <--- ОТКЛЮЧАЕМ ПОДПИСИ НАД СТОЛБЦАМИ
-            },
-            title: {
-                display: true,
-                text: 'Стоимость автомобилей',
-                color: '#000000',
-                font: { family: 'Times New Roman', size: 22, weight: 'bold' },
-                padding: { bottom: 15 }
-            },
-            legend: { display: false },
-            tooltip: {
-                backgroundColor: '#333',
-                titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
-                bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-                title: { 
-                    display: true, 
-                    text: 'Цена (руб.)', 
-                    color: '#000000',
-                    font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
-                },
-                ticks: {
-                    color: '#000000',
-                    font: { family: 'Times New Roman', size: 14, weight: 'bold' },
-                    // Красивое отображение миллионов на оси Y
-                    callback: function(value) {
-                        if (value >= 1000000) return (value / 1000000) + ' млн';
-                        if (value >= 1000) return (value / 1000) + ' тыс.';
-                        return value;
-                    }
-                },
-                grid: { color: '#a0a0a0', lineWidth: 1.5 }
-            },
-            x: {
-                title: { 
-                    display: true, 
-                    text: 'Автомобили', 
-                    color: '#000000',
-                    font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
-                },
-                ticks: {
-                    display: true,
-                    maxRotation: 45, // Наклоняем текст под 45 градусов
-                    minRotation: 45, // Наклоняем текст под 45 градусов
-                    autoSkip: false, // Показываем ВСЕ названия без пропусков
-                    color: '#000000',
-                    font: { family: 'Times New Roman', size: 13, weight: 'bold' } // Чуть уменьшили шрифт
-                },
-                grid: { display: false }
+    </div> 
+    <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
+    <script>
+        // Утилита для вывода
+        function showResult(id, text, isError = false) {
+            const el = document.getElementById(id);
+            el.style.display = 'block';
+            el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : `<span style="color:green;">${text}</span>`;
+        }
+        
+        // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (5-9) ---
+        function checkTask5() {
+            const val = document.getElementById('task5Input').value.replace(/\s/g, '').toLowerCase();
+            if (val.includes("'red'") && val.includes("'green'") && val.includes("'blue'") && val.startsWith('[') && val.endsWith(']')) {
+                showResult('resTask5', `>>> Верно! colors = ['red', 'green', 'blue']`);
+            } else {
+                showResult('resTask5', `Ошибка. Попробуй формат: ['red', 'green', 'blue']`, true);
             }
         }
-    }
-});
 
+        function checkTask6() {
+            const val = document.getElementById('task6Input').value.trim();
+            if (val === ':2' || val === '0:2') {
+                showResult('resTask6', `>>> Верно! [10, 20]`);
+            } else {
+                showResult('resTask6', `Ошибка. Для первых двух элементов нужен срез :2`, true);
+            }
+        }
 
-}
+        function checkTask7() {
+            const val = document.getElementById('task7Input').value.trim();
+            if (val === '1') {
+                showResult('resTask7', `>>> Верно! ['Lada', 'BMW', 'Vesta']`);
+            } else {
+                showResult('resTask7', `Ошибка. Второй элемент имеет индекс 1.`, true);
+            }
+        }
 
-</script>
+        function checkTask8() {
+            const val = document.getElementById('task8Input').value.trim().toLowerCase();
+            if (val === 'in') {
+                showResult('resTask8', `>>> Верно! Оператор in проверяет вхождение.`);
+            } else {
+                showResult('resTask8', `Ошибка. Для проверки вхождения используется оператор in.`, true);
+            }
+        }
 
+        function checkTask9() {
+            const val = document.getElementById('task9Input').value.trim().toLowerCase();
+            if (val === 'remove') {
+                showResult('resTask9', `>>> Верно! ['Lada', 'Vesta']`);
+            } else {
+                showResult('resTask9', `Ошибка. Для удаления по значению используется метод remove.`, true);
+            }
+        }
+
+        // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (10-15) ---
+        function checkTask10() {
+            const val = document.getElementById('task10Input').value.replace(/\s/g, '');
+            if (val === '[]') {
+                showResult('resTask10', `>>> Верно! my_list = []`);
+            } else {
+                showResult('resTask10', `Ошибка. Пустой список создается с помощью [].`, true);
+            }
+        }
+
+        function checkTask11() {
+            const val = document.getElementById('task11Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === "append('яблоко')" || val === 'append("яблоко")') {
+                showResult('resTask11', `>>> Верно! ['Банан', 'Апельсин', 'Яблоко']`);
+            } else {
+                showResult('resTask11', `Ошибка. Используй метод append() и не забудь кавычки.`, true);
+            }
+        }
+
+        function checkTask12() {
+            const val = document.getElementById('task12Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === "insert(1,'груша')" || val === 'insert(1,"груша")') {
+                showResult('resTask12', `>>> Верно! ['Банан', 'Груша', 'Апельсин']`);
+            } else {
+                showResult('resTask12', `Ошибка. Используй insert(1, 'Груша').`, true);
+            }
+        }
+
+        function checkTask13() {
+            const val = document.getElementById('task13Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === "remove('банан')" || val === 'remove("банан")') {
+                showResult('resTask13', `>>> Верно! ['Апельсин', 'Яблоко']`);
+            } else {
+                showResult('resTask13', `Ошибка. Используй метод remove('Банан').`, true);
+            }
+        }
+
+        function checkTask14() {
+            const val = document.getElementById('task14Input').value.trim().toLowerCase();
+            if (val === 'del') {
+                showResult('resTask14', `>>> Верно! ['Банан', 'Яблоко']`);
+            } else {
+                showResult('resTask14', `Ошибка. Для удаления по индексу используется оператор del.`, true);
+            }
+        }
+
+        function checkTask15() {
+            const val = document.getElementById('task15Input').value.replace(/\s/g, '').toLowerCase();
+            if (val === 'clear()') {
+                showResult('resTask15', `>>> Верно! []`);
+            } else {
+                showResult('resTask15', `Ошибка. Для полной очистки используется метод clear().`, true);
+            }
+        }
+
+        // --- НОВЫЕ ЗАДАЧИ (16-18) ---
+        
+        // Живое обновление для задачи 16
+        document.getElementById('task16NamesInput').addEventListener('input', function() {
+            const names = this.value.trim() || 'иванов иван, петрова мария, иванов иван';
+            document.getElementById('task16NamesDisplay').textContent = names;
+        });
+
+        document.getElementById('task16TargetInput').addEventListener('input', function() {
+            const target = this.value.trim() || 'иванов иван';
+            document.getElementById('task16TargetDisplay').textContent = target;
+        });
+
+        function checkTask16() {
+            const method = document.getElementById('task16InputMethod').value.trim().toLowerCase();
+            const countFunc = document.getElementById('task16InputCount').value.trim().toLowerCase();
+            const sameCountFunc = document.getElementById('task16InputSameCount').value.trim().toLowerCase();
+            
+            const rawInput = document.getElementById('task16NamesInput').value.trim() || 'иванов иван, петрова мария, иванов иван';
+            const targetInput = document.getElementById('task16TargetInput').value.trim() || 'иванов иван';
+            
+            const clients = rawInput.split(',').map(s => s.trim()).filter(s => s !== '');
+            
+            let isMethodCorrect = (method === 'title');
+            let isCountCorrect = (countFunc === 'len');
+            let isSameCountCorrect = (sameCountFunc === 'count');
+            
+            if (isMethodCorrect && isCountCorrect && isSameCountCorrect) {
+                const formattedNames = clients.map(name => 
+                    name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ')
+                );
+                
+                const targetName = targetInput.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(' ');
+                
+                const sameCount = formattedNames.filter(name => name === targetName).length;
+                
+                showResult('resTask16', 
+                    `>>> Верно!<br>
+                    Клиенты: [${formattedNames.map(n => `'${n}'`).join(', ')}]<br>
+                    Всего клиентов: ${clients.length}<br>
+                    Клиент ${targetName} встречается ${sameCount} раз(а)`
+                );
+            } else {
+                let errorMsg = "Ошибка. ";
+                if (!isMethodCorrect) errorMsg += "Для заглавных букв используется title(). ";
+                if (!isCountCorrect) errorMsg += "Для подсчета общего количества используется len(). ";
+                if (!isSameCountCorrect) errorMsg += "Для подсчета повторений используется count().";
+                showResult('resTask16', errorMsg, true);
+            }
+        }
+
+        // Живое обновление для задачи 17
+        document.getElementById('task17StatusInput').addEventListener('input', function() {
+            const status = this.value.trim() || 'гость';
+            document.getElementById('task17StatusDisplay').textContent = status;
+        });
+
+        function checkTask17() {
+            const method = document.getElementById('task17Input').value.trim().toLowerCase();
+            const statusInput = document.getElementById('task17StatusInput').value.trim();
+            const status = statusInput || 'гость';
+            
+            if (method === 'upper') {
+                const result = status.toUpperCase();
+                showResult('resTask17', `>>> Верно! Результат: '${result}'`);
+            } else {
+                showResult('resTask17', `Ошибка. Для перевода всей строки в верхний регистр используется upper().`, true);
+            }
+        }
+
+        // Живое обновление для задачи 18
+        document.getElementById('task18QueryInput').addEventListener('input', function() {
+            const query = this.value.trim() || 'Ноутбук';
+            document.getElementById('task18QueryDisplay').textContent = query;
+        });
+
+        function checkTask18() {
+            const method = document.getElementById('task18Input').value.trim().toLowerCase();
+            const queryInput = document.getElementById('task18QueryInput').value.trim();
+            const query = queryInput || 'Ноутбук';
+            const products = ['смартфон', 'ноутбук', 'наушники'];
+            
+            if (method === 'lower') {
+                const normalizedQuery = query.toLowerCase();
+                if (products.includes(normalizedQuery)) {
+                    showResult('resTask18', `>>> Верно!<br>Товар '${query}' найден`);
+                } else {
+                    showResult('resTask18', `>>> Верно!<br>Но товара '${query}' нет в каталоге.`, false);
+                }
+            } else {
+                showResult('resTask18', `Ошибка. Для приведения к нижнему регистру используется lower().`, true);
+            }
+        }
+
+        // --- ИНТЕРАКТИВ (ТЕОРИЯ) ---
+        function runCreate() {
+            const input = document.getElementById('createInput').value;
+            if (!input.trim()) return;
+            const arr = input.split(',').map(s => s.trim());
+            showResult('resCreate', `>>> ['${arr.join("', '")}']`);
+        }
+
+        function runIndex() {
+            const list = ['Lada', 'KIA', 'Vesta', 'УАЗ'];
+            const index = parseInt(document.getElementById('indexInput').value);
+            if (isNaN(index)) return;
+            if (index >= list.length || index < -list.length) {
+                showResult('resIndex', `IndexError: list index out of range`, true);
+            } else {
+                const realIndex = index < 0 ? list.length + index : index;
+                showResult('resIndex', `>>> ${list[realIndex]}`);
+            }
+        }
+
+        function runSlice() {
+            const list = ['Lada', 'Niva', 'Vesta', 'УАЗ'];
+            const start = parseInt(document.getElementById('sliceStart').value) || 0;
+            const end = parseInt(document.getElementById('sliceEnd').value);
+            if (isNaN(end)) return;
+            const sliced = list.slice(start, end);
+            showResult('resSlice', `>>> [${sliced.map(s => `'${s}'`).join(', ')}]`);
+        }
+
+        function runAppend() {
+            const list = ['Lada', 'Niva'];
+            const val = document.getElementById('appendInput').value;
+            if (!val.trim()) return;
+            list.push(val);
+            showResult('resAppend', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
+        }
+
+        function runInsert() {
+            const list = ['Lada', 'Niva', 'Aurus'];
+            const index = parseInt(document.getElementById('insertIndex').value);
+            const val = document.getElementById('insertValue').value;
+            if (isNaN(index) || !val.trim()) return;
+            list.splice(index, 0, val);
+            showResult('resInsert', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
+        }
+
+        function runRemove() {
+            const list = ['Молоко', 'Хлеб', 'Сметана'];
+            const val = document.getElementById('removeInput').value;
+            if (!val.trim()) return;
+            const idx = list.indexOf(val);
+            if (idx !== -1) {
+                list.splice(idx, 1);
+                showResult('resRemove', `>>> [${list.map(s => `'${s}'`).join(', ')}]`);
+            } else {
+                showResult('resRemove', `ValueError: list.remove(x): x not in list`, true);
+            }
+        }
+
+        function runDel() {
+            const list = ['Молоко', 'Хлеб', 'Сметана'];
+            const index = parseInt(document.getElementById('popIndex').value);
+            if (isNaN(index)) return;
+            if (index >= list.length || index < -list.length) {
+                showResult('resPop', `IndexError: list assignment index out of range`, true);
+                return;
+            }
+            const realIndex = index < 0 ? list.length + index : index;
+            list.splice(realIndex, 1);
+            showResult('resPop', `(del) >>> [${list.map(s => `'${s}'`).join(', ')}]`);
+        }
+
+        function runPop() {
+            const list = ['Молоко', 'Хлеб', 'Сметана'];
+            const index = parseInt(document.getElementById('popIndex').value);
+            if (isNaN(index)) return;
+            if (index >= list.length || index < -list.length) {
+                showResult('resPop', `IndexError: pop index out of range`, true);
+                return;
+            }
+            const realIndex = index < 0 ? list.length + index : index;
+            const popped = list.splice(realIndex, 1)[0];
+            showResult('resPop', `Удалено: '${popped}'<br>(pop) >>> [${list.map(s => `'${s}'`).join(', ')}]`);
+        }
+
+        function runClear() {
+            showResult('resClear', `>>> []`);
+        }
+
+        // --- ИНТЕРАКТИВНЫЕ ЗАДАЧИ ---
+        function runInsertTask() {
+            const name = document.getElementById('urgentName').value.trim();
+            const price = parseFloat(document.getElementById('urgentPrice').value);
+            const place = parseInt(document.getElementById('urgentPlace').value);
+            if (!name || isNaN(price) || isNaN(place)) { alert("Заполните все поля!"); return; }
+            const products = ['Хлеб', 'Молоко'];
+            const prices = [65, 99];
+            const index = Math.min(place - 1, products.length);
+            products.splice(index, 0, name);
+            prices.splice(index, 0, price);
+            let output = "";
+            for (let i = 0; i < products.length; i++) {
+                output += `${products[i]} - ${prices[i]} руб.<br>`;
+            }
+            showResult('resInsertTask', output);
+        }
+
+        function runRemoveTask() {
+            const val = document.getElementById('removeTaskName').value.trim();
+            if (!val) return;
+            const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
+            const idx = cart.indexOf(val);
+            if (idx !== -1) {
+                cart.splice(idx, 1);
+                showResult('resRemoveTask', `Товар '${val}' удален.<br>Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
+            } else {
+                showResult('resRemoveTask', `Такого товара нет в корзине.`, true);
+            }
+        }
+
+        function runDelTask() {
+            const num = parseInt(document.getElementById('popTaskNum').value);
+            if (isNaN(num)) return;
+            const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
+            if (num >= 1 && num <= cart.length) {
+                cart.splice(num - 1, 1);
+                showResult('resPopTask', `(del) Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
+            } else {
+                showResult('resPopTask', `Ошибка: такого номера нет.`, true);
+            }
+        }
+
+        function runPopTask() {
+            const num = parseInt(document.getElementById('popTaskNum').value);
+            if (isNaN(num)) return;
+            const cart = ['Молоко', 'Хлеб', 'Сметана', 'Сыр'];
+            if (num >= 1 && num <= cart.length) {
+                const removed = cart.splice(num - 1, 1)[0];
+                showResult('resPopTask', `(pop) Удалено: '${removed}'<br>Новая корзина: [${cart.map(s => `'${s}'`).join(', ')}]`);
+            } else {
+                showResult('resPop', `Ошибка: такого номера нет.`, true);
+            }
+        }
+
+        // --- КАТАЛОГ ---
+        let catalogCart = [];
+        function runCatalogTask() {
+            const choice = document.getElementById('catalogChoice').value.trim();
+            const resultBox = document.getElementById('resCatalogTask');
+            const listDiv = document.getElementById('catalogCartList');
+            const totalDiv = document.getElementById('catalogCartTotal');
+            if (!choice) return;
+            resultBox.style.display = 'block';
+            if (choice.toLowerCase() === 'стоп') {
+                listDiv.innerHTML += `<br><b>Оформление:</b><br>`;
+                let total = 0;
+                catalogCart.forEach(item => {
+                    listDiv.innerHTML += `${item.name} - ${item.price} руб.<br>`;
+                    total += item.price;
+                });
+                totalDiv.innerHTML = `Итого: ${total} руб.`;
+                return;
+            }
+            const catalog = [
+                { name: 'Хлеб', price: 65 },
+                { name: 'Молоко', price: 99 },
+                { name: 'Сметана', price: 85 },
+                { name: 'Сыр', price: 150 }
+            ];
+            const found = catalog.find(item => item.name.toLowerCase() === choice.toLowerCase());
+            if (found) {
+                catalogCart.push(found);
+                listDiv.innerHTML += `Добавлено: ${found.name} за ${found.price} руб.<br>`;
+            } else {
+                listDiv.innerHTML += `<span style="color:red;">Такого товара нет.</span><br>`;
+            }
+        }
+
+        // --- ЧЕК ---
+        let cartProducts = [];
+        let cartPrices = [];
+        function addItem() {
+            const nameInput = document.getElementById('prodName');
+            const priceInput = document.getElementById('prodPrice');
+            const name = nameInput.value.trim();
+            const price = parseFloat(priceInput.value);
+            if (name === "" || isNaN(price) || price < 0) { alert("Введите корректные данные!"); return; }
+            cartProducts.push(name);
+            cartPrices.push(price);
+            nameInput.value = ''; priceInput.value = '';
+            updateReceipt();
+        }
+        function resetCart() {
+            cartProducts = []; cartPrices = [];
+            document.getElementById('resultBox').style.display = 'none';
+        }
+        function updateReceipt() {
+            const resultBox = document.getElementById('resultBox');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            resultBox.style.display = 'block';
+            cartItems.innerHTML = '';
+            let total = 0;
+            for (let i = 0; i < cartProducts.length; i++) {
+                let displayPrice = cartPrices[i];
+                if (displayPrice % 1 === 0) displayPrice = displayPrice.toFixed(0);
+                else displayPrice = displayPrice.toFixed(2).replace(/\.?0+$/, "");
+                cartItems.innerHTML += `${cartProducts[i]} - ${displayPrice} руб.<br>`;
+                total += cartPrices[i];
+            }
+            let displayTotal = total;
+            if (displayTotal % 1 === 0) displayTotal = displayTotal.toFixed(0);
+            else displayTotal = displayTotal.toFixed(2).replace(/\.?0+$/, "");
+            cartTotal.innerHTML = `Итого: ${displayTotal} руб.`;
+        }
+
+        // --- ВИЗУАЛИЗАЦИЯ ДАННЫХ (ГРАФИКИ) ---
+        
+        // Инициализируем массивы начальными значениями (автомобили)
+        let vizNames = ['Lada Granta', 'Lada Vesta', 'Niva Travel', 'УАЗ Патриот', 'Kia Rio', 'Москвич 3', 'OMODA C5'];
+        let vizPrices = [1050000, 1750000, 1550000, 2000000, 2250000, 1780000, 2450000];
+        let myChartInstance = null;
+
+        // Вызываем отображение данных при загрузке страницы
+        window.onload = function() {
+            updateVizDisplay();
+        };
+
+        function updateVizDisplay() {
+            const listDisplay = document.getElementById('vizListDisplay');
+            const priceDisplay = document.getElementById('vizPriceDisplay');
+            const resBox = document.getElementById('vizResultBox');
+            
+            resBox.style.display = 'block';
+            listDisplay.textContent = `[${vizNames.map(n => `'${n}'`).join(', ')}]`;
+            priceDisplay.textContent = `[${vizPrices.join(', ')}]`;
+        }
+
+        function addVizItem() {
+            const nameInput = document.getElementById('vizProdName');
+            const priceInput = document.getElementById('vizProdPrice');
+            const name = nameInput.value.trim();
+            const price = parseFloat(priceInput.value);
+
+            if (!name || isNaN(price)) {
+                alert("Пожалуйста, введите корректное название и цену!");
+                return;
+            }
+
+            // Проверка на дубликаты: если авто уже есть, обновляем цену
+            const existingIndex = vizNames.indexOf(name);
+            if (existingIndex !== -1) {
+                vizPrices[existingIndex] = price; 
+            } else {
+                vizNames.push(name);
+                vizPrices.push(price);
+            }
+            
+            nameInput.value = '';
+            priceInput.value = '';
+            updateVizDisplay();
+        }
+
+        function clearViz() {
+            vizNames = [];
+            vizPrices = [];
+            document.getElementById('vizResultBox').style.display = 'none';
+            document.getElementById('chartContainer').style.display = 'none';
+            if (myChartInstance) {
+                myChartInstance.destroy();
+                myChartInstance = null;
+            }
+            // После очистки обновляем экран (пустые списки)
+            updateVizDisplay();
+        }
+
+        function drawChart(type) {
+            if (vizNames.length === 0) {
+                alert("Сначала добавьте хотя бы один товар!");
+                return;
+            }
+
+            document.getElementById('chartContainer').style.display = 'block';
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            if (myChartInstance) {
+                myChartInstance.destroy();
+            }
+
+            const isLine = type === 'line';
+            
+            myChartInstance = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: vizNames,
+                    datasets: [{
+                        label: 'Цена (руб.)',
+                        data: vizPrices,
+                        borderColor: '#104E8B', 
+                        backgroundColor: isLine ? '#104E8B' : '#1E90FF', 
+                        borderWidth: isLine ? 3 : 2, 
+                        pointBackgroundColor: '#104E8B',
+                        pointBorderColor: '#ffffff',
+                        pointBorderWidth: 2,
+                        pointRadius: isLine ? 7 : 0, 
+                        pointHoverRadius: 9,
+                        tension: 0,
+                        fill: false
+                    }]
+                },
+                plugins: [ChartDataLabels],
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 500 },
+                    plugins: {
+                        datalabels: {
+                            display: false // <--- ОТКЛЮЧАЕМ ПОДПИСИ НАД СТОЛБЦАМИ
+                        },
+                        title: {
+                            display: true,
+                            text: 'Стоимость автомобилей',
+                            color: '#000000',
+                            font: { family: 'Times New Roman', size: 22, weight: 'bold' },
+                            padding: { bottom: 15 }
+                        },
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#333',
+                            titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
+                            bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: { 
+                                display: true, 
+                                text: 'Цена (руб.)', 
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                            },
+                            ticks: {
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 14, weight: 'bold' },
+                                // Красивое отображение миллионов на оси Y
+                                callback: function(value) {
+                                    if (value >= 1000000) return (value / 1000000) + ' млн';
+                                    if (value >= 1000) return (value / 1000) + ' тыс.';
+                                    return value;
+                                }
+                            },
+                            grid: { color: '#a0a0a0', lineWidth: 1.5 }
+                        },
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: 'Автомобили', 
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                            },
+                            ticks: {
+                                display: true,
+                                maxRotation: 45, // Наклоняем текст под 45 градусов
+                                minRotation: 45, // Наклоняем текст под 45 градусов
+                                autoSkip: false, // Показываем ВСЕ названия без пропусков
+                                color: '#000000',
+                                font: { family: 'Times New Roman', size: 13, weight: 'bold' } // Чуть уменьшили шрифт
+                            },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>
