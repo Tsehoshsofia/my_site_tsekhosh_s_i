@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Теория: Списки в Python</title>
+    <title>Квест: Основы работы со списками в Python</title>
+    
     <!-- ПОДКЛЮЧАЕМ БИБЛИОТЕКУ ДЛЯ ГРАФИКОВ -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- ПОДКЛЮЧАЕМ ПЛАГИН ДЛЯ ПОДПИСЕЙ НА ГРАФИКЕ -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+    <!-- ПОДКЛЮЧАЕМ ШРИФТ В СТИЛЕ КВЕСТА -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         /* 1. БАЗОВЫЕ НАСТРОЙКИ */
+        :root {
+            --primary-color: #4169E1;
+            --primary-dark: #2b4eb5;
+            --primary-light: #6B88FF;
+            --text-color: #111111;
+            --bg-card: rgba(255, 255, 255, 0.95);
+        }
+
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            font-family: "Times New Roman", Times, serif;
+            font-family: "Montserrat", sans-serif;
             overflow: hidden; 
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            scroll-behavior: smooth;
+            background: #eef2f5; /* Запасной фон, если нет картинки */
         }
 
         /* 2. ФОН */
@@ -25,203 +38,268 @@
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-image: url("белый_фон.jpeg"); 
             background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: -2;
+        }
+        
+        /* Затемнение фона для контраста */
+        .background-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(135deg, rgba(238, 242, 245, 0.6) 0%, rgba(200, 215, 235, 0.5) 100%);
             z-index: -1;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
         }
 
         /* 3. КОНТЕЙНЕР */
         .quest-container {
             position: fixed; 
-            top: 0.5cm;
+            top: 1.5cm;
             bottom: 2vh;
             left: 50%; 
             transform: translateX(-50%);
-            width: 750px; 
+            width: 850px; 
             max-width: calc(100% - 40px); 
-            max-height: calc(100vh - 0.5cm - 2vh);
+            max-height: calc(100vh - 1.5cm - 2vh);
             overflow-y: auto; 
             display: flex; 
             flex-direction: column; 
-            gap: 25px; 
-            padding-bottom: 20px; 
-            padding-right: 5px;
+            gap: 30px; 
+            padding-bottom: 30px; 
+            padding-right: 15px;
         }
         
-        /* 4. ПЛАШКА */
+        /* 4. ПЛАШКА (КАРТОЧКА) */
         .theory-card {
-            background-color: rgba(255, 255, 255, 0.98); 
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
-            border-radius: 20px; border: 1px solid #e0e0e0;
-            padding: 30px 35px; box-sizing: border-box;
-            font-size: 20px; line-height: 1.6; color: #000000;
+            background-color: var(--bg-card); 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.12), 
+                        0px 5px 15px rgba(0, 0, 0, 0.05),
+                        inset 0px 2px 0px rgba(255, 255, 255, 0.8);
+            border-radius: 24px; 
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 35px 40px; 
+            box-sizing: border-box;
+            font-size: 18px; 
+            line-height: 1.7; 
+            color: var(--text-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .theory-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.15), 
+                        0px 8px 20px rgba(0, 0, 0, 0.08);
         }
 
         /* 5. ЗАГОЛОВКИ */
         h2 {
-            font-size: 28px; font-weight: bold; margin-top: 0; margin-bottom: 20px;
-            color: #000000; border-bottom: 3px solid #4169E1; padding-bottom: 10px;
-            display: flex; align-items: center; gap: 12px; letter-spacing: 0.5px;
+            font-size: 26px; font-weight: 800; margin-top: 0; margin-bottom: 25px;
+            color: var(--text-color); 
+            border-bottom: 4px solid var(--primary-color); 
+            padding-bottom: 12px;
+            display: flex; align-items: center; gap: 12px; 
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
         }
 
         /* 6. ТЕКСТ */
         p { 
-            margin: 10px 0; text-align: justify; color: #000000; 
-            font-weight: 500; letter-spacing: 0.2px; 
-            text-shadow: 0px 0px 1px rgba(255,255,255,0.8); 
+            margin: 12px 0; text-align: justify; color: var(--text-color); 
+            font-weight: 500; letter-spacing: 0.3px; 
         }
         ul { 
-            margin-left: 20px; line-height: 1.6; color: #000000; 
-            font-weight: 500; letter-spacing: 0.2px;
+            margin-left: 20px; line-height: 1.8; color: var(--text-color); 
+            font-weight: 500; letter-spacing: 0.3px;
         }
+        b { font-weight: 700; color: #000; }
 
         /* 7. КОД */
         code {
-            font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.12); padding: 4px 8px;
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 16px;
+            background-color: rgba(65, 105, 225, 0.1); padding: 4px 8px;
             border-radius: 6px; color: #8B0000;
-            display: inline-block; margin: 5px 0; font-weight: bold;
+            display: inline-block; margin: 4px 0; font-weight: 700;
+            border: 1px solid rgba(65, 105, 225, 0.2);
         }
 
         .code-block {
-            font-family: 'Consolas', 'Courier New', monospace; font-size: 18px;
-            background-color: rgba(65, 105, 225, 0.06);
-            padding: 15px; border-radius: 8px; 
+            font-family: 'Consolas', 'Courier New', monospace; font-size: 16px;
+            background-color: #f8faff;
+            padding: 18px; border-radius: 12px; 
             color: #8B0000;
-            margin: 15px 0; white-space: pre-wrap; line-height: 1.5; 
+            margin: 18px 0; white-space: pre-wrap; line-height: 1.6; 
             display: block; width: 100%; box-sizing: border-box; 
-            border-left: 4px solid #4169E1; font-weight: bold;
+            border-left: 5px solid var(--primary-color); font-weight: 700;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
         }
 
         /* 8. КОНСОЛЬ */
         .console-output {
-            background-color: #f8f9fa; border-left: 4px solid #4169E1; 
-            padding: 15px; font-family: 'Consolas', monospace; font-size: 16px; 
-            border-radius: 0 8px 8px 0; margin-top: 15px; color: #000000;
-            border: 1px solid #ddd; font-weight: bold;
+            background-color: #f4f6f9; border-left: 5px solid var(--primary-color); 
+            padding: 15px; font-family: 'Consolas', monospace; font-size: 15px; 
+            border-radius: 0 12px 12px 0; margin-top: 15px; color: var(--text-color);
+            border: 1px solid #e0e0e0; font-weight: 700;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
         }
         .console-title {
-            display: block; font-weight: bold; font-family: 'Times New Roman', Times, serif;
-            font-size: 14px; margin-bottom: 5px; color: #4169E1;
+            display: block; font-weight: 800; font-family: 'Montserrat', sans-serif;
+            font-size: 13px; margin-bottom: 8px; color: var(--primary-color);
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
         /* 9. ИНТЕРАКТИВНЫЙ БЛОК */
         .interactive-box {
-            background-color: #F4F9FF; border: 2px dashed #4169E1;
-            border-radius: 12px; padding: 15px; margin-top: 15px; text-align: center;
+            background-color: #F4F9FF; border: 2px dashed var(--primary-color);
+            border-radius: 16px; padding: 20px; margin-top: 25px; text-align: center;
+            box-shadow: inset 0 0 20px rgba(65, 105, 225, 0.05);
         }
 
         .interactive-box input, .interactive-box select {
-            font-family: 'Consolas', monospace; font-size: 16px; padding: 8px;
-            margin: 5px 2px; 
+            font-family: 'Consolas', monospace; font-size: 16px; padding: 10px 12px;
+            margin: 6px 4px; 
             border: 2px solid #b0b0b0; 
             border-top-color: #888;
-            border-radius: 6px;
-            outline: none; box-sizing: border-box; color: #000; font-weight: bold;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            outline: none; box-sizing: border-box; color: #000; font-weight: 700;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
             background-color: #fcfcfc; 
             transition: all 0.2s ease;
         }
 
         .interactive-box input:focus, .interactive-box select:focus { 
-            border-color: #4169E1; 
-            border-top-color: #2b4eb5;
+            border-color: var(--primary-color); 
+            border-top-color: var(--primary-dark);
             background-color: #fff; 
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 3px rgba(65, 105, 225, 0.2);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1), 0 0 0 4px rgba(65, 105, 225, 0.2);
         }
 
+        /* Кнопки в стиле 3D-квеста */
         .interactive-box button {
-            font-family: "Times New Roman", Times, serif; 
+            font-family: "Montserrat", sans-serif; 
             font-size: 16px;
-            font-weight: bold; 
+            font-weight: 800; 
             color: white;
-            background: linear-gradient(180deg, #5A7BFF 0%, #4169E1 100%);
+            background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary-color) 100%);
             border: none; 
-            border-radius: 6px; 
-            padding: 9px 15px;
-            margin: 5px 2px; 
+            border-radius: 8px; 
+            padding: 12px 20px;
+            margin: 8px 4px; 
             cursor: pointer; 
-            box-shadow: 0 4px 0 #2b4eb5, 0 4px 6px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 0 var(--primary-dark), 0 8px 15px rgba(0,0,0,0.2);
             transition: all 0.1s ease; 
             position: relative;
             top: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .interactive-box button:hover { 
-            background: linear-gradient(180deg, #6B88FF 0%, #5279E1 100%);
-            box-shadow: 0 4px 0 #2b4eb5, 0 6px 10px rgba(0,0,0,0.2);
+            background: linear-gradient(180deg, #7b95ff 0%, #5279E1 100%);
+            box-shadow: 0 5px 0 var(--primary-dark), 0 10px 20px rgba(0,0,0,0.25);
         }
 
         .interactive-box button:active { 
-            top: 4px;
-            box-shadow: 0 0 0 #2b4eb5, 0 1px 2px rgba(0,0,0,0.2);
+            top: 5px;
+            box-shadow: 0 0 0 var(--primary-dark), 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Кнопка "Очистить" */
+        .interactive-box button.btn-clear {
+            background: linear-gradient(180deg, #e0e0e0 0%, #c0c0c0 100%);
+            color: #333;
+            box-shadow: 0 5px 0 #999, 0 8px 15px rgba(0,0,0,0.15);
+        }
+        .interactive-box button.btn-clear:hover {
+            background: linear-gradient(180deg, #f0f0f0 0%, #d0d0d0 100%);
+            box-shadow: 0 5px 0 #999, 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .interactive-box button.btn-clear:active {
+            top: 5px;
+            box-shadow: 0 0 0 #999, 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .result-box {
-            margin-top: 10px; font-family: 'Consolas', monospace; font-size: 16px;
-            text-align: left; background-color: #fff; padding: 10px;
-            border-radius: 8px; border: 1px solid #ccc; display: none; color: #000;
-            font-weight: bold;
+            margin-top: 15px; font-family: 'Consolas', monospace; font-size: 16px;
+            text-align: left; background-color: #fff; padding: 15px;
+            border-radius: 10px; border: 2px solid #e0e0e0; display: none; color: #000;
+            font-weight: 700;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
         }
         
         /* 10. КНОПКА ПЕРЕХОДА */
         .btn {
             display: block; width: 100%; max-width: 500px;
-            margin: 20px auto 0 auto; padding: 14px 20px;
-            background-color: #F4F9FF; border: 2px solid #4169E1;
-            border-radius: 10px; color: #4169E1; font-size: 18px;
-            font-weight: bold; text-align: center; text-decoration: none;
+            margin: 25px auto 0 auto; padding: 16px 24px;
+            background-color: #F4F9FF; border: 3px solid var(--primary-color);
+            border-radius: 12px; color: var(--primary-color); font-size: 18px;
+            font-weight: 800; text-align: center; text-decoration: none;
             transition: all 0.2s ease-in-out; cursor: pointer; box-sizing: border-box;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(65, 105, 225, 0.1);
         }
 
-        .btn:hover { background-color: #4169E1; color: #FFFFFF; transform: translateY(-2px); }
+        .btn:hover { 
+            background-color: var(--primary-color); 
+            color: #FFFFFF; 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.3);
+        }
 
         /* 11. ТИТУЛЬНЫЙ СЛАЙД */
         .start-screen {
-            text-align: center; padding: 30px 30px;
+            text-align: center; padding: 40px 40px;
             display: flex; flex-direction: column; justify-content: center;
-            align-items: center; min-height: 400px;
+            align-items: center; min-height: 500px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(244,249,255,0.95) 100%);
         }
-        .start-screen h1 { font-size: 34px; margin: 0 0 10px 0; font-weight: bold; color: #000; letter-spacing: 1px; }
-        .start-screen .subtitle { font-size: 24px; color: #4169E1; margin-bottom: 30px; font-weight: bold; }
-        .start-screen .description { font-size: 20px; color: #000; margin-bottom: 40px; text-align: center; max-width: 600px; font-weight: 500; }
-        .start-screen .author { font-size: 18px; color: #333; margin-bottom: 40px; font-style: italic; font-weight: bold; }
+        .start-screen h1 { font-size: 36px; margin: 0 0 15px 0; font-weight: 800; color: #111; letter-spacing: 1.5px; line-height: 1.3; }
+        .start-screen .subtitle { font-size: 22px; color: var(--primary-color); margin-bottom: 25px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        .start-screen .description { font-size: 18px; color: #333; margin-bottom: 40px; text-align: center; max-width: 650px; font-weight: 500; line-height: 1.8; }
+        .start-screen .author { font-size: 16px; color: #666; margin-bottom: 30px; font-weight: 700; letter-spacing: 1px; }
+        .start-screen .author b { color: var(--primary-color); }
 
         /* 12. ЗАДАЧИ НА ВВОД */
         .blank-input {
             font-family: 'Consolas', monospace; font-size: 18px;
-            font-weight: bold; color: #4169E1; background-color: #fff;
-            border: 2px solid #999; border-radius: 4px; padding: 2px 5px;
-            width: 120px; text-align: center;
+            font-weight: 700; color: var(--primary-color); background-color: #fff;
+            border: 2px solid #999; border-radius: 6px; padding: 4px 8px;
+            width: 140px; text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
         /* Скроллбар */
-        .quest-container::-webkit-scrollbar { width: 8px; }
-        .quest-container::-webkit-scrollbar-track { background: transparent; }
-        .quest-container::-webkit-scrollbar-thumb { background: #4169E1; border-radius: 10px; }
+        .quest-container::-webkit-scrollbar { width: 10px; }
+        .quest-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+        .quest-container::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; border: 2px solid rgba(255,255,255,0.5); }
+        .quest-container::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
         /* Адаптив */
         @media (max-width: 600px) {
-            .theory-card { padding: 20px; }
-            h2 { font-size: 24px; }
-            p, code, .code-block { font-size: 16px; }
+            .theory-card { padding: 20px; border-radius: 16px; }
+            h2 { font-size: 22px; }
+            p, code, .code-block { font-size: 15px; }
             .interactive-box input { width: 100%; margin: 5px 0; }
-            .start-screen h1 { font-size: 32px; }
+            .start-screen h1 { font-size: 28px; }
+            .interactive-box button { width: 100%; margin: 5px 0; }
+            .btn { font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
     <div class="background-layer"></div>
+    <div class="background-overlay"></div>
 
     <div class="quest-container" id="main-container">
         
-          <!-- ТИТУЛЬНЫЙ СЛАЙД -->
+        <!-- ТИТУЛЬНЫЙ СЛАЙД -->
         <div class="theory-card start-screen" id="start-screen">
-            <h1>Основы работы со списками в Python</h1>
-            <div class="subtitle">Учебные материалы</div>
+            <h1>Квест: Основы работы со списками в Python</h1>
+            <div class="subtitle">Интерактивное расследование</div>
             <p class="description">
-                В данном модуле рассматриваются базовые операции со списками: создание, индексация, срезы, а также добавление и удаление элементов.
-                Для закрепления материала предусмотрены практические задания.
+                Добро пожаловать в отдел разработки! В приложении доставки произошли сбои: клиенты не находят товары, получают не те заказы и теряют корзины. 
+                <br><br>
+                Ваша задача — изучить основы работы со списками, найти ошибки в коде и исправить их. Выполняйте задания шаг за шагом, чтобы восстановить работу приложения.
             </p>
             <div class="author">Разработчик: <b>Цехош София Ивановна</b></div>
         </div>
@@ -320,7 +398,7 @@ del cart[1] # или cart.pop(1)</div>
                 <p style="margin: 0 0 10px 0; font-size: 16px;">Список: <code>['Молоко', 'Хлеб', 'Сметана']</code></p>
                 <input type="number" id="popIndex" placeholder="Индекс" style="width: 20%;">
                 <button onclick="runDel()">Удалить через del</button>
-                <button onclick="runPop()" style="background-color: #5cb85c;">Удалить через pop</button>
+                <button onclick="runPop()" style="background: linear-gradient(180deg, #5cb85c 0%, #449d44 100%); box-shadow: 0 5px 0 #357a35, 0 8px 15px rgba(0,0,0,0.2);">Удалить через pop</button>
                 <div class="result-box" id="resPop"></div>
             </div>
         </div>
@@ -364,12 +442,12 @@ total = sum(price_list)
 print(f"Итого: {total:g} руб.")
 print("---------------")</div>
             
-            <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (интерактив):</p>
+            <p style="margin-top: 20px; font-weight: bold; color: var(--primary-color);">Попробуйте сами (интерактив):</p>
             <div class="interactive-box">
                 <input type="text" id="prodName" placeholder="Название товара (напр. Молоко)">
                 <input type="number" step="0.01" id="prodPrice" placeholder="Цена (напр. 99 или 99.5)">
                 <button onclick="addItem()">Добавить в чек</button>
-                <button onclick="resetCart()" style="background-color: #ccc; color: #333;">Очистить</button>
+                <button onclick="resetCart()" class="btn-clear">Очистить</button>
                 
                 <div class="result-box" id="resultBox">
                     <strong>--- ВАШ ЧЕК ---</strong><br>
@@ -468,7 +546,7 @@ else:
                 <p style="margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Корзина: 1. Молоко, 2. Хлеб, 3. Сметана, 4. Сыр</p>
                 <input type="number" id="popTaskNum" placeholder="Номер (с 1)" style="width: 30%;">
                 <button onclick="runDelTask()">Удалить через del</button>
-                <button onclick="runPopTask()" style="background-color: #5cb85c;">Удалить через pop</button>
+                <button onclick="runPopTask()" style="background: linear-gradient(180deg, #5cb85c 0%, #449d44 100%); box-shadow: 0 5px 0 #357a35, 0 8px 15px rgba(0,0,0,0.2);">Удалить через pop</button>
                 <div class="result-box" id="resPopTask"></div>
             </div>
         </div>
@@ -526,120 +604,120 @@ else:
             <p>Теперь давайте проверим, как вы усвоили материал. Впишите недостающий код в каждой задаче.</p>
 
             <!-- Задача 5: Создание -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 5.</b> Создайте список <code>colors</code> из строк 'red', 'green', 'blue'.</p>
                 <div class="code-block">colors = <input type="text" id="task5Input" class="blank-input" placeholder="..." style="width: 200px;">"></div>
-                <button onclick="checkTask5()" class="btn" style="width: auto; margin: 10px 0 0 0; padding: 8px 16px; font-size: 16px;">Проверить код</button>
+                <button onclick="checkTask5()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask5"></div>
             </div>
 
             <!-- Задача 6: Срез -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 6.</b> Выведите первые два элемента списка <code>nums</code> с помощью среза.</p>
                 <div class="code-block">nums = [10, 20, 30, 40]
 print(nums[<input type="text" id="task6Input" class="blank-input" placeholder="...", style="width: 100px;">])</div>
-                <button onclick="checkTask6()">Проверить код</button>
+                <button onclick="checkTask6()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask6"></div>
             </div>
 
             <!-- Задача 7: Изменение -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 7.</b> Замените второй элемент списка (индекс 1) на 'Aurus'.</p>
                 <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
 cars[<input type="text" id="task7Input" class="blank-input" placeholder="...", style="width: 100px;">] = 'Aurus'</div>
-                <button onclick="checkTask7()">Проверить код</button>
+                <button onclick="checkTask7()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask7"></div>
             </div>
 
             <!-- Задача 8: Проверка вхождения -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 8.</b> Проверьте, есть ли слово 'яблоко' в списке <code>fruits</code>.</p>
                 <div class="code-block">fruits = ['банан', 'апельсин']
 if 'яблоко' <input type="text" id="task8Input" class="blank-input" placeholder="...", style="width: 80px;"> fruits:
     print("Есть!")</div>
-                <button onclick="checkTask8()">Проверить код</button>
+                <button onclick="checkTask8()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask8"></div>
             </div>
 
             <!-- Задача 9: Комбинированная (поиск и удаление) -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 9.</b> Удалите 'KIA' из списка <code>cars</code> по значению.</p>
                 <div class="code-block">cars = ['Lada', 'KIA', 'Vesta']
 cars.<input type="text" id="task9Input" class="blank-input" placeholder="...">('KIA')</div>
-                <button onclick="checkTask9()">Проверить код</button>
+                <button onclick="checkTask9()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask9"></div>
             </div>
 
             <!-- Задача 10 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 10.</b> Создайте <b>пустой</b> список с именем <code>my_list</code>.</p>
                 <div class="code-block">my_list = <input type="text" id="task10Input" class="blank-input" placeholder="...", style="width: 100px;"></div>
-                <button onclick="checkTask10()">Проверить код</button>
+                <button onclick="checkTask10()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask10"></div>
             </div>
 
             <!-- Задача 11 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 11.</b> Добавьте слово <code>'Яблоко'</code> в конец готового списка <code>fruits</code>.</p>
                 <div class="code-block">fruits = ['Банан', 'Апельсин']
 fruits.<input type="text" id="task11Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask11()">Проверить код</button>
+                <button onclick="checkTask11()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask11"></div>
             </div>
 
             <!-- Задача 12 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 12.</b> Вставьте слово <code>'Груша'</code> на <b>второе место</b> (то есть под <b>индекс 1</b>).</p>
                 <div class="code-block">fruits = ['Банан', 'Апельсин']
 fruits.<input type="text" id="task12Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask12()">Проверить код</button>
+                <button onclick="checkTask12()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask12"></div>
             </div>
 
             <!-- Задача 13 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 13.</b> Удалите слово <code>'Банан'</code> из списка по его <b>названию</b>.</p>
                 <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
 fruits.<input type="text" id="task13Input" class="blank-input" placeholder="...", style="width: 200px;"></div>
-                <button onclick="checkTask13()">Проверить код</button>
+                <button onclick="checkTask13()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask13"></div>
             </div>
 
             <!-- Задача 14 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 14.</b> Удалите второй элемент (индекс 1) из списка с помощью оператора <code>del</code>.</p>
                 <div class="code-block">fruits = ['Банан', 'Апельсин', 'Яблоко']
 <input type="text" id="task14Input" class="blank-input" placeholder="..." style="width: 80px;"> fruits[1]</div>
-                <button onclick="checkTask14()">Проверить код</button>
+                <button onclick="checkTask14()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask14"></div>
             </div>
 
-               <!-- Задача 15 -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <!-- Задача 15 -->
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 15.</b> Полностью очистите список <code>cart</code>, оставив его пустым.</p>
                 <div class="code-block">cart = ['Хлеб', 'Молоко', 'Сыр']
 cart.<input type="text" id="task15Input" class="blank-input" placeholder="..." style="width: 100px;"></div>
-                <button onclick="checkTask15()">Проверить код</button>
+                <button onclick="checkTask15()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask15"></div>
             </div>
 
             <!-- Задача 16 (ОБНОВЛЕННАЯ) -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 16.</b> Мы добавляем клиентов в базу. Впишите методы, чтобы сделать первые буквы имен заглавными, посчитать <b>общее количество</b> клиентов и узнать, <b>сколько раз встречается конкретный клиент</b>.</p>
                 
                 <div style="margin-bottom: 10px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
                     <div>
-                        <label style="font-size: 16px; font-weight: bold;">Введите клиентов (через запятую):</label>
-                        <input type="text" id="task16NamesInput" class="blank-input" placeholder="напр. иванов иван, петрова мария, иванов иван" style="width: 350px; font-size: 16px; padding: 5px;">
+                        <label style="font-size: 15px; font-weight: 700;">Введите клиентов:</label>
+                        <input type="text" id="task16NamesInput" class="blank-input" placeholder="напр. иванов иван, петрова мария" style="width: 300px; font-size: 15px; padding: 6px;">
                     </div>
                     <div>
-                        <label style="font-size: 16px; font-weight: bold;">Кого ищем?</label>
-                        <input type="text" id="task16TargetInput" class="blank-input" placeholder="напр. иванов иван" style="width: 150px; font-size: 16px; padding: 5px;">
+                        <label style="font-size: 15px; font-weight: 700;">Кого ищем?</label>
+                        <input type="text" id="task16TargetInput" class="blank-input" placeholder="напр. иванов иван" style="width: 150px; font-size: 15px; padding: 6px;">
                     </div>
                 </div>
 
                 <div class="code-block"># Ввод клиентов (каждое имя через запятую)
-raw_input = '<span id="task16NamesDisplay" style="color: #4169E1;">иванов иван, петрова мария, иванов иван</span>'
+raw_input = '<span id="task16NamesDisplay" style="color: var(--primary-color);">иванов иван, петрова мария, иванов иван</span>'
 clients = [name.strip() for name in raw_input.split(',')]
 
 # Делаем первую букву заглавной для всех
@@ -649,44 +727,44 @@ formatted_names = [client.<input type="text" id="task16InputMethod" class="blank
 count = <input type="text" id="task16InputCount" class="blank-input" placeholder="функция" style="width: 80px;">(clients)
 
 # Считаем, сколько раз встречается конкретный клиент
-target_name = '<span id="task16TargetDisplay" style="color: #4169E1;">иванов иван</span>'.title()
+target_name = '<span id="task16TargetDisplay" style="color: var(--primary-color);">иванов иван</span>'.title()
 same_count = clients.<input type="text" id="task16InputSameCount" class="blank-input" placeholder="метод" style="width: 80px;">(target_name)
 
 print("Клиенты:", formatted_names)
 print("Всего клиентов:", count)
 print(f"Клиент {target_name} встречается {same_count} раз(а)")</div>
                 
-                <button onclick="checkTask16()">Проверить код</button>
+                <button onclick="checkTask16()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask16"></div>
             </div>
 
             <!-- Задача 17 (ОБНОВЛЕННАЯ) -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 17.</b> Нужно вывести статус в верхнем регистре.</p>
                 
                 <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px; font-weight: bold;">Введите статус:</label>
-                    <input type="text" id="task17StatusInput" class="blank-input" placeholder="напр. гость" style="width: 200px; font-size: 16px; padding: 5px;">
+                    <label style="font-size: 15px; font-weight: 700;">Введите статус:</label>
+                    <input type="text" id="task17StatusInput" class="blank-input" placeholder="напр. гость" style="width: 200px; font-size: 15px; padding: 6px;">
                 </div>
 
-                <div class="code-block">status = '<span id="task17StatusDisplay" style="color: #4169E1;">гость</span>'
+                <div class="code-block">status = '<span id="task17StatusDisplay" style="color: var(--primary-color);">гость</span>'
 print(status.<input type="text" id="task17Input" class="blank-input" placeholder="..." style="width: 120px;">())</div>
                 
-                <button onclick="checkTask17()">Проверить код</button>
+                <button onclick="checkTask17()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask17"></div>
             </div>
 
             <!-- Задача 18 (ОБНОВЛЕННАЯ) -->
-            <div style="background: #fff; border: 1px solid #ddd; padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+            <div style="background: #fff; border: 2px solid #eee; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.03);">
                 <p><b>Задача 18.</b> Поиск не находит товар, потому что регистр не совпадает. Впишите метод, который приведёт запрос к нижнему регистру.</p>
                 
                 <div style="margin-bottom: 10px;">
-                    <label style="font-size: 16px; font-weight: bold;">Введите поисковый запрос:</label>
-                    <input type="text" id="task18QueryInput" class="blank-input" placeholder="напр. Ноутбук" style="width: 200px; font-size: 16px; padding: 5px;">
+                    <label style="font-size: 15px; font-weight: 700;">Введите поисковый запрос:</label>
+                    <input type="text" id="task18QueryInput" class="blank-input" placeholder="напр. Ноутбук" style="width: 200px; font-size: 15px; padding: 6px;">
                 </div>
 
                 <div class="code-block">products = ['смартфон', 'ноутбук', 'наушники']
-search_query = '<span id="task18QueryDisplay" style="color: #4169E1;">Ноутбук</span>'
+search_query = '<span id="task18QueryDisplay" style="color: var(--primary-color);">Ноутбук</span>'
 
 normalized_query = search_query.<input type="text" id="task18Input" class="blank-input" placeholder="метод" style="width: 100px;">()
 
@@ -695,17 +773,17 @@ if normalized_query in products:
 else:
     print('Товар не найден')</div>
                 
-                <button onclick="checkTask18()">Проверить код</button>
+                <button onclick="checkTask18()" class="btn" style="width: auto; margin: 15px 0 0 0; padding: 10px 20px; font-size: 15px; border-width: 2px;">Проверить код</button>
                 <div class="result-box" id="resTask18"></div>
             </div>
         </div> <!-- Закрытие блока "Большая проверка" -->
 
         <!-- ФИНАЛЬНАЯ КАРТОЧКА -->
-        <div class="theory-card" style="text-align: center; padding-bottom: 30px; margin-bottom: 20px; position: relative; overflow: visible;">
-            <h2 style="justify-content: center; border-bottom: none; font-size: 28px; margin-bottom: 15px; z-index: 2; position: relative;">Теория пройдена!</h2>
+        <div class="theory-card" style="text-align: center; padding-bottom: 40px; margin-bottom: 20px; position: relative; overflow: visible;">
+            <h2 style="justify-content: center; border-bottom: none; font-size: 28px; margin-bottom: 15px; z-index: 2; position: relative;">Квест пройден!</h2>
             
-            <p style="font-weight: bold; font-size: 20px; margin-bottom: 15px; text-align: center; z-index: 2; position: relative;">
-                Готов проверить знания на практике
+            <p style="font-weight: 700; font-size: 20px; margin-bottom: 20px; text-align: center; z-index: 2; position: relative;">
+                Отличная работа! Теперь вы готовы применять списки в реальных проектах.
             </p>
             
             <div style="display: flex; justify-content: center; margin-top: 5px;">
@@ -763,38 +841,39 @@ plt.title("Сравнение цен")
 plt.xticks(rotation=15)
 plt.show()</div>
 
-            <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (заполните списки и постройте графики):</p>
+            <p style="margin-top: 20px; font-weight: bold; color: var(--primary-color);">Попробуйте сами (заполните списки и постройте графики):</p>
             <div class="interactive-box">
                 <input type="text" id="vizProdName" placeholder="Название авто (напр. Lada)">
                 <input type="number" step="1" id="vizProdPrice" placeholder="Цена (напр. 1500000)">
                 <button onclick="addVizItem()">Добавить авто</button>
-                <button onclick="clearViz()" style="background-color: #ccc; color: #333;">Очистить</button>
+                <button onclick="clearViz()" class="btn-clear">Очистить</button>
                 
                 <div class="result-box" id="vizResultBox" style="margin-bottom: 15px;">
                     <strong>Список авто (cars_list):</strong> <span id="vizListDisplay">[]</span><br>
                     <strong>Список цен (price_list):</strong> <span id="vizPriceDisplay">[]</span>
                 </div>
 
-                <div style="margin: 10px 0;">
-                    <button onclick="drawChart('line')" style="background: #4169E1;">Построить линейный график (plt.plot)</button>
-                    <button onclick="drawChart('bar')" style="background: #4169E1;">Построить гистограмму (plt.bar)</button>
+                <div style="margin: 15px 0;">
+                    <button onclick="drawChart('line')" style="background: linear-gradient(180deg, #5a7bff 0%, #4169E1 100%);">Построить линейный график (plt.plot)</button>
+                    <button onclick="drawChart('bar')" style="background: linear-gradient(180deg, #5a7bff 0%, #4169E1 100%);">Построить гистограмму (plt.bar)</button>
                 </div>
 
-                <!-- Контейнер для графика (увеличена высота до 500px) -->
-                <div style="position: relative; height: 500px; width: 100%; background: white; border-radius: 8px; padding: 10px; box-sizing: border-box; display: none; border: 1px solid #ddd;" id="chartContainer">
+                <!-- Контейнер для графика -->
+                <div style="position: relative; height: 500px; width: 100%; background: white; border-radius: 12px; padding: 15px; box-sizing: border-box; display: none; border: 2px solid #ddd; box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);" id="chartContainer">
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
 
     </div> 
+    
     <!-- СКРИПТ ДЛЯ ИНТЕРАКТИВА И ПРОВЕРКИ ЗАДАЧ -->
     <script>
         // Утилита для вывода
         function showResult(id, text, isError = false) {
             const el = document.getElementById(id);
             el.style.display = 'block';
-            el.innerHTML = isError ? `<span style="color:red;">${text}</span>` : `<span style="color:green;">${text}</span>`;
+            el.innerHTML = isError ? `<span style="color:#d9534f; font-weight: 800;">${text}</span>` : `<span style="color:#28a745; font-weight: 800;">${text}</span>`;
         }
         
         // --- ЗАДАЧИ НА ПРОВЕРКУ КОДА (5-9) ---
@@ -1210,12 +1289,10 @@ plt.show()</div>
 
         // --- ВИЗУАЛИЗАЦИЯ ДАННЫХ (ГРАФИКИ) ---
         
-        // Инициализируем массивы начальными значениями (автомобили)
         let vizNames = ['Lada Granta', 'Lada Vesta', 'Niva Travel', 'УАЗ Патриот', 'Kia Rio', 'Москвич 3', 'OMODA C5'];
         let vizPrices = [1050000, 1750000, 1550000, 2000000, 2250000, 1780000, 2450000];
         let myChartInstance = null;
 
-        // Вызываем отображение данных при загрузке страницы
         window.onload = function() {
             updateVizDisplay();
         };
@@ -1241,7 +1318,6 @@ plt.show()</div>
                 return;
             }
 
-            // Проверка на дубликаты: если авто уже есть, обновляем цену
             const existingIndex = vizNames.indexOf(name);
             if (existingIndex !== -1) {
                 vizPrices[existingIndex] = price; 
@@ -1264,7 +1340,6 @@ plt.show()</div>
                 myChartInstance.destroy();
                 myChartInstance = null;
             }
-            // После очистки обновляем экран (пустые списки)
             updateVizDisplay();
         }
 
@@ -1309,20 +1384,20 @@ plt.show()</div>
                     animation: { duration: 500 },
                     plugins: {
                         datalabels: {
-                            display: false // <--- ОТКЛЮЧАЕМ ПОДПИСИ НАД СТОЛБЦАМИ
+                            display: false 
                         },
                         title: {
                             display: true,
                             text: 'Стоимость автомобилей',
-                            color: '#000000',
-                            font: { family: 'Times New Roman', size: 22, weight: 'bold' },
+                            color: '#111111',
+                            font: { family: 'Montserrat', size: 20, weight: '800' },
                             padding: { bottom: 15 }
                         },
                         legend: { display: false },
                         tooltip: {
                             backgroundColor: '#333',
-                            titleFont: { family: 'Times New Roman', size: 16, weight: 'bold' },
-                            bodyFont: { family: 'Times New Roman', size: 16, weight: 'bold' }
+                            titleFont: { family: 'Montserrat', size: 15, weight: '700' },
+                            bodyFont: { family: 'Montserrat', size: 15, weight: '700' }
                         }
                     },
                     scales: {
@@ -1331,35 +1406,34 @@ plt.show()</div>
                             title: { 
                                 display: true, 
                                 text: 'Цена (руб.)', 
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                                color: '#111111',
+                                font: { family: 'Montserrat', size: 16, weight: '700' } 
                             },
                             ticks: {
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 14, weight: 'bold' },
-                                // Красивое отображение миллионов на оси Y
+                                color: '#111111',
+                                font: { family: 'Montserrat', size: 13, weight: '600' },
                                 callback: function(value) {
                                     if (value >= 1000000) return (value / 1000000) + ' млн';
                                     if (value >= 1000) return (value / 1000) + ' тыс.';
                                     return value;
                                 }
                             },
-                            grid: { color: '#a0a0a0', lineWidth: 1.5 }
+                            grid: { color: '#d0d0d0', lineWidth: 1 }
                         },
                         x: {
                             title: { 
                                 display: true, 
                                 text: 'Автомобили', 
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 18, weight: 'bold' } 
+                                color: '#111111',
+                                font: { family: 'Montserrat', size: 16, weight: '700' } 
                             },
                             ticks: {
                                 display: true,
-                                maxRotation: 45, // Наклоняем текст под 45 градусов
-                                minRotation: 45, // Наклоняем текст под 45 градусов
-                                autoSkip: false, // Показываем ВСЕ названия без пропусков
-                                color: '#000000',
-                                font: { family: 'Times New Roman', size: 13, weight: 'bold' } // Чуть уменьшили шрифт
+                                maxRotation: 45, 
+                                minRotation: 45, 
+                                autoSkip: false, 
+                                color: '#111111',
+                                font: { family: 'Montserrat', size: 12, weight: '700' } 
                             },
                             grid: { display: false }
                         }
