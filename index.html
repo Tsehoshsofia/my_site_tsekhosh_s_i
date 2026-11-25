@@ -213,9 +213,9 @@ code {
 
 </head>
 <body>
-Копировать
+
 <div class="background-layer"></div><div class="quest-container" id="main-container">
-Копировать
+
   <!-- ТИТУЛЬНЫЙ СЛАЙД -->
 <div class="theory-card start-screen" id="start-screen">
     <h1>Основы работы со списками в Python</h1>
@@ -254,7 +254,7 @@ print(car_models[0])</div>
             </div>
         </div>
 
-Копировать
+
     <!-- 3. СРЕЗЫ -->
     <div class="theory-card">
         <h2>✂️ Срезы списка</h2>
@@ -271,7 +271,7 @@ print(cars[1:3])</div>
             </div>
         </div>
 
-Копировать
+
     <!-- 4. APPEND -->
     <div class="theory-card">
         <h2>➕ Добавление: append()</h2>
@@ -287,7 +287,7 @@ garage.append('Aurus')</div>
             </div>
         </div>
 
-Копировать
+
     <!-- 5. INSERT -->
     <div class="theory-card">
         <h2>📍 Добавление: insert()</h2>
@@ -304,7 +304,7 @@ garage.insert(1, 'УАЗ')</div>
             </div>
         </div>
 
-Копировать
+
     <!-- 6. REMOVE -->
     <div class="theory-card">
         <h2>🗑️ Удаление: remove()</h2>
@@ -320,7 +320,7 @@ cart.remove('Хлеб')</div>
             </div>
         </div>
 
-Копировать
+
     <!-- 7. POP и DEL -->
     <div class="theory-card">
         <h2>🗑️ Удаление: pop() и del</h2>
@@ -337,7 +337,7 @@ del cart[1] # или cart.pop(1)</div>
             </div>
         </div>
 
-Копировать
+
     <!-- 8. CLEAR -->
     <div class="theory-card">
         <h2>🗑️ Удаление: clear()</h2>
@@ -352,14 +352,14 @@ cart.clear()</div>
             </div>
         </div>
 
-Копировать
+
     <!-- ЗАДАЧА 1: ЧЕК (ИНТЕРАКТИВ) -->
     <div class="theory-card">
         <h2>⌨️ Задача 1: Добавление товаров в конец</h2>
         <p>Давайте напишем мини-программу, которая просит ввести товар и цену. Пользователь может добавлять товары сколько угодно раз.</p>
         <p><i>Обратите внимание на форматирование <code>:g</code> при выводе цены. Оно убирает лишние нули у целых чисел (например, 50.0 превращает в 50), но сохраняет копейки (например, 99.50 останется 99.5).</i></p>
 
-Копировать
+
     <div class="code-block">shopping_list = []
 
 price_list = []
@@ -381,7 +381,7 @@ total = sum(price_list)
 print(f"Итого: {total:g} руб.")
 print("---------------")</div>
 
-Копировать
+
                <p style="margin-top: 20px; font-weight: bold; color: #4169E1;">Попробуйте сами (заполните списки и постройте графики):</p>
     <div class="interactive-box">
         <input type="text" id="vizProdName" placeholder="Название авто (напр. Lada)">
@@ -536,7 +536,6 @@ function checkTask16() {
     const countFunc = document.getElementById('task16InputCount').value.trim().toLowerCase();
     const sameCountFunc = document.getElementById('task16InputSameCount').value.trim().toLowerCase();
 
-Копировать
 const rawInput = document.getElementById('task16NamesInput').value.trim() || 'иванов иван, петрова мария, иванов иван';
 const targetInput = document.getElementById('task16TargetInput').value.trim() || 'иванов иван';
 
@@ -583,7 +582,7 @@ function checkTask17() {
     const statusInput = document.getElementById('task17StatusInput').value.trim();
     const status = statusInput || 'гость';
 
-Копировать
+
 if (method === 'upper') {
     const result = status.toUpperCase();
     showResult('resTask17', `>>> Верно! Результат: '${result}'`);
@@ -606,7 +605,7 @@ function checkTask18() {
     const query = queryInput || 'Ноутбук';
     const products = ['смартфон', 'ноутбук', 'наушники'];
 
-Копировать
+
 if (method === 'lower') {
     const normalizedQuery = query.toLowerCase();
     if (products.includes(normalizedQuery)) {
@@ -854,7 +853,6 @@ function updateVizDisplay() {
     const priceDisplay = document.getElementById('vizPriceDisplay');
     const resBox = document.getElementById('vizResultBox');
 
-Копировать
 resBox.style.display = 'block';
 listDisplay.textContent = `[${vizNames.map(n => `'${n}'`).join(', ')}]`;
 priceDisplay.textContent = `[${vizPrices.join(', ')}]`;
@@ -868,7 +866,7 @@ function addVizItem() {
     const name = nameInput.value.trim();
     const price = parseFloat(priceInput.value);
 
-Копировать
+
 if (!name || isNaN(price)) {
     alert("Пожалуйста, введите корректное название и цену!");
     return;
@@ -909,7 +907,7 @@ function drawChart(type) {
         return;
     }
 
-Копировать
+
 document.getElementById('chartContainer').style.display = 'block';
 const ctx = document.getElementById('myChart').getContext('2d');
 
