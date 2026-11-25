@@ -9,25 +9,25 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
     
-    <!-- ПОДКЛЮЧАЕМ БОЛЕЕ ПЛОТНЫЙ ШРИФТ ДЛЯ ЧИТАЕМОСТИ -->
+    <!-- ПОДКЛЮЧАЕМ МЯГКИЙ И ОКРУГЛЫЙ ШРИФТ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         /* 1. БАЗОВЫЕ НАСТРОЙКИ */
         :root {
-            --primary-color: #3350d6; /* Более насыщенный синий */
-            --primary-dark: #2137a3;
-            --primary-light: #5c7cfa;
-            --text-color: #0f0f0f; /* Почти черный для контраста */
-            --text-muted: #4a4a4a;
+            --primary-color: #4169E1;
+            --primary-dark: #2b4eb5;
+            --primary-light: #6B88FF;
+            --text-color: #222222; /* Мягкий черный */
+            --text-muted: #555555;
             --bg-card: #ffffff;
         }
 
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            font-family: "Rubik", sans-serif;
+            font-family: "Nunito", sans-serif;
             overflow: hidden; 
             -webkit-font-smoothing: antialiased;
             background: #eef2f5;
@@ -52,29 +52,32 @@
         /* 3. КОНТЕЙНЕР */
         .quest-container {
             position: fixed; 
-            top: 1.5cm;
+            top: 1cm;
             bottom: 2vh;
             left: 50%; 
             transform: translateX(-50%);
-            width: 1050px; /* Ширина окна */
+            width: 1050px; 
             max-width: calc(100% - 40px); 
-            max-height: calc(100vh - 1.5cm - 2vh);
+            max-height: calc(100vh - 1cm - 2vh);
             overflow-y: auto; 
             display: flex; 
             flex-direction: column; 
             gap: 30px; 
+            /* ОТСТУПЫ СВЕРХУ И СНИЗУ, ЧТОБЫ НЕ ОБРЕЗАЛО */
+            padding-top: 25px; 
             padding-bottom: 40px; 
-            padding-right: 10px; /* Отступ под скроллбар */
+            padding-right: 15px; 
+            scroll-behavior: smooth;
         }
         
         /* 4. ПЛАШКА (КАРТОЧКА) */
         .theory-card {
             background-color: var(--bg-card); 
-            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1), 
-                        0px 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.08), 
+                        0px 3px 10px rgba(0, 0, 0, 0.04);
             border-radius: 20px; 
-            border: 2px solid #e6e6e6; /* Четкая рамка */
-            padding: 35px 40px; /* Уменьшили отступы, чтобы не срезало */
+            border: 2px solid #e6e6e6; 
+            padding: 35px 40px; 
             box-sizing: border-box;
             font-size: 18px; 
             line-height: 1.6; 
@@ -84,15 +87,17 @@
 
         .theory-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.12), 
-                        0px 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1), 
+                        0px 4px 12px rgba(0, 0, 0, 0.06);
         }
 
         /* 5. ЗАГОЛОВКИ */
         h2 {
-            font-size: 26px; font-weight: 800; margin-top: 0; margin-bottom: 20px;
+            font-size: 26px; 
+            font-weight: 700; /* Уменьшили жирность */
+            margin-top: 0; margin-bottom: 20px;
             color: var(--text-color); 
-            border-bottom: 4px solid var(--primary-color); 
+            border-bottom: 3px solid var(--primary-color); 
             padding-bottom: 12px;
             display: flex; align-items: center; gap: 12px; 
         }
@@ -100,7 +105,7 @@
         /* 6. ТЕКСТ */
         p { 
             margin: 12px 0; text-align: justify; color: var(--text-color); 
-            font-weight: 500; /* Более плотный текст */
+            font-weight: 500; /* Более мягкий текст */
         }
         b { font-weight: 700; color: #000; }
         i { color: var(--text-muted); }
@@ -110,7 +115,7 @@
             font-family: 'Consolas', 'Courier New', monospace; font-size: 16px;
             background-color: #f0f3fa; padding: 4px 8px;
             border-radius: 6px; color: #b30000; 
-            display: inline-block; margin: 4px 0; font-weight: 700;
+            display: inline-block; margin: 4px 0; font-weight: 600;
             border: 1px solid #d0d7ec;
         }
 
@@ -119,11 +124,11 @@
             background-color: #f8faff;
             padding: 20px; 
             border-radius: 12px; 
-            color: #b30000; /* Насыщенный красный */
+            color: #b30000; 
             margin: 15px 0; white-space: pre-wrap; line-height: 1.5; 
             display: block; width: 100%; box-sizing: border-box; 
             border-left: 5px solid var(--primary-color); 
-            font-weight: 700;
+            font-weight: 600;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
             border: 1px solid #e0e6f5;
             border-left: 5px solid var(--primary-color);
@@ -139,7 +144,7 @@
         }
 
         .interactive-box input, .interactive-box select {
-            font-family: "Rubik", sans-serif; font-size: 16px; padding: 12px 15px;
+            font-family: "Nunito", sans-serif; font-size: 16px; padding: 12px 15px;
             margin: 6px 4px; 
             border: 2px solid #999; 
             border-radius: 8px;
@@ -155,12 +160,12 @@
 
         .interactive-box input:focus, .interactive-box select:focus { 
             border-color: var(--primary-color); 
-            box-shadow: 0 0 0 4px rgba(51, 80, 214, 0.15);
+            box-shadow: 0 0 0 4px rgba(65, 105, 225, 0.15);
         }
 
         /* Кнопки в стиле 3D-квеста */
         .interactive-box button {
-            font-family: "Rubik", sans-serif; 
+            font-family: "Nunito", sans-serif; 
             font-size: 16px;
             font-weight: 700; 
             color: white;
@@ -174,8 +179,12 @@
             transition: all 0.1s ease; 
             position: relative;
             top: 0;
+            text-transform: lowercase; /* ОТКЛЮЧАЕМ КАПС */
+        }
+        
+        /* Делаем первую букву заглавной */
+        .interactive-box button::first-letter {
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .interactive-box button:hover { 
@@ -207,7 +216,7 @@
             margin-top: 15px; font-family: 'Consolas', monospace; font-size: 16px;
             text-align: left; background-color: #fff; padding: 15px;
             border-radius: 10px; border: 2px solid #d0d7ec; display: none; color: #000;
-            font-weight: 700;
+            font-weight: 600;
             box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
         }
         
@@ -217,17 +226,21 @@
             margin: 25px auto 0 auto; padding: 16px 24px;
             background-color: #fff; border: 3px solid var(--primary-color);
             border-radius: 12px; color: var(--primary-color); font-size: 18px;
-            font-weight: 800; text-align: center; text-decoration: none;
+            font-weight: 700; text-align: center; text-decoration: none;
             transition: all 0.2s ease-in-out; cursor: pointer; box-sizing: border-box;
+            text-transform: lowercase;
+            box-shadow: 0 4px 10px rgba(65, 105, 225, 0.15);
+        }
+        
+        .btn::first-letter {
             text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(51, 80, 214, 0.15);
         }
 
         .btn:hover { 
             background-color: var(--primary-color); 
             color: #FFFFFF; 
             transform: translateY(-2px); 
-            box-shadow: 0 8px 20px rgba(51, 80, 214, 0.3);
+            box-shadow: 0 8px 20px rgba(65, 105, 225, 0.3);
         }
 
         /* 10. ТИТУЛЬНЫЙ СЛАЙД */
@@ -237,22 +250,22 @@
             align-items: center; min-height: 400px;
             background: #ffffff;
         }
-        .start-screen h1 { font-size: 36px; margin: 0 0 15px 0; font-weight: 800; color: #0f0f0f; letter-spacing: 1px; line-height: 1.3; }
-        .start-screen .subtitle { font-size: 22px; color: var(--primary-color); margin-bottom: 25px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+        .start-screen h1 { font-size: 34px; margin: 0 0 15px 0; font-weight: 800; color: #222; letter-spacing: 0.5px; line-height: 1.3; }
+        .start-screen .subtitle { font-size: 20px; color: var(--primary-color); margin-bottom: 25px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
         .start-screen .description { font-size: 18px; color: var(--text-color); margin-bottom: 40px; text-align: center; max-width: 700px; font-weight: 500; line-height: 1.7; }
-        .start-screen .author { font-size: 16px; color: var(--text-muted); margin-bottom: 30px; font-weight: 600; letter-spacing: 1px; }
+        .start-screen .author { font-size: 16px; color: var(--text-muted); margin-bottom: 30px; font-weight: 600; letter-spacing: 0.5px; }
         .start-screen .author b { color: var(--primary-color); }
 
         /* 11. ЗАДАЧИ НА ВВОД */
         .blank-input {
             font-family: 'Consolas', monospace; font-size: 18px;
-            font-weight: 700; color: var(--primary-color); background-color: #fff;
+            font-weight: 600; color: var(--primary-color); background-color: #fff;
             border: 2px solid #999; border-radius: 6px; padding: 4px 8px;
             width: 140px; text-align: center;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Скроллбар - аккуратный и не перекрывает контент */
+        /* Скроллбар */
         .quest-container::-webkit-scrollbar { width: 8px; }
         .quest-container::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 8px; }
         .quest-container::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 8px; }
@@ -264,7 +277,7 @@
             h2 { font-size: 22px; }
             p, code, .code-block { font-size: 15px; }
             .interactive-box input { width: 100%; margin: 5px 0; }
-            .start-screen h1 { font-size: 28px; }
+            .start-screen h1 { font-size: 26px; }
             .interactive-box button { width: 100%; margin: 5px 0; }
         }
     </style>
